@@ -27,7 +27,7 @@ namespace DesktopFacebookInterface
                 foreach (Album album in m_LoginUser.Albums)
                 {
                     string albumName = album.Name.ToLower();
-                    if (album.Name.Equals("cover photos"))
+                    if (albumName.Equals("cover photos"))
                     {
                         m_CoverImage = album.Photos[0].PictureNormalURL;
                     }
