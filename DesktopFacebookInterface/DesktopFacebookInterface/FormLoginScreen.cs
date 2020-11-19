@@ -12,25 +12,22 @@ using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
-    public partial class Form1 : Form
+    public partial class FormLoginScreen : Form
     {
         LoginResult m_LoginResult;
         User m_LoginUser;
-        public Form1()
+
+        public FormLoginScreen()
         {
             InitializeComponent();
-        }
-
-        private void ButtonLogin_Click(object sender, EventArgs e)
-        {
-            LoginAndInit();
+            this.BackColor = Color.FromArgb(66, 103, 178);
         }
 
         private void LoginAndInit()
         {
-            if(m_LoginResult == null)
+            if (m_LoginResult == null)
             {
-                m_LoginResult = FacebookService.Login("370214274434054", 
+                m_LoginResult = FacebookService.Login("370214274434054",
                     "public_profile",
                     "email",
                     "publish_to_groups",
@@ -53,7 +50,7 @@ namespace DesktopFacebookInterface
             if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
             {
                 m_LoginUser = m_LoginResult.LoggedInUser;
-
+                PictureBoxProfilePicture.Image = m_LoginUser.ImageNormal;
             }
             else
             {
@@ -66,9 +63,13 @@ namespace DesktopFacebookInterface
             //after getting the token, take the necessary info from user facebook profile
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void ButtonLogin_Click(object sender, EventArgs e)
         {
-
+            LoginAndInit();
+            this.Hide();
+            HomeScreen homeScreen = new HomeScreen(m_LoginResult, m_LoginUser);
+            this.Close();
+            //homeScreen.ShowDialog();
         }
     }
 }
