@@ -96,18 +96,18 @@ namespace DesktopFacebookInterface
         {
             try
             {
-                switch (tabControlHomeScreen.SelectedIndex)
+                switch ((eTabOptions)tabControlHomeScreen.SelectedIndex)
                 {
-                    case 0:
+                    case eTabOptions.About:
                         fetchAbout();
                         break;
-                    case 1:
+                    case eTabOptions.Albums:
                         fetchAlbums();
                         break;
-                    case 2:
+                    case eTabOptions.Pages:
                         fetchPages();
                         break;
-                    case 3:
+                    case eTabOptions.Events:
                         fetchEvents();
                         break;
                     default:

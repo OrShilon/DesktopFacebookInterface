@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="eTabOptions.cs" />
     <Compile Include="FormLoginScreen.cs">
       <SubType>Form</SubType>
     </Compile>
