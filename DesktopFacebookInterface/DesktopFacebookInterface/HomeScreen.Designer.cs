@@ -37,10 +37,14 @@
             this.listBoxAlbums = new System.Windows.Forms.ListBox();
             this.tabPagePages = new System.Windows.Forms.TabPage();
             this.tabPageEvents = new System.Windows.Forms.TabPage();
+            this.listBoxPages = new System.Windows.Forms.ListBox();
+            this.listBoxEvents = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxProfile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCoverPhoto)).BeginInit();
             this.tabControlHomeScreen.SuspendLayout();
             this.tabPageAlbums.SuspendLayout();
+            this.tabPagePages.SuspendLayout();
+            this.tabPageEvents.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonLogout
@@ -120,6 +124,7 @@
             // 
             // tabPagePages
             // 
+            this.tabPagePages.Controls.Add(this.listBoxPages);
             this.tabPagePages.Location = new System.Drawing.Point(4, 29);
             this.tabPagePages.Name = "tabPagePages";
             this.tabPagePages.Size = new System.Drawing.Size(814, 240);
@@ -129,12 +134,31 @@
             // 
             // tabPageEvents
             // 
+            this.tabPageEvents.Controls.Add(this.listBoxEvents);
             this.tabPageEvents.Location = new System.Drawing.Point(4, 29);
             this.tabPageEvents.Name = "tabPageEvents";
             this.tabPageEvents.Size = new System.Drawing.Size(814, 240);
             this.tabPageEvents.TabIndex = 3;
             this.tabPageEvents.Text = "Events";
             this.tabPageEvents.UseVisualStyleBackColor = true;
+            // 
+            // listBoxPages
+            // 
+            this.listBoxPages.FormattingEnabled = true;
+            this.listBoxPages.ItemHeight = 20;
+            this.listBoxPages.Location = new System.Drawing.Point(3, 3);
+            this.listBoxPages.Name = "listBoxPages";
+            this.listBoxPages.Size = new System.Drawing.Size(205, 204);
+            this.listBoxPages.TabIndex = 0;
+            // 
+            // listBoxEvents
+            // 
+            this.listBoxEvents.FormattingEnabled = true;
+            this.listBoxEvents.ItemHeight = 20;
+            this.listBoxEvents.Location = new System.Drawing.Point(0, 4);
+            this.listBoxEvents.Name = "listBoxEvents";
+            this.listBoxEvents.Size = new System.Drawing.Size(235, 204);
+            this.listBoxEvents.TabIndex = 0;
             // 
             // HomeScreen
             // 
@@ -153,6 +177,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCoverPhoto)).EndInit();
             this.tabControlHomeScreen.ResumeLayout(false);
             this.tabPageAlbums.ResumeLayout(false);
+            this.tabPagePages.ResumeLayout(false);
+            this.tabPageEvents.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -168,5 +194,7 @@
         private System.Windows.Forms.TabPage tabPagePages;
         private System.Windows.Forms.TabPage tabPageEvents;
         private System.Windows.Forms.ListBox listBoxAlbums;
+        private System.Windows.Forms.ListBox listBoxPages;
+        private System.Windows.Forms.ListBox listBoxEvents;
     }
 }
