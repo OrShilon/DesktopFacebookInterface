@@ -1,4 +1,5 @@
-﻿using FacebookWrapper;
+﻿using Facebook;
+using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 using System;
 using System.Collections.Generic;
@@ -69,19 +70,33 @@ namespace DesktopFacebookInterface
 
         private void tabControlHomeScreen_Selected(object sender, TabControlEventArgs e)
         {
-            switch(tabControlHomeScreen.SelectedIndex)
+            try
             {
-                case 0:
-                    break;
-                case 1:
-                    fetchAlbums();
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                default:
-                    break;
+                switch (tabControlHomeScreen.SelectedIndex)
+                {
+                    case 0:
+                        fetchAbout();
+                        break;
+                    case 1:
+                        fetchAlbums();
+                        break;
+                    case 2:
+                        fetchPages();
+                        break;
+                    case 3:
+                        fetchEvents();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch(FacebookOAuthException fe)
+            {
+                MessageBox.Show("No Permissions!");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Unknown Error.");
             }
         }
 
@@ -156,7 +171,38 @@ namespace DesktopFacebookInterface
                 }*/
             }
         }
-            
+
+        private void fetchPages()
+        {
+            listBoxPages.Items.Clear();
+            listBoxPages.DisplayMember = "Name";
+
+            foreach (Page page in m_LoginUser.LikedPages)
+            {
+                listBoxPages.Items.Add(page);
+            }
+
+            if (m_LoginUser.LikedPages.Count == 0)
+            {
+                MessageBox.Show("No pages to retrieve :(");
+            }
+        }
+        private void fetchEvents()
+        {
+            listBoxEvents.Items.Clear();
+            listBoxEvents.DisplayMember = "Name";
+
+            foreach (Event userEvent in m_LoginUser.Events)
+            {
+                listBoxEvents.Items.Add(userEvent);
+            }
+
+            if (m_LoginUser.Events.Count == 0)
+            {
+                MessageBox.Show("No events to retrieve :(");
+            }
+        }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             m_AppSettings.WindowLocation = this.Location;
