@@ -57,7 +57,14 @@ namespace DesktopFacebookInterface
         private void loggedOutFinished()
         {
             m_LoginUser = null;
-            MessageBox.Show("You are now logged out!!");
+            m_AppSettings.UserAccessToken = null;
+            m_AppSettings.RememberUser = false;
+            m_AppSettings.SaveFile();
+            MessageBox.Show("You are now logged out!");
+            this.Hide();
+            this.Close();
+            closeFormAndShowLogin();
+
         }
 
         private void tabControlHomeScreen_Selected(object sender, TabControlEventArgs e)
@@ -138,6 +145,7 @@ namespace DesktopFacebookInterface
                     pictureBoxProfile.Image = pictureBoxProfile.ErrorImage;
                 }*/
             }
+        }
             
         protected override void OnFormClosing(FormClosingEventArgs e)
         {

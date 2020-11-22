@@ -36,9 +36,9 @@ namespace DesktopFacebookInterface
             {
                 m_LoginResult = FacebookService.Connect(m_AppSettings.UserAccessToken);
                 m_LoginUser = m_LoginResult.LoggedInUser;
+                closeFormAndShowHome();
             }
 
-            closeFormAndShowHome();
             base.OnShown(e);
         }
 
@@ -82,7 +82,6 @@ namespace DesktopFacebookInterface
             this.Hide();
             HomeScreen homeScreen = new HomeScreen(m_LoginResult, m_LoginUser, m_AppSettings);
             this.Close();
-
         }
 
         private void ButtonLogin_Click(object sender, EventArgs e)
