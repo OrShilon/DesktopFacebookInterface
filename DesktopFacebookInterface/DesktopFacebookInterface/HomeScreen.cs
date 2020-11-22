@@ -17,20 +17,18 @@ namespace DesktopFacebookInterface
         LoginResult m_LoginResult;
         AppSettings m_AppSettings;
         User m_LoginUser;
-        UserInformationWrapper user;
-        readonly List<string> m_UserInformation;
+        UserInformationWrapper m_UserInfo;
 
         public HomeScreen(LoginResult i_LoginResult, User i_LoginUser, AppSettings i_AppSettings)
         {
             m_LoginResult = i_LoginResult;
             m_LoginUser = i_LoginUser;
             m_AppSettings = i_AppSettings;
-            user = new UserInformationWrapper(m_LoginUser);
+            m_UserInfo = new UserInformationWrapper(m_LoginUser);
             //Console.WriteLine(m_LoginUser.Name);
             InitializeComponent();
-            PictureBoxProfile.LoadAsync(m_LoginUser.PictureNormalURL);
-            PictureBoxCoverPhoto.LoadAsync(user.CoverImage);
-            m_UserInformation = new List<string>();
+            PictureBoxProfile.LoadAsync(m_UserInfo.m_ProfileImage);
+            PictureBoxCoverPhoto.LoadAsync(m_UserInfo.m_CoverImage);
             fetchAbout();
             this.ShowDialog();
             //PictureBoxCoverPhoto.Load(m_LoginUser.Cover.SourceURL);
@@ -103,21 +101,21 @@ namespace DesktopFacebookInterface
             TabPage selectedTab = tabControlHomeScreen.SelectedTab;
 
             Label labelName = new Label();
-            labelName.Text = "Name: " + user.m_FullName;
+            labelName.Text = "Name: " + m_UserInfo.m_FullName;
             labelName.Width += 100;
             selectedTab.Controls.Add(labelName);
             Label labelBirthday = new Label();
-            labelBirthday.Text = "Birthday: " + user.m_Birthday;
+            labelBirthday.Text = "Birthday: " + m_UserInfo.m_Birthday;
             labelBirthday.Location = new Point(labelName.Location.X, labelName.Location.Y + 25);
             labelBirthday.Width += 100;
             selectedTab.Controls.Add(labelBirthday);
             Label labelGender = new Label();
-            labelGender.Text = "Gender: " + user.m_Gender;
+            labelGender.Text = "Gender: " + m_UserInfo.m_Gender;
             labelGender.Location = new Point(labelBirthday.Location.X, labelBirthday.Location.Y + 25);
             labelGender.Width += 100;
             selectedTab.Controls.Add(labelGender);
             Label labelEmail = new Label();
-            labelEmail.Text = "Email: " + user.m_Email;
+            labelEmail.Text = "Email: " + m_UserInfo.m_Email;
             labelEmail.Width += 100;
             labelEmail.Location = new Point(labelGender.Location.X, labelGender.Location.Y + 25);
             selectedTab.Controls.Add(labelEmail);

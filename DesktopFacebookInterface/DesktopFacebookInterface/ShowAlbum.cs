@@ -45,6 +45,24 @@ namespace DesktopFacebookInterface
         private void displayImage()
         {
             pictureBoxImage.LoadAsync(m_AlbumPhotos[indexInAlbum]);
+            UpdateButtonsNextPrev();
+        }
+
+        private void UpdateButtonsNextPrev()
+        {
+            if (indexInAlbum == 0)
+            {
+                ButtonPrevious.Enabled = false;
+            }
+            else if (indexInAlbum == m_AlbumPhotos.Length - 1)
+            {
+                ButtonNext.Enabled = false;
+            }
+            else
+            {
+                ButtonPrevious.Enabled = true;
+                ButtonNext.Enabled = true;
+            }
         }
 
         private void ButtonNext_Click(object sender, EventArgs e)

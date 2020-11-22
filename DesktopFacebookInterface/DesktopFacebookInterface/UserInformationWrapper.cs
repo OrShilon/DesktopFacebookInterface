@@ -12,7 +12,8 @@ namespace DesktopFacebookInterface
     {
 
         User m_LoginUser;
-        string m_CoverImage;
+        public string m_ProfileImage { get; set; }
+        public string m_CoverImage { get; set; }
         public string m_FullName { get; set; }
         public string m_Email { get; set; }
         public string m_Gender { get; set; }
@@ -26,7 +27,7 @@ namespace DesktopFacebookInterface
             m_Email = m_LoginUser.Email;
             m_Gender = m_LoginUser.Gender.ToString();
             m_Birthday = m_LoginUser.Birthday;
-
+            m_ProfileImage = m_LoginUser.PictureNormalURL;
             addCoverPhoto();
         }
 
@@ -47,16 +48,6 @@ namespace DesktopFacebookInterface
             {
                 MessageBox.Show("got here");
             }
-        }
-
-        public string CoverImage
-        {
-            get
-            {
-                return m_CoverImage;
-            }
-        }
-
-        
+        }        
     }
 }
