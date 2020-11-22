@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 
 namespace DesktopFacebookInterface
@@ -19,7 +20,7 @@ namespace DesktopFacebookInterface
 
         private AppSettings()
         {
-            WindowLocation = new Point(900, 500);
+            WindowLocation = new Point(Screen.PrimaryScreen.Bounds.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2);
             WindowSize = new Size(700, 400);
             RememberUser = false;
             UserAccessToken = null;
