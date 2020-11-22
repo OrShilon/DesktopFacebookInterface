@@ -13,10 +13,20 @@ namespace DesktopFacebookInterface
 
         User m_LoginUser;
         string m_CoverImage;
+        public string m_FullName { get; set; }
+        public string m_Email { get; set; }
+        public string m_Gender { get; set; }
+        public string m_Birthday { get; set; }
+        
 
         public UserInformationWrapper(User i_LoginUser)
         {
             m_LoginUser = i_LoginUser;
+            m_FullName = m_LoginUser.Name;
+            m_Email = m_LoginUser.Email;
+            m_Gender = m_LoginUser.Gender.ToString();
+            m_Birthday = m_LoginUser.Birthday;
+
             addCoverPhoto();
         }
 
@@ -45,6 +55,8 @@ namespace DesktopFacebookInterface
             {
                 return m_CoverImage;
             }
-        } 
+        }
+
+        
     }
 }
