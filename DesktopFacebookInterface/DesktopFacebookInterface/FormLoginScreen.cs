@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using Facebook;
 using FacebookWrapper;
@@ -14,13 +15,31 @@ namespace DesktopFacebookInterface
 {
     public partial class FormLoginScreen : Form
     {
+        AppSettings m_AppSettings;
         LoginResult m_LoginResult;
         User m_LoginUser;
 
         public FormLoginScreen()
         {
+            m_AppSettings = AppSettings.LoadFile();
             InitializeComponent();
             this.BackColor = Color.FromArgb(66, 103, 178);
+            this.checkBoxRememberUser.Checked = m_AppSettings.RememberUser;
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = m_AppSettings.WindowLocation;
+
+            if (m_AppSettings.RememberUser && !string.IsNullOrEmpty(m_AppSettings.UserAccessToken))
+            {
+                m_LoginResult = FacebookService.Connect(m_AppSettings.UserAccessToken);
+                m_LoginUser = m_LoginResult.LoggedInUser;
+            }
+
+            closeFormAndShowHome();
+            base.OnShown(e);
         }
 
         private void LoginAndInit()
@@ -58,18 +77,24 @@ namespace DesktopFacebookInterface
             }
         }
 
-        private void FetchUserInfo()
+        private void closeFormAndShowHome()
         {
-            //after getting the token, take the necessary info from user facebook profile
+            this.Hide();
+            HomeScreen homeScreen = new HomeScreen(m_LoginResult, m_LoginUser, m_AppSettings);
+            this.Close();
+
         }
 
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
             LoginAndInit();
-            this.Hide();
-            HomeScreen homeScreen = new HomeScreen(m_LoginResult, m_LoginUser);
-            this.Close();
+            closeFormAndShowHome();
             //homeScreen.ShowDialog();
+        }
+
+        private void checkBoxRememberUser_CheckedChanged(object sender, EventArgs e)
+        {
+            m_AppSettings.RememberUser = checkBoxRememberUser.Checked;
         }
     }
 }
