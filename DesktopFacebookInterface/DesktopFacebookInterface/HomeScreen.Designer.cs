@@ -39,9 +39,11 @@
             this.listBoxPages = new System.Windows.Forms.ListBox();
             this.tabPageEvents = new System.Windows.Forms.TabPage();
             this.listBoxEvents = new System.Windows.Forms.ListBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBoxTimeline = new System.Windows.Forms.ListBox();
             this.textBoxPostStatus = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelPostStatus = new System.Windows.Forms.Label();
+            this.buttonPostStatus = new System.Windows.Forms.Button();
+            this.labelTimeline = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxProfile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCoverPhoto)).BeginInit();
             this.tabControlHomeScreen.SuspendLayout();
@@ -87,10 +89,10 @@
             this.tabControlHomeScreen.Controls.Add(this.tabPageAlbums);
             this.tabControlHomeScreen.Controls.Add(this.tabPagePages);
             this.tabControlHomeScreen.Controls.Add(this.tabPageEvents);
-            this.tabControlHomeScreen.Location = new System.Drawing.Point(366, 186);
+            this.tabControlHomeScreen.Location = new System.Drawing.Point(407, 194);
             this.tabControlHomeScreen.Name = "tabControlHomeScreen";
             this.tabControlHomeScreen.SelectedIndex = 0;
-            this.tabControlHomeScreen.Size = new System.Drawing.Size(456, 273);
+            this.tabControlHomeScreen.Size = new System.Drawing.Size(456, 362);
             this.tabControlHomeScreen.TabIndex = 3;
             this.tabControlHomeScreen.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlHomeScreen_Selected);
             // 
@@ -99,7 +101,7 @@
             this.tabPageAbout.Location = new System.Drawing.Point(4, 29);
             this.tabPageAbout.Name = "tabPageAbout";
             this.tabPageAbout.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAbout.Size = new System.Drawing.Size(448, 240);
+            this.tabPageAbout.Size = new System.Drawing.Size(448, 329);
             this.tabPageAbout.TabIndex = 0;
             this.tabPageAbout.Text = "About";
             this.tabPageAbout.UseVisualStyleBackColor = true;
@@ -110,7 +112,7 @@
             this.tabPageAlbums.Location = new System.Drawing.Point(4, 29);
             this.tabPageAlbums.Name = "tabPageAlbums";
             this.tabPageAlbums.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAlbums.Size = new System.Drawing.Size(814, 240);
+            this.tabPageAlbums.Size = new System.Drawing.Size(448, 240);
             this.tabPageAlbums.TabIndex = 1;
             this.tabPageAlbums.Text = "Albums";
             this.tabPageAlbums.UseVisualStyleBackColor = true;
@@ -130,7 +132,7 @@
             this.tabPagePages.Controls.Add(this.listBoxPages);
             this.tabPagePages.Location = new System.Drawing.Point(4, 29);
             this.tabPagePages.Name = "tabPagePages";
-            this.tabPagePages.Size = new System.Drawing.Size(814, 240);
+            this.tabPagePages.Size = new System.Drawing.Size(448, 240);
             this.tabPagePages.TabIndex = 2;
             this.tabPagePages.Text = "Pages";
             this.tabPagePages.UseVisualStyleBackColor = true;
@@ -149,7 +151,7 @@
             this.tabPageEvents.Controls.Add(this.listBoxEvents);
             this.tabPageEvents.Location = new System.Drawing.Point(4, 29);
             this.tabPageEvents.Name = "tabPageEvents";
-            this.tabPageEvents.Size = new System.Drawing.Size(814, 240);
+            this.tabPageEvents.Size = new System.Drawing.Size(448, 240);
             this.tabPageEvents.TabIndex = 3;
             this.tabPageEvents.Text = "Events";
             this.tabPageEvents.UseVisualStyleBackColor = true;
@@ -163,39 +165,60 @@
             this.listBoxEvents.Size = new System.Drawing.Size(235, 204);
             this.listBoxEvents.TabIndex = 0;
             // 
-            // listBox1
+            // listBoxTimeline
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(12, 328);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(305, 84);
-            this.listBox1.TabIndex = 4;
+            this.listBoxTimeline.FormattingEnabled = true;
+            this.listBoxTimeline.ItemHeight = 20;
+            this.listBoxTimeline.Location = new System.Drawing.Point(12, 352);
+            this.listBoxTimeline.Name = "listBoxTimeline";
+            this.listBoxTimeline.Size = new System.Drawing.Size(305, 204);
+            this.listBoxTimeline.TabIndex = 4;
             // 
             // textBoxPostStatus
             // 
             this.textBoxPostStatus.Location = new System.Drawing.Point(12, 239);
             this.textBoxPostStatus.Name = "textBoxPostStatus";
-            this.textBoxPostStatus.Size = new System.Drawing.Size(276, 26);
+            this.textBoxPostStatus.Size = new System.Drawing.Size(288, 26);
             this.textBoxPostStatus.TabIndex = 5;
+            this.textBoxPostStatus.Text = "Post something!";
             // 
-            // label1
+            // labelPostStatus
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 202);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 20);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "label1";
+            this.labelPostStatus.AutoSize = true;
+            this.labelPostStatus.Location = new System.Drawing.Point(12, 202);
+            this.labelPostStatus.Name = "labelPostStatus";
+            this.labelPostStatus.Size = new System.Drawing.Size(93, 20);
+            this.labelPostStatus.TabIndex = 6;
+            this.labelPostStatus.Text = "Post status:";
+            // 
+            // buttonPostStatus
+            // 
+            this.buttonPostStatus.Location = new System.Drawing.Point(315, 239);
+            this.buttonPostStatus.Name = "buttonPostStatus";
+            this.buttonPostStatus.Size = new System.Drawing.Size(86, 26);
+            this.buttonPostStatus.TabIndex = 7;
+            this.buttonPostStatus.Text = "Post";
+            this.buttonPostStatus.UseVisualStyleBackColor = true;
+            // 
+            // labelTimeline
+            // 
+            this.labelTimeline.AutoSize = true;
+            this.labelTimeline.Location = new System.Drawing.Point(16, 309);
+            this.labelTimeline.Name = "labelTimeline";
+            this.labelTimeline.Size = new System.Drawing.Size(71, 20);
+            this.labelTimeline.TabIndex = 8;
+            this.labelTimeline.Text = "Timeline:";
             // 
             // HomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1056, 558);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelTimeline);
+            this.Controls.Add(this.buttonPostStatus);
+            this.Controls.Add(this.labelPostStatus);
             this.Controls.Add(this.textBoxPostStatus);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.listBoxTimeline);
             this.Controls.Add(this.tabControlHomeScreen);
             this.Controls.Add(this.buttonLogout);
             this.Controls.Add(this.PictureBoxProfile);
@@ -231,8 +254,10 @@
         private System.Windows.Forms.ListBox listBoxAlbums;
         private System.Windows.Forms.ListBox listBoxPages;
         private System.Windows.Forms.ListBox listBoxEvents;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBoxTimeline;
         private System.Windows.Forms.TextBox textBoxPostStatus;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelPostStatus;
+        private System.Windows.Forms.Button buttonPostStatus;
+        private System.Windows.Forms.Label labelTimeline;
     }
 }
