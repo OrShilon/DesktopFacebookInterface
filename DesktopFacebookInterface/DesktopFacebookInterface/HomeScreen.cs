@@ -30,6 +30,7 @@ namespace DesktopFacebookInterface
             PictureBoxProfile.LoadAsync(m_UserInfo.m_ProfileImage);
             PictureBoxCoverPhoto.LoadAsync(m_UserInfo.m_CoverImage);
             fetchAbout();
+            fetchTimeline();
             this.ShowDialog();
             //PictureBoxCoverPhoto.Load(m_LoginUser.Cover.SourceURL);
         }
@@ -62,6 +63,33 @@ namespace DesktopFacebookInterface
             MessageBox.Show("You are now logged out!");
             this.Hide();
             this.Close();
+        }
+
+        private void fetchTimeline()
+        {
+            listBoxTimeline.Items.Clear();
+            listBoxTimeline.DisplayMember = "Name";
+
+            foreach (Post post in m_LoginUser.Posts)
+            {
+                if (post.Message != null)
+                {
+                    listBoxTimeline.Items.Add(post.Message);
+                }
+                else if (post.Caption != null)
+                {
+                    listBoxTimeline.Items.Add(post.Caption);
+                }
+                else
+                {
+                    listBoxTimeline.Items.Add(string.Format("[{0}]", post.Type));
+                }
+            }
+
+            if (m_LoginUser.Posts.Count == 0)
+            {
+                listBoxTimeline.Items.Add("Your timeline has 0 posts!");
+            }
         }
 
         private void tabControlHomeScreen_Selected(object sender, TabControlEventArgs e)
@@ -226,7 +254,9 @@ namespace DesktopFacebookInterface
         private void HomeScreen_Resize(object sender, EventArgs e)
         {
             buttonLogout.Location = new Point(this.Width - 110, buttonLogout.Location.Y);
-            tabControlHomeScreen.Width = this.Width;
-            tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Height;        }
+            tabControlHomeScreen.Width = this.Width - 100;
+            tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Height;
+            //listBoxTimeline.Height = this.Height - labelTimeline.Location.Y;
+        }
     }
 }
