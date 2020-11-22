@@ -36,9 +36,9 @@ namespace DesktopFacebookInterface
             {
                 m_LoginResult = FacebookService.Connect(m_AppSettings.UserAccessToken);
                 m_LoginUser = m_LoginResult.LoggedInUser;
+                closeFormAndShowHome();
             }
 
-            closeFormAndShowHome();
             base.OnShown(e);
         }
 

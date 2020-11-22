@@ -83,19 +83,22 @@ namespace DesktopFacebookInterface
             TabPage selectedTab = tabControlHomeScreen.SelectedTab;
 
             Label labelName = new Label();
-            labelName.Text = user.m_FullName;
+            labelName.Text = "Name: " + user.m_FullName;
+            labelName.Width += 100;
             selectedTab.Controls.Add(labelName);
             Label labelBirthday = new Label();
-            labelBirthday.Text = user.m_Birthday;
+            labelBirthday.Text = "Birthday: " + user.m_Birthday;
             labelBirthday.Location = new Point(labelName.Location.X, labelName.Location.Y + 25);
+            labelBirthday.Width += 100;
             selectedTab.Controls.Add(labelBirthday);
             Label labelGender = new Label();
-            labelGender.Text = user.m_Gender;
+            labelGender.Text = "Gender: " + user.m_Gender;
             labelGender.Location = new Point(labelBirthday.Location.X, labelBirthday.Location.Y + 25);
+            labelGender.Width += 100;
             selectedTab.Controls.Add(labelGender);
             Label labelEmail = new Label();
-            labelEmail.Text = user.m_Email;
-            labelEmail.Width += 10;
+            labelEmail.Text = "Email: " + user.m_Email;
+            labelEmail.Width += 100;
             labelEmail.Location = new Point(labelGender.Location.X, labelGender.Location.Y + 25);
             selectedTab.Controls.Add(labelEmail);
 
@@ -127,8 +130,15 @@ namespace DesktopFacebookInterface
             if (listBoxAlbums.SelectedItems.Count == 1)
             {
                 Album selectedAlbum = listBoxAlbums.SelectedItem as Album;
-                ShowAlbum album = new ShowAlbum(selectedAlbum);
-                album.ShowDialog();
+                if(selectedAlbum.Photos.Count < 1)
+                {
+                    MessageBox.Show("This album is empty");
+                }
+                else
+                {
+                    ShowAlbum album = new ShowAlbum(selectedAlbum);
+                    album.ShowDialog();
+                }
                 /*if (selectedAlbum.PictureAlbumURL != null)
                 {
                     pictureBoxAlbum.LoadAsync(selectedAlbum.PictureAlbumURL);
@@ -138,6 +148,7 @@ namespace DesktopFacebookInterface
                     pictureBoxProfile.Image = pictureBoxProfile.ErrorImage;
                 }*/
             }
+        }
             
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
