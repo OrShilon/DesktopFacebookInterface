@@ -64,8 +64,6 @@ namespace DesktopFacebookInterface
             MessageBox.Show("You are now logged out!");
             this.Hide();
             this.Close();
-            closeFormAndShowLogin();
-
         }
 
         private void tabControlHomeScreen_Selected(object sender, TabControlEventArgs e)
@@ -226,5 +224,11 @@ namespace DesktopFacebookInterface
         {
             base.OnFormClosed(e);
         }
+
+        private void HomeScreen_Resize(object sender, EventArgs e)
+        {
+            buttonLogout.Location = new Point(this.Width - 110, buttonLogout.Location.Y);
+            tabControlHomeScreen.Width = this.Width;
+            tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Height;        }
     }
 }

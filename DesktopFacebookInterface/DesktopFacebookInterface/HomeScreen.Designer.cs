@@ -36,9 +36,12 @@
             this.tabPageAlbums = new System.Windows.Forms.TabPage();
             this.listBoxAlbums = new System.Windows.Forms.ListBox();
             this.tabPagePages = new System.Windows.Forms.TabPage();
-            this.tabPageEvents = new System.Windows.Forms.TabPage();
             this.listBoxPages = new System.Windows.Forms.ListBox();
+            this.tabPageEvents = new System.Windows.Forms.TabPage();
             this.listBoxEvents = new System.Windows.Forms.ListBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.textBoxPostStatus = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxProfile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCoverPhoto)).BeginInit();
             this.tabControlHomeScreen.SuspendLayout();
@@ -49,10 +52,10 @@
             // 
             // buttonLogout
             // 
-            this.buttonLogout.Location = new System.Drawing.Point(669, 44);
+            this.buttonLogout.Location = new System.Drawing.Point(896, 35);
             this.buttonLogout.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonLogout.Name = "buttonLogout";
-            this.buttonLogout.Size = new System.Drawing.Size(112, 35);
+            this.buttonLogout.Size = new System.Drawing.Size(120, 35);
             this.buttonLogout.TabIndex = 2;
             this.buttonLogout.Text = "Logout";
             this.buttonLogout.UseVisualStyleBackColor = true;
@@ -84,10 +87,10 @@
             this.tabControlHomeScreen.Controls.Add(this.tabPageAlbums);
             this.tabControlHomeScreen.Controls.Add(this.tabPagePages);
             this.tabControlHomeScreen.Controls.Add(this.tabPageEvents);
-            this.tabControlHomeScreen.Location = new System.Drawing.Point(-1, 186);
+            this.tabControlHomeScreen.Location = new System.Drawing.Point(366, 186);
             this.tabControlHomeScreen.Name = "tabControlHomeScreen";
             this.tabControlHomeScreen.SelectedIndex = 0;
-            this.tabControlHomeScreen.Size = new System.Drawing.Size(822, 273);
+            this.tabControlHomeScreen.Size = new System.Drawing.Size(456, 273);
             this.tabControlHomeScreen.TabIndex = 3;
             this.tabControlHomeScreen.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlHomeScreen_Selected);
             // 
@@ -96,7 +99,7 @@
             this.tabPageAbout.Location = new System.Drawing.Point(4, 29);
             this.tabPageAbout.Name = "tabPageAbout";
             this.tabPageAbout.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAbout.Size = new System.Drawing.Size(814, 240);
+            this.tabPageAbout.Size = new System.Drawing.Size(448, 240);
             this.tabPageAbout.TabIndex = 0;
             this.tabPageAbout.Text = "About";
             this.tabPageAbout.UseVisualStyleBackColor = true;
@@ -132,6 +135,15 @@
             this.tabPagePages.Text = "Pages";
             this.tabPagePages.UseVisualStyleBackColor = true;
             // 
+            // listBoxPages
+            // 
+            this.listBoxPages.FormattingEnabled = true;
+            this.listBoxPages.ItemHeight = 20;
+            this.listBoxPages.Location = new System.Drawing.Point(3, 3);
+            this.listBoxPages.Name = "listBoxPages";
+            this.listBoxPages.Size = new System.Drawing.Size(205, 204);
+            this.listBoxPages.TabIndex = 0;
+            // 
             // tabPageEvents
             // 
             this.tabPageEvents.Controls.Add(this.listBoxEvents);
@@ -142,15 +154,6 @@
             this.tabPageEvents.Text = "Events";
             this.tabPageEvents.UseVisualStyleBackColor = true;
             // 
-            // listBoxPages
-            // 
-            this.listBoxPages.FormattingEnabled = true;
-            this.listBoxPages.ItemHeight = 20;
-            this.listBoxPages.Location = new System.Drawing.Point(3, 3);
-            this.listBoxPages.Name = "listBoxPages";
-            this.listBoxPages.Size = new System.Drawing.Size(205, 204);
-            this.listBoxPages.TabIndex = 0;
-            // 
             // listBoxEvents
             // 
             this.listBoxEvents.FormattingEnabled = true;
@@ -160,19 +163,50 @@
             this.listBoxEvents.Size = new System.Drawing.Size(235, 204);
             this.listBoxEvents.TabIndex = 0;
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(12, 328);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(305, 84);
+            this.listBox1.TabIndex = 4;
+            // 
+            // textBoxPostStatus
+            // 
+            this.textBoxPostStatus.Location = new System.Drawing.Point(12, 239);
+            this.textBoxPostStatus.Name = "textBoxPostStatus";
+            this.textBoxPostStatus.Size = new System.Drawing.Size(276, 26);
+            this.textBoxPostStatus.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 202);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "label1";
+            // 
             // HomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(819, 456);
+            this.ClientSize = new System.Drawing.Size(1056, 558);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBoxPostStatus);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.tabControlHomeScreen);
             this.Controls.Add(this.buttonLogout);
             this.Controls.Add(this.PictureBoxProfile);
             this.Controls.Add(this.PictureBoxCoverPhoto);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MinimumSize = new System.Drawing.Size(545, 330);
             this.Name = "HomeScreen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HomeScreen";
             this.Load += new System.EventHandler(this.HomeScreen_Load);
+            this.Resize += new System.EventHandler(this.HomeScreen_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxProfile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCoverPhoto)).EndInit();
             this.tabControlHomeScreen.ResumeLayout(false);
@@ -180,6 +214,7 @@
             this.tabPagePages.ResumeLayout(false);
             this.tabPageEvents.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -196,5 +231,8 @@
         private System.Windows.Forms.ListBox listBoxAlbums;
         private System.Windows.Forms.ListBox listBoxPages;
         private System.Windows.Forms.ListBox listBoxEvents;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.TextBox textBoxPostStatus;
+        private System.Windows.Forms.Label label1;
     }
 }
