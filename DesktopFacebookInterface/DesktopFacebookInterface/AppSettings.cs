@@ -20,8 +20,8 @@ namespace DesktopFacebookInterface
 
         private AppSettings()
         {
-            WindowLocation = new Point(Screen.PrimaryScreen.Bounds.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2);
-            WindowSize = new Size(700, 400);
+            WindowLocation = new Point(0, 0);
+            WindowSize = new Size(0, 0);
             RememberUser = false;
             UserAccessToken = null;
         }

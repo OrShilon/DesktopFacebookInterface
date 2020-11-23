@@ -23,14 +23,14 @@ namespace DesktopFacebookInterface
         {
             m_AppSettings = AppSettings.LoadFile();
             InitializeComponent();
-        }
-
-        protected override void OnShown(EventArgs e)
-        {
             this.BackColor = Color.FromArgb(66, 103, 178);
             this.StartPosition = FormStartPosition.Manual;
             this.Location = m_AppSettings.WindowLocation;
             this.checkBoxRememberUser.Checked = m_AppSettings.RememberUser;
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
             base.OnShown(e);
 
             if (m_AppSettings.RememberUser && !string.IsNullOrEmpty(m_AppSettings.UserAccessToken))
@@ -39,8 +39,6 @@ namespace DesktopFacebookInterface
                 m_LoginUser = m_LoginResult.LoggedInUser;
                 closeFormAndShowHome();
             }
-
-            
         }
 
         private void LoginAndInit()
