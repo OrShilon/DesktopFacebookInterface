@@ -53,7 +53,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="ContestLogic.cs" />
     <Compile Include="eTabOptions.cs" />
+    <Compile Include="FormContest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormContest.Designer.cs">
+      <DependentUpon>FormContest.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormLoginScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +87,9 @@
       <DependentUpon>ShowAlbum.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInformationWrapper.cs" />
+    <EmbeddedResource Include="FormContest.resx">
+      <DependentUpon>FormContest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormLoginScreen.resx">
       <DependentUpon>FormLoginScreen.cs</DependentUpon>
     </EmbeddedResource>

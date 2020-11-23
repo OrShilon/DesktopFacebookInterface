@@ -38,17 +38,19 @@
             // labelAlbumName
             // 
             this.labelAlbumName.AutoSize = true;
-            this.labelAlbumName.Location = new System.Drawing.Point(31, 13);
+            this.labelAlbumName.Location = new System.Drawing.Point(41, 16);
+            this.labelAlbumName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelAlbumName.Name = "labelAlbumName";
-            this.labelAlbumName.Size = new System.Drawing.Size(100, 20);
+            this.labelAlbumName.Size = new System.Drawing.Size(134, 25);
             this.labelAlbumName.TabIndex = 0;
             this.labelAlbumName.Text = "Album Name";
             // 
             // ButtonNext
             // 
-            this.ButtonNext.Location = new System.Drawing.Point(399, 407);
+            this.ButtonNext.Location = new System.Drawing.Point(532, 509);
+            this.ButtonNext.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ButtonNext.Name = "ButtonNext";
-            this.ButtonNext.Size = new System.Drawing.Size(123, 34);
+            this.ButtonNext.Size = new System.Drawing.Size(164, 42);
             this.ButtonNext.TabIndex = 1;
             this.ButtonNext.Text = "Next";
             this.ButtonNext.UseVisualStyleBackColor = true;
@@ -56,9 +58,10 @@
             // 
             // ButtonPrevious
             // 
-            this.ButtonPrevious.Location = new System.Drawing.Point(273, 407);
+            this.ButtonPrevious.Location = new System.Drawing.Point(364, 509);
+            this.ButtonPrevious.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ButtonPrevious.Name = "ButtonPrevious";
-            this.ButtonPrevious.Size = new System.Drawing.Size(120, 34);
+            this.ButtonPrevious.Size = new System.Drawing.Size(160, 42);
             this.ButtonPrevious.TabIndex = 2;
             this.ButtonPrevious.Text = "Previous";
             this.ButtonPrevious.UseVisualStyleBackColor = true;
@@ -66,23 +69,26 @@
             // 
             // pictureBoxImage
             // 
-            this.pictureBoxImage.Location = new System.Drawing.Point(115, 51);
+            this.pictureBoxImage.Location = new System.Drawing.Point(153, 64);
+            this.pictureBoxImage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBoxImage.Name = "pictureBoxImage";
-            this.pictureBoxImage.Size = new System.Drawing.Size(530, 328);
+            this.pictureBoxImage.Size = new System.Drawing.Size(707, 410);
             this.pictureBoxImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxImage.TabIndex = 3;
             this.pictureBoxImage.TabStop = false;
             // 
             // ShowAlbum
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 506);
+            this.ClientSize = new System.Drawing.Size(1067, 632);
             this.Controls.Add(this.pictureBoxImage);
             this.Controls.Add(this.ButtonPrevious);
             this.Controls.Add(this.ButtonNext);
             this.Controls.Add(this.labelAlbumName);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ShowAlbum";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShowAlbum";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).EndInit();
             this.ResumeLayout(false);

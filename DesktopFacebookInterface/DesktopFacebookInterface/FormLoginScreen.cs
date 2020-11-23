@@ -19,6 +19,8 @@ namespace DesktopFacebookInterface
         LoginResult m_LoginResult;
         User m_LoginUser;
 
+        const string k_AppId = "370214274434054";
+
         public FormLoginScreen()
         {
             m_AppSettings = AppSettings.LoadFile();
@@ -32,12 +34,26 @@ namespace DesktopFacebookInterface
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
+            Thread t1 = new Thread(new ThreadStart(ConnectByUserAccessToken));
+            t1.Start();
+        }
 
+        private void ConnectByUserAccessToken()
+        {
             if (m_AppSettings.RememberUser && !string.IsNullOrEmpty(m_AppSettings.UserAccessToken))
             {
-                m_LoginResult = FacebookService.Connect(m_AppSettings.UserAccessToken);
-                m_LoginUser = m_LoginResult.LoggedInUser;
-                closeFormAndShowHome();
+                try
+                {
+                    m_LoginResult = FacebookService.Connect(m_AppSettings.UserAccessToken);
+                    m_LoginUser = m_LoginResult.LoggedInUser;
+                    closeFormAndShowHome();
+                }
+
+                catch (FacebookOAuthException e)
+                {
+                    m_LoginResult = null;
+                    MessageBox.Show(e.Message);
+                }
             }
         }
 
@@ -45,7 +61,7 @@ namespace DesktopFacebookInterface
         {
             if (m_LoginResult == null)
             {
-                m_LoginResult = FacebookService.Login("370214274434054",
+                m_LoginResult = FacebookService.Login(k_AppId,
                     "public_profile",
                     "email",
                     "publish_to_groups",
@@ -69,6 +85,7 @@ namespace DesktopFacebookInterface
             {
                 m_LoginUser = m_LoginResult.LoggedInUser;
                 PictureBoxProfilePicture.Image = m_LoginUser.ImageNormal;
+                closeFormAndShowHome();
             }
             else
             {
@@ -86,8 +103,6 @@ namespace DesktopFacebookInterface
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
             LoginAndInit();
-            closeFormAndShowHome();
-            //homeScreen.ShowDialog();
         }
 
         private void checkBoxRememberUser_CheckedChanged(object sender, EventArgs e)
