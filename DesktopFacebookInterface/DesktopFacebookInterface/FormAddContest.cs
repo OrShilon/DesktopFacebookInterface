@@ -68,6 +68,15 @@ namespace DesktopFacebookInterface
             }
         }
 
+        public string Status
+        {
+            get
+            {
+                return m_ContestDescription;
+            }
+
+        }
+
         public string ImagePath
         {
             get
