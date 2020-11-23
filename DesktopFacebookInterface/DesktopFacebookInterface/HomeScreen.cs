@@ -18,7 +18,7 @@ namespace DesktopFacebookInterface
         AppSettings m_AppSettings;
         User m_LoginUser;
         UserInformationWrapper m_UserInfo;
-        string m_PostAttachedFilePath = null;
+        string m_AttachedImagePath = null;
 
         public HomeScreen(LoginResult i_LoginResult, User i_LoginUser, AppSettings i_AppSettings)
         {
@@ -282,7 +282,7 @@ namespace DesktopFacebookInterface
 
         }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
+        private void SaveAppSettings()
         {
             m_AppSettings.WindowLocation = this.Location;
             m_AppSettings.WindowSize = this.Size;
@@ -297,12 +297,11 @@ namespace DesktopFacebookInterface
             }
 
             m_AppSettings.SaveFile();
-
-            base.OnFormClosing(e);
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
+            SaveAppSettings();
             base.OnFormClosed(e);
         }
 
@@ -318,23 +317,7 @@ namespace DesktopFacebookInterface
 
         private void buttonPostStatus_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (m_PostAttachedFilePath == null)
-                {
-                    m_LoginUser.PostStatus(textBoxPostStatus.Text);
-
-                }
-                else
-                {
-                    m_LoginUser.PostPhoto(m_PostAttachedFilePath, textBoxPostStatus.Text);
-                }
-                MessageBox.Show("Status posted successfully!");
-            }
-            catch(FacebookOAuthException foae)
-            {
-                MessageBox.Show(foae.Message);
-            }
+            UserPostStatusWrapper.PostStatus(m_LoginUser, m_AttachedImagePath, textBoxPostStatus.Text);
         }
 
         private void buttonAttachImage_Click(object sender, EventArgs e)
@@ -343,8 +326,15 @@ namespace DesktopFacebookInterface
             ofd.Filter = ("Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG");
             if(ofd.ShowDialog() == DialogResult.OK)
             {
-                m_PostAttachedFilePath  = ofd.FileName;
+                m_AttachedImagePath  = ofd.FileName;
+                buttonCancelAttachment.Visible = true;
             }
+        }
+
+        private void buttonCancelAttachment_Click(object sender, EventArgs e)
+        {
+            m_AttachedImagePath = null;
+            buttonCancelAttachment.Visible = false;
         }
     }
 }
