@@ -93,6 +93,7 @@
       <DependentUpon>ShowAlbum.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInformationWrapper.cs" />
+    <Compile Include="UserPostStatusWrapper.cs" />
     <EmbeddedResource Include="FormAddContest.resx">
       <DependentUpon>FormAddContest.cs</DependentUpon>
     </EmbeddedResource>
