@@ -268,6 +268,8 @@ namespace DesktopFacebookInterface
             listBoxFriends.Items.Clear();
             listBoxFriends.DisplayMember = "Name";
 
+            
+
             foreach (User friend in m_LoginUser.Friends)
             {
                 listBoxFriends.Items.Add(friend.Name);
