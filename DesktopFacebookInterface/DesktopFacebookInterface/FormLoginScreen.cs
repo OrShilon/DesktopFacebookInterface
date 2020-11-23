@@ -36,6 +36,11 @@ namespace DesktopFacebookInterface
             base.OnShown(e);
             Thread t1 = new Thread(new ThreadStart(ConnectByUserAccessToken));
             t1.Start();
+            t1.Join();
+            if (m_LoginResult != null)
+            {
+                closeFormAndShowHome();
+            }
         }
 
         private void ConnectByUserAccessToken()
@@ -46,7 +51,6 @@ namespace DesktopFacebookInterface
                 {
                     m_LoginResult = FacebookService.Connect(m_AppSettings.UserAccessToken);
                     m_LoginUser = m_LoginResult.LoggedInUser;
-                    closeFormAndShowHome();
                 }
 
                 catch (FacebookOAuthException e)
