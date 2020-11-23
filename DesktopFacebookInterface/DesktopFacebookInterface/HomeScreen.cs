@@ -336,5 +336,11 @@ namespace DesktopFacebookInterface
             m_AttachedImagePath = null;
             buttonCancelAttachment.Visible = false;
         }
+
+        private void buttonContestMenu_Click(object sender, EventArgs e)
+        {
+            FormContest formContest = new FormContest(m_LoginUser);
+            formContest.ShowDialog();
+        }
     }
 }
