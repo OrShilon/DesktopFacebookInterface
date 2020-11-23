@@ -110,6 +110,9 @@ namespace DesktopFacebookInterface
                     case eTabOptions.Events:
                         fetchEvents();
                         break;
+                    case eTabOptions.Friends:
+                        fetchFriends();
+                        break;
                     default:
                         break;
                 }
@@ -227,6 +230,23 @@ namespace DesktopFacebookInterface
             }
         }
 
+        private void fetchFriends()
+        {
+            listBoxFriends.Items.Clear();
+            listBoxFriends.DisplayMember = "Name";
+
+            foreach (User friend in m_LoginUser.Friends)
+            {
+                listBoxFriends.Items.Add(friend.Name);
+            }
+
+            if (m_LoginUser.Friends.Count == 0)
+            {
+                MessageBox.Show("No friends to retrieve :(");
+            }
+
+        }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             m_AppSettings.WindowLocation = this.Location;
@@ -254,8 +274,10 @@ namespace DesktopFacebookInterface
         private void HomeScreen_Resize(object sender, EventArgs e)
         {
             buttonLogout.Location = new Point(this.Width - 110, buttonLogout.Location.Y);
-            tabControlHomeScreen.Width = this.Width - 100;
-            tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Height;
+            //tabControlHomeScreen.Width = this.Width - 100;
+            tabControlHomeScreen.Width = this.Width - buttonPostStatus.Right - 20;
+            tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Bottom - 45;
+            //tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Height;
             //listBoxTimeline.Height = this.Height - labelTimeline.Location.Y;
         }
     }
