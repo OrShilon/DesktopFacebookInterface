@@ -25,14 +25,13 @@ namespace DesktopFacebookInterface
             m_LoginUser = i_LoginUser;
             m_AppSettings = i_AppSettings;
             m_UserInfo = new UserInformationWrapper(m_LoginUser);
-            //Console.WriteLine(m_LoginUser.Name);
             InitializeComponent();
+            this.Text = string.Format("Facebook - {0}", m_UserInfo.m_FullName);
             PictureBoxProfile.LoadAsync(m_UserInfo.m_ProfileImage);
             PictureBoxCoverPhoto.LoadAsync(m_UserInfo.m_CoverImage);
             fetchAbout();
             fetchTimeline();
             this.ShowDialog();
-            //PictureBoxCoverPhoto.Load(m_LoginUser.Cover.SourceURL);
         }
 
         protected override void OnShown(EventArgs e)
@@ -132,26 +131,57 @@ namespace DesktopFacebookInterface
         private void fetchAbout()
         {
             TabPage selectedTab = tabControlHomeScreen.SelectedTab;
+            Label prevLabel = new Label();
 
-            Label labelName = new Label();
-            labelName.Text = "Name: " + m_UserInfo.m_FullName;
-            labelName.Width += 100;
-            selectedTab.Controls.Add(labelName);
-            Label labelBirthday = new Label();
-            labelBirthday.Text = "Birthday: " + m_UserInfo.m_Birthday;
-            labelBirthday.Location = new Point(labelName.Location.X, labelName.Location.Y + 25);
-            labelBirthday.Width += 100;
-            selectedTab.Controls.Add(labelBirthday);
-            Label labelGender = new Label();
-            labelGender.Text = "Gender: " + m_UserInfo.m_Gender;
-            labelGender.Location = new Point(labelBirthday.Location.X, labelBirthday.Location.Y + 25);
-            labelGender.Width += 100;
-            selectedTab.Controls.Add(labelGender);
-            Label labelEmail = new Label();
-            labelEmail.Text = "Email: " + m_UserInfo.m_Email;
-            labelEmail.Width += 100;
-            labelEmail.Location = new Point(labelGender.Location.X, labelGender.Location.Y + 25);
-            selectedTab.Controls.Add(labelEmail);
+            foreach(string info in m_UserInfo.BasicInfo)
+            {
+                Label labelInfo = new Label();
+
+                if(m_UserInfo.BasicInfo[0].Equals(info))
+                {
+                    labelInfo.Text = info;
+                    labelInfo.Width += 100;
+                    selectedTab.Controls.Add(labelInfo);
+                }
+                else
+                {
+                    labelInfo.Text = info;
+                    labelInfo.Width += 100;
+                    labelInfo.Location = new Point(prevLabel.Location.X, prevLabel.Location.Y + 25);
+                    selectedTab.Controls.Add(labelInfo);
+                }
+
+                prevLabel = labelInfo;
+
+            }
+
+
+
+
+
+
+            //Label labelName = new Label();
+            //labelName.Text = "Name: " + m_UserInfo.m_FullName;
+            //labelName.Width += 100;
+            //selectedTab.Controls.Add(labelName);
+            //Label labelBirthday = new Label();
+            //labelBirthday.Text = "Birthday: " + m_UserInfo.m_Birthday;
+            //labelBirthday.Location = new Point(labelName.Location.X, labelName.Location.Y + 25);
+            //labelBirthday.Width += 100;
+            //selectedTab.Controls.Add(labelBirthday);
+            //Label labelGender = new Label();
+            //labelGender.Text = "Gender: " + m_UserInfo.m_Gender;
+            //labelGender.Location = new Point(labelBirthday.Location.X, labelBirthday.Location.Y + 25);
+            //labelGender.Width += 100;
+            //selectedTab.Controls.Add(labelGender);
+            //Label labelEmail = new Label();
+            //labelEmail.Text = "Email: " + m_UserInfo.m_Email;
+            //labelEmail.Width += 100;
+            //labelEmail.Location = new Point(labelGender.Location.X, labelGender.Location.Y + 25);
+            //selectedTab.Controls.Add(labelEmail);
+            //Label labelCity = new Label();
+            //labelCity.Text = "City: " + m_UserInfo.m_City;
+            //labelCity.Location = new Point(labelEmail.Location.X, labelEmail.Location.Y + 25);
 
         }
 
