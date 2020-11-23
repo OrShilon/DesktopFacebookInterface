@@ -14,10 +14,12 @@ namespace DesktopFacebookInterface
     {
         private int m_TabIndex = 0;
         User m_LoginUser;
+        private readonly List<ContestLogic> m_ListOfContests;
         public FormContest(User i_LoginUser)
         {
             m_LoginUser = i_LoginUser;
             InitializeComponent();
+            m_ListOfContests = new List<ContestLogic>();
 
         }
 
@@ -59,31 +61,32 @@ namespace DesktopFacebookInterface
         {
             TabPage tabPageContest = new TabPage();
 
-            tabPageContest.Location = new Point(104, 4);
-            tabPageContest.Name = string.Format("tabPageContest{0}", m_TabIndex + 1);
-            tabPageContest.Size = new Size(867, 616);
-            tabPageContest.TabIndex = m_TabIndex;
-            tabPageContest.Text = string.Format("Contest {0}", m_TabIndex + 1);
-            tabPageContest.UseVisualStyleBackColor = true;
-
             if (m_TabIndex == 0)
             {
                 tabPageContest.Padding = new Padding(3);
             }
 
-            FormAddContest newConstest = new FormAddContest();
-            newConstest.ShowDialog();
-            if(newConstest.DialogResult == DialogResult.OK)
+            FormAddContest newFormConstest = new FormAddContest();
+            newFormConstest.ShowDialog();
+            if(newFormConstest.DialogResult == DialogResult.OK)
+            {
+                ContestLogic newContest = new ContestLogic(m_LoginUser, newFormConstest.Status, newFormConstest.ImagePath,
+                    newFormConstest.LikeCondition, newFormConstest.CommentCondition, newFormConstest.NumberOfWinners);
+                m_ListOfContests.Add(newContest);
+                tabPageContest.Location = new Point(104, 4);
+                tabPageContest.Name = string.Format("tabPageContest{0}", m_TabIndex + 1);
+                tabPageContest.Size = new Size(867, 616);
+                tabPageContest.TabIndex = m_TabIndex;
+                tabPageContest.Text = string.Format("Contest {0}", m_TabIndex + 1);
+                tabPageContest.UseVisualStyleBackColor = true;
+                tabControlContest.Controls.Add(tabPageContest);
+                m_TabIndex++;
+
+            }
+            else if(newFormConstest.DialogResult == DialogResult.Cancel)
             {
 
             }
-            else if(newConstest.DialogResult == DialogResult.Cancel)
-            {
-
-            }
-
-            tabControlContest.Controls.Add(tabPageContest);
-            m_TabIndex++;
         }
     }
 }
