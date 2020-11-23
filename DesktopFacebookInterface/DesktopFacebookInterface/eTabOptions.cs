@@ -9,8 +9,8 @@ namespace DesktopFacebookInterface
     {
         About,
         Albums,
+        Friends,
         Pages,
         Events,
-        Friends
     }
 }
