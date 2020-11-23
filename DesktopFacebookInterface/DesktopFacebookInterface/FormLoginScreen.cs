@@ -37,7 +37,7 @@ namespace DesktopFacebookInterface
             Thread t1 = new Thread(new ThreadStart(ConnectByUserAccessToken));
             t1.Start();
             t1.Join();
-            if(m_LoginResult != null)
+            if (m_LoginResult != null)
             {
                 closeFormAndShowHome();
             }
