@@ -37,10 +37,12 @@ namespace DesktopFacebookInterface
 
         protected override void OnShown(EventArgs e)
         {
-            this.StartPosition = FormStartPosition.Manual;
-            this.Size = m_AppSettings.WindowSize;
-            this.Location = m_AppSettings.WindowLocation;
-
+            if (!m_AppSettings.WindowSize.IsEmpty)
+            {
+                this.StartPosition = FormStartPosition.Manual;
+                this.Size = m_AppSettings.WindowSize;
+                this.Location = m_AppSettings.WindowLocation;
+            }
             base.OnShown(e);
         }
 
