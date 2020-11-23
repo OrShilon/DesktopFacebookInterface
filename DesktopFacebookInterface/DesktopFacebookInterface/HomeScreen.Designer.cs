@@ -35,24 +35,24 @@
             this.tabPageAbout = new System.Windows.Forms.TabPage();
             this.tabPageAlbums = new System.Windows.Forms.TabPage();
             this.listBoxAlbums = new System.Windows.Forms.ListBox();
+            this.tabPageFriends = new System.Windows.Forms.TabPage();
+            this.listBoxFriends = new System.Windows.Forms.ListBox();
             this.tabPagePages = new System.Windows.Forms.TabPage();
             this.listBoxPages = new System.Windows.Forms.ListBox();
             this.tabPageEvents = new System.Windows.Forms.TabPage();
             this.listBoxEvents = new System.Windows.Forms.ListBox();
-            this.tabPageFriends = new System.Windows.Forms.TabPage();
             this.listBoxTimeline = new System.Windows.Forms.ListBox();
             this.textBoxPostStatus = new System.Windows.Forms.TextBox();
             this.labelPostStatus = new System.Windows.Forms.Label();
             this.buttonPostStatus = new System.Windows.Forms.Button();
             this.labelTimeline = new System.Windows.Forms.Label();
-            this.listBoxFriends = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxProfile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCoverPhoto)).BeginInit();
             this.tabControlHomeScreen.SuspendLayout();
             this.tabPageAlbums.SuspendLayout();
+            this.tabPageFriends.SuspendLayout();
             this.tabPagePages.SuspendLayout();
             this.tabPageEvents.SuspendLayout();
-            this.tabPageFriends.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonLogout
@@ -68,7 +68,7 @@
             // 
             // PictureBoxProfile
             // 
-            this.PictureBoxProfile.Location = new System.Drawing.Point(295, 90);
+            this.PictureBoxProfile.Location = new System.Drawing.Point(499, 90);
             this.PictureBoxProfile.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.PictureBoxProfile.Name = "PictureBoxProfile";
             this.PictureBoxProfile.Size = new System.Drawing.Size(200, 142);
@@ -81,7 +81,7 @@
             this.PictureBoxCoverPhoto.Location = new System.Drawing.Point(-1, -2);
             this.PictureBoxCoverPhoto.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.PictureBoxCoverPhoto.Name = "PictureBoxCoverPhoto";
-            this.PictureBoxCoverPhoto.Size = new System.Drawing.Size(837, 235);
+            this.PictureBoxCoverPhoto.Size = new System.Drawing.Size(1134, 234);
             this.PictureBoxCoverPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureBoxCoverPhoto.TabIndex = 0;
             this.PictureBoxCoverPhoto.TabStop = false;
@@ -94,7 +94,7 @@
             this.tabControlHomeScreen.Controls.Add(this.tabPagePages);
             this.tabControlHomeScreen.Controls.Add(this.tabPageEvents);
             this.tabControlHomeScreen.Location = new System.Drawing.Point(543, 242);
-            this.tabControlHomeScreen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControlHomeScreen.Margin = new System.Windows.Forms.Padding(4);
             this.tabControlHomeScreen.Name = "tabControlHomeScreen";
             this.tabControlHomeScreen.SelectedIndex = 0;
             this.tabControlHomeScreen.Size = new System.Drawing.Size(608, 452);
@@ -104,9 +104,9 @@
             // tabPageAbout
             // 
             this.tabPageAbout.Location = new System.Drawing.Point(8, 39);
-            this.tabPageAbout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageAbout.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageAbout.Name = "tabPageAbout";
-            this.tabPageAbout.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageAbout.Padding = new System.Windows.Forms.Padding(4);
             this.tabPageAbout.Size = new System.Drawing.Size(592, 405);
             this.tabPageAbout.TabIndex = 0;
             this.tabPageAbout.Text = "About";
@@ -116,10 +116,10 @@
             // 
             this.tabPageAlbums.Controls.Add(this.listBoxAlbums);
             this.tabPageAlbums.Location = new System.Drawing.Point(8, 39);
-            this.tabPageAlbums.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageAlbums.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageAlbums.Name = "tabPageAlbums";
             this.tabPageAlbums.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAlbums.Size = new System.Drawing.Size(448, 329);
+            this.tabPageAlbums.Size = new System.Drawing.Size(592, 405);
             this.tabPageAlbums.TabIndex = 1;
             this.tabPageAlbums.Text = "Albums";
             this.tabPageAlbums.UseVisualStyleBackColor = true;
@@ -127,20 +127,40 @@
             // listBoxAlbums
             // 
             this.listBoxAlbums.FormattingEnabled = true;
-            this.listBoxAlbums.ItemHeight = 20;
+            this.listBoxAlbums.ItemHeight = 25;
             this.listBoxAlbums.Location = new System.Drawing.Point(0, 0);
             this.listBoxAlbums.Name = "listBoxAlbums";
-            this.listBoxAlbums.Size = new System.Drawing.Size(260, 224);
+            this.listBoxAlbums.Size = new System.Drawing.Size(260, 204);
             this.listBoxAlbums.TabIndex = 0;
             this.listBoxAlbums.SelectedIndexChanged += new System.EventHandler(this.listBoxAlbums_SelectedIndexChanged);
+            // 
+            // tabPageFriends
+            // 
+            this.tabPageFriends.Controls.Add(this.listBoxFriends);
+            this.tabPageFriends.Location = new System.Drawing.Point(8, 39);
+            this.tabPageFriends.Name = "tabPageFriends";
+            this.tabPageFriends.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageFriends.Size = new System.Drawing.Size(592, 405);
+            this.tabPageFriends.TabIndex = 4;
+            this.tabPageFriends.Text = "Friends";
+            this.tabPageFriends.UseVisualStyleBackColor = true;
+            // 
+            // listBoxFriends
+            // 
+            this.listBoxFriends.FormattingEnabled = true;
+            this.listBoxFriends.ItemHeight = 25;
+            this.listBoxFriends.Location = new System.Drawing.Point(0, 0);
+            this.listBoxFriends.Name = "listBoxFriends";
+            this.listBoxFriends.Size = new System.Drawing.Size(260, 204);
+            this.listBoxFriends.TabIndex = 0;
             // 
             // tabPagePages
             // 
             this.tabPagePages.Controls.Add(this.listBoxPages);
             this.tabPagePages.Location = new System.Drawing.Point(8, 39);
-            this.tabPagePages.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPagePages.Margin = new System.Windows.Forms.Padding(4);
             this.tabPagePages.Name = "tabPagePages";
-            this.tabPagePages.Size = new System.Drawing.Size(448, 329);
+            this.tabPagePages.Size = new System.Drawing.Size(592, 405);
             this.tabPagePages.TabIndex = 2;
             this.tabPagePages.Text = "Pages";
             this.tabPagePages.UseVisualStyleBackColor = true;
@@ -148,19 +168,19 @@
             // listBoxPages
             // 
             this.listBoxPages.FormattingEnabled = true;
-            this.listBoxPages.ItemHeight = 20;
+            this.listBoxPages.ItemHeight = 25;
             this.listBoxPages.Location = new System.Drawing.Point(0, 0);
             this.listBoxPages.Name = "listBoxPages";
-            this.listBoxPages.Size = new System.Drawing.Size(260, 224);
+            this.listBoxPages.Size = new System.Drawing.Size(260, 204);
             this.listBoxPages.TabIndex = 0;
             // 
             // tabPageEvents
             // 
             this.tabPageEvents.Controls.Add(this.listBoxEvents);
             this.tabPageEvents.Location = new System.Drawing.Point(8, 39);
-            this.tabPageEvents.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageEvents.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageEvents.Name = "tabPageEvents";
-            this.tabPageEvents.Size = new System.Drawing.Size(448, 329);
+            this.tabPageEvents.Size = new System.Drawing.Size(592, 405);
             this.tabPageEvents.TabIndex = 3;
             this.tabPageEvents.Text = "Events";
             this.tabPageEvents.UseVisualStyleBackColor = true;
@@ -168,29 +188,18 @@
             // listBoxEvents
             // 
             this.listBoxEvents.FormattingEnabled = true;
-            this.listBoxEvents.ItemHeight = 20;
+            this.listBoxEvents.ItemHeight = 25;
             this.listBoxEvents.Location = new System.Drawing.Point(0, 0);
             this.listBoxEvents.Name = "listBoxEvents";
-            this.listBoxEvents.Size = new System.Drawing.Size(260, 224);
+            this.listBoxEvents.Size = new System.Drawing.Size(260, 204);
             this.listBoxEvents.TabIndex = 0;
-            // 
-            // tabPageFriends
-            // 
-            this.tabPageFriends.Controls.Add(this.listBoxFriends);
-            this.tabPageFriends.Location = new System.Drawing.Point(4, 29);
-            this.tabPageFriends.Name = "tabPageFriends";
-            this.tabPageFriends.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFriends.Size = new System.Drawing.Size(448, 329);
-            this.tabPageFriends.TabIndex = 4;
-            this.tabPageFriends.Text = "Friends";
-            this.tabPageFriends.UseVisualStyleBackColor = true;
             // 
             // listBoxTimeline
             // 
             this.listBoxTimeline.FormattingEnabled = true;
             this.listBoxTimeline.ItemHeight = 25;
             this.listBoxTimeline.Location = new System.Drawing.Point(16, 440);
-            this.listBoxTimeline.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBoxTimeline.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxTimeline.Name = "listBoxTimeline";
             this.listBoxTimeline.Size = new System.Drawing.Size(405, 254);
             this.listBoxTimeline.TabIndex = 4;
@@ -198,7 +207,7 @@
             // textBoxPostStatus
             // 
             this.textBoxPostStatus.Location = new System.Drawing.Point(16, 299);
-            this.textBoxPostStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxPostStatus.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxPostStatus.Name = "textBoxPostStatus";
             this.textBoxPostStatus.Size = new System.Drawing.Size(383, 31);
             this.textBoxPostStatus.TabIndex = 5;
@@ -217,7 +226,7 @@
             // buttonPostStatus
             // 
             this.buttonPostStatus.Location = new System.Drawing.Point(420, 299);
-            this.buttonPostStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonPostStatus.Margin = new System.Windows.Forms.Padding(4);
             this.buttonPostStatus.Name = "buttonPostStatus";
             this.buttonPostStatus.Size = new System.Drawing.Size(115, 32);
             this.buttonPostStatus.TabIndex = 7;
@@ -233,15 +242,6 @@
             this.labelTimeline.Size = new System.Drawing.Size(99, 25);
             this.labelTimeline.TabIndex = 8;
             this.labelTimeline.Text = "Timeline:";
-            // 
-            // listBoxFriends
-            // 
-            this.listBoxFriends.FormattingEnabled = true;
-            this.listBoxFriends.ItemHeight = 20;
-            this.listBoxFriends.Location = new System.Drawing.Point(0, 0);
-            this.listBoxFriends.Name = "listBoxFriends";
-            this.listBoxFriends.Size = new System.Drawing.Size(260, 224);
-            this.listBoxFriends.TabIndex = 0;
             // 
             // HomeScreen
             // 
@@ -268,9 +268,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCoverPhoto)).EndInit();
             this.tabControlHomeScreen.ResumeLayout(false);
             this.tabPageAlbums.ResumeLayout(false);
+            this.tabPageFriends.ResumeLayout(false);
             this.tabPagePages.ResumeLayout(false);
             this.tabPageEvents.ResumeLayout(false);
-            this.tabPageFriends.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
