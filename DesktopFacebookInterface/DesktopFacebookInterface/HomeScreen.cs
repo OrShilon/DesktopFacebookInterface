@@ -18,6 +18,7 @@ namespace DesktopFacebookInterface
         AppSettings m_AppSettings;
         User m_LoginUser;
         UserInformationWrapper m_UserInfo;
+        string m_PostAttachedFilePath = null;
 
         public HomeScreen(LoginResult i_LoginResult, User i_LoginUser, AppSettings i_AppSettings)
         {
@@ -311,6 +312,37 @@ namespace DesktopFacebookInterface
             tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Bottom - 45;
             //tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Height;
             //listBoxTimeline.Height = this.Height - labelTimeline.Location.Y;
+        }
+
+        private void buttonPostStatus_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (m_PostAttachedFilePath == null)
+                {
+                    m_LoginUser.PostStatus(textBoxPostStatus.Text);
+
+                }
+                else
+                {
+                    m_LoginUser.PostPhoto(m_PostAttachedFilePath, textBoxPostStatus.Text);
+                }
+                MessageBox.Show("Status posted successfully!");
+            }
+            catch(FacebookOAuthException foae)
+            {
+                MessageBox.Show(foae.Message);
+            }
+        }
+
+        private void buttonAttachImage_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = ("Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG");
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                m_PostAttachedFilePath  = ofd.FileName;
+            }
         }
     }
 }
