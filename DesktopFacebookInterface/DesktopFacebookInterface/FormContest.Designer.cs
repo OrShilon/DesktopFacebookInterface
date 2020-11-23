@@ -28,34 +28,80 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tabControlContest = new System.Windows.Forms.TabControl();
+            this.buttonAddContest = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tabControlContest.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // toolStrip1
+            // tabControlContest
             // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(64, 887);
-            this.toolStrip1.TabIndex = 0;
-            this.toolStrip1.Text = "toolStrip1";
+            this.tabControlContest.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.tabControlContest.Controls.Add(this.tabPage1);
+            this.tabControlContest.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControlContest.ItemSize = new System.Drawing.Size(25, 100);
+            this.tabControlContest.Location = new System.Drawing.Point(12, 12);
+            this.tabControlContest.Multiline = true;
+            this.tabControlContest.Name = "tabControlContest";
+            this.tabControlContest.SelectedIndex = 0;
+            this.tabControlContest.Size = new System.Drawing.Size(975, 624);
+            this.tabControlContest.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControlContest.TabIndex = 0;
+            this.tabControlContest.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
+            // 
+            // buttonAddContest
+            // 
+            this.buttonAddContest.Location = new System.Drawing.Point(12, 642);
+            this.buttonAddContest.Name = "buttonAddContest";
+            this.buttonAddContest.Size = new System.Drawing.Size(93, 54);
+            this.buttonAddContest.TabIndex = 1;
+            this.buttonAddContest.Text = "Add new contest";
+            this.buttonAddContest.UseVisualStyleBackColor = true;
+            this.buttonAddContest.Click += new System.EventHandler(this.buttonAddContest_Click);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Location = new System.Drawing.Point(104, 4);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(867, 616);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "label1";
             // 
             // FormContest
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1313, 887);
-            this.Controls.Add(this.toolStrip1);
+            this.ClientSize = new System.Drawing.Size(985, 710);
+            this.Controls.Add(this.buttonAddContest);
+            this.Controls.Add(this.tabControlContest);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormContest";
             this.Text = "FormContest";
+            this.tabControlContest.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.TabControl tabControlContest;
+        private System.Windows.Forms.Button buttonAddContest;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Label label1;
     }
 }
