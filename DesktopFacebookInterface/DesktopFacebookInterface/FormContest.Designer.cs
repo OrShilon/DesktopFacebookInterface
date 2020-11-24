@@ -42,7 +42,7 @@
             this.tabControlContest.Multiline = true;
             this.tabControlContest.Name = "tabControlContest";
             this.tabControlContest.SelectedIndex = 0;
-            this.tabControlContest.Size = new System.Drawing.Size(650, 406);
+            this.tabControlContest.Size = new System.Drawing.Size(702, 389);
             this.tabControlContest.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlContest.TabIndex = 0;
             this.tabControlContest.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
@@ -62,7 +62,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 461);
+            this.ClientSize = new System.Drawing.Size(703, 433);
             this.Controls.Add(this.buttonAddContest);
             this.Controls.Add(this.tabControlContest);
             this.Margin = new System.Windows.Forms.Padding(1);

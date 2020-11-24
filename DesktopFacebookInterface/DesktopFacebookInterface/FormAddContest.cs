@@ -108,7 +108,7 @@ namespace DesktopFacebookInterface
         {
             get
             {
-                return m_NumberOfWinnersCondition;
+                return m_NumberOfWinnersCondition + 1; // index 0 --> 1 winner, index 1 --> 2 winners.........
             }
 
         }

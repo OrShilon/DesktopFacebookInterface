@@ -67,6 +67,12 @@
     <Compile Include="FormContest.Designer.cs">
       <DependentUpon>FormContest.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDiplayWinners.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDiplayWinners.Designer.cs">
+      <DependentUpon>FormDiplayWinners.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormLoginScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormContest.resx">
       <DependentUpon>FormContest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDiplayWinners.resx">
+      <DependentUpon>FormDiplayWinners.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLoginScreen.resx">
       <DependentUpon>FormLoginScreen.cs</DependentUpon>
