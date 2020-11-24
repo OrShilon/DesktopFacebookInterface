@@ -16,7 +16,7 @@ namespace DesktopFacebookInterface
         string m_AttachedImagePath;
         FormContest m_FormContest;
         bool m_isFirstContestClick = true;
-        private const string k_textBoxMsg = "Post something!";
+        private const string k_textBoxPostStatusMsg = "Post something!";
 
         public FormHomeScreen(LoginResult i_LoginResult, User i_LoginUser, AppSettings i_AppSettings)
         {
@@ -27,6 +27,7 @@ namespace DesktopFacebookInterface
             m_AttachedImagePath = null;
             InitializeComponent();
             this.Text = string.Format("Facebook - {0}", m_UserInfo.m_FullName);
+            textBoxPostStatus.Text = k_textBoxPostStatusMsg;
             PictureBoxProfile.LoadAsync(m_UserInfo.m_ProfileImage);
             PictureBoxCoverPhoto.LoadAsync(m_UserInfo.m_CoverImage);
             fetchAbout();
@@ -269,7 +270,19 @@ namespace DesktopFacebookInterface
 
         private void buttonPostStatus_Click(object sender, EventArgs e)
         {
-            UserPostStatusWrapper.PostStatus(m_LoginUser, m_AttachedImagePath, textBoxPostStatus.Text);
+            try
+            {
+                GeoPostedItem postedItem = UserPostStatusWrapper.PostStatus(m_LoginUser, m_AttachedImagePath, textBoxPostStatus.Text);
+                MessageBox.Show(string.Format("Post published successfully!{1} Post ID: {0}", postedItem.Id, Environment.NewLine));
+            }
+            catch (FacebookOAuthException)
+            {
+                MessageBox.Show("Status post failed: No permissions.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void buttonAttachImage_Click(object sender, EventArgs e)
@@ -305,7 +318,7 @@ namespace DesktopFacebookInterface
 
         private void textBoxPostStatus_MouseClick(object sender, MouseEventArgs e)
         {
-            if (textBoxPostStatus.Text == k_textBoxMsg)
+            if (textBoxPostStatus.Text == k_textBoxPostStatusMsg)
             {
                 textBoxPostStatus.Text = string.Empty;
             }
@@ -315,7 +328,7 @@ namespace DesktopFacebookInterface
         {
             if (string.IsNullOrWhiteSpace(textBoxPostStatus.Text))
             {
-                textBoxPostStatus.Text = k_textBoxMsg;
+                textBoxPostStatus.Text = k_textBoxPostStatusMsg;
             }
         }
     }

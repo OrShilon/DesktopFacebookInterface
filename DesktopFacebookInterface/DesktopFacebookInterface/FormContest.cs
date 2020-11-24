@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Facebook;
 using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
@@ -70,8 +71,20 @@ namespace DesktopFacebookInterface
             if(newFormContest.DialogResult == DialogResult.OK)
             {
                 ContestLogic newContest = new ContestLogic(m_TabIndex + 1, m_LoginUser, newFormContest.Status, newFormContest.ImagePath,
-                    newFormContest.LikeCondition, newFormContest.CommentCondition, newFormContest.NumberOfWinners);
+                                            newFormContest.LikeCondition, newFormContest.CommentCondition, newFormContest.NumberOfWinners);
                 m_ListOfContests.Add(newContest);
+                try
+                {
+                    newContest.PostContestStatus();
+                }
+                catch (FacebookOAuthException)
+                {
+                    MessageBox.Show("Failed to post status: No permissions.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 tabPageContest.Location = new Point(104, 4);
                 tabPageContest.Name = string.Format("tabPageContest{0}", m_TabIndex + 1);
                 tabPageContest.Size = new Size(867, 616);
@@ -191,7 +204,22 @@ namespace DesktopFacebookInterface
         {
             Button button = (Button)sender;
             int index = (button.Name[button.Name.Length - 1] - '0') - 1;
-            m_ListOfContests[index].UpdateParticipantsList();
+            try
+            {
+                m_ListOfContests[index].UpdateParticipantsList();
+                if (m_ListOfContests[index].r_ParticipantsList.Count == 0)
+                {
+                    MessageBox.Show("No user meets the requirements of your contest.");
+                }
+            }
+            catch (FacebookOAuthException)
+            {
+                MessageBox.Show("Unable to load. No permission.");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No user meets the requirements of your contest.");
+            }
         }
         private void buttonChooseWinner_Click(object sender, EventArgs e)
         {
@@ -202,6 +230,10 @@ namespace DesktopFacebookInterface
             {
                 FormDiplayWinners displayWinners = new FormDiplayWinners(m_ListOfContests[index].r_ContestWinners);
                 displayWinners.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(string.Format("Not enough participants to choose {0}.", m_ListOfContests[index].m_NumberOfWinners > 1 ? "winners" : "winner"));
             }
         }
         protected override void OnFormClosed(FormClosedEventArgs e)
