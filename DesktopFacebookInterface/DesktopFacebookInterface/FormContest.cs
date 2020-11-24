@@ -109,38 +109,70 @@ namespace DesktopFacebookInterface
             labelPost.TabIndex = 0;
             labelPost.TabStop = false;
 
-            textBoxDescription.Location = new Point(labelPost.Location.X, labelPost.Location.Y + 20);
+            textBoxDescription.Location = new Point(labelPost.Location.X, labelPost.Bottom + 20);
             textBoxDescription.Margin = new Padding(2, 2, 2, 2);
             textBoxDescription.Multiline = true;
             textBoxDescription.Name = "textBoxContestDescription";
-            //textBoxDescription.Text = m_ListOfContests[m_ListOfContests.Count - 1]
+            textBoxDescription.Text = m_ListOfContests[m_ListOfContests.Count - 1].m_Status;
             textBoxDescription.Size = new Size(420, 120);
             textBoxDescription.TabIndex = 1;
 
-            pictureBoxAttachedImage.Location = new Point(textBoxDescription.Right + 15, textBoxDescription.Location.Y);
-            pictureBoxAttachedImage.Margin = new Padding(5, 6, 5, 6);
-            pictureBoxAttachedImage.Name = "pictureBoxAttachedImage";
-            pictureBoxAttachedImage.Size = new Size(200, 145);
-            pictureBoxAttachedImage.SizeMode = PictureBoxSizeMode.StretchImage;
-            //pictureBoxAttachedImage.LoadAsync(m_ListOfContests[m_ListOfContests.Count - 1])
-            pictureBoxAttachedImage.TabIndex = 2;
-            pictureBoxAttachedImage.TabStop = false;
+            if(m_ListOfContests[m_ListOfContests.Count - 1].m_ImagePath != null)
+            {
+                pictureBoxAttachedImage.Location = new Point(textBoxDescription.Right + 15, textBoxDescription.Location.Y);
+                pictureBoxAttachedImage.Margin = new Padding(5, 6, 5, 6);
+                pictureBoxAttachedImage.Name = "pictureBoxAttachedImage";
+                pictureBoxAttachedImage.Size = new Size(200, 145);
+                pictureBoxAttachedImage.SizeMode = PictureBoxSizeMode.StretchImage;
+                pictureBoxAttachedImage.Image = Image.FromFile(m_ListOfContests[m_ListOfContests.Count - 1].m_ImagePath);
+                pictureBoxAttachedImage.TabIndex = 2;
+                pictureBoxAttachedImage.TabStop = false;
+            }
 
-            listBoxParticipants.AutoSize = true;
-            listBoxParticipants.Font = new Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            listBoxParticipants.Location = new Point(textBoxDescription.Location.X, textBoxDescription.Location.Y + 30);
+            labelParticipants.AutoSize = true;
+            labelParticipants.Font = new Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            labelParticipants.Location = new Point(textBoxDescription.Location.X, textBoxDescription.Bottom + 15);
+            labelParticipants.Name = "labelParticipants";
+            labelParticipants.Size = new Size(195, 25);
+            labelParticipants.Text = "List of participants:";
+            labelParticipants.TabIndex = 3;
+            labelParticipants.TabStop = false;
+
+            listBoxParticipants.FormattingEnabled = true;
+            listBoxParticipants.ItemHeight = 20;
+            listBoxParticipants.Location = new Point(labelParticipants.Right + 20, labelParticipants.Location.Y);
+            listBoxParticipants.Margin = new Padding(3, 2, 3, 2);
             listBoxParticipants.Name = "listBoxParticipants";
-            listBoxParticipants.Size = new Size(195, 25);
-            listBoxParticipants.Text = "List of participants:";
-            listBoxParticipants.TabIndex = 3;
-            listBoxParticipants.TabStop = false;
+            listBoxParticipants.Size = new Size(220, 200);
+            listBoxParticipants.TabIndex = 4;
+
+            buttonUpdateParticipants.Location = new Point((currentTabPage.Width / 2) - 50, currentTabPage.Height - 30);
+            buttonUpdateParticipants.Margin = new Padding(5, 6, 5, 6);
+            buttonUpdateParticipants.Name = "buttonUpdateParticipants";
+            buttonUpdateParticipants.Size = new Size(160, 45);
+            buttonUpdateParticipants.TabIndex = 5;
+            buttonUpdateParticipants.Text = "Update participants";
+            buttonUpdateParticipants.UseVisualStyleBackColor = true;
+            //buttonUpdateParticipants.Click += new System.EventHandler(this.buttonLogout_Click);
+
+            buttonChooseWinner.Location = new Point(buttonUpdateParticipants.Right + 30, currentTabPage.Height - 30);
+            buttonChooseWinner.Margin = new Padding(5, 6, 5, 6);
+            buttonChooseWinner.Name = "buttonChooseWinner";
+            buttonChooseWinner.Size = new Size(160, 45);
+            buttonChooseWinner.TabIndex = 6;
+            buttonChooseWinner.Text = m_ListOfContests[m_ListOfContests.Count - 1].m_NumberOfWinners < 2 ? "Choose winner" : "Choose winners";
+            buttonChooseWinner.UseVisualStyleBackColor = true;
+            //buttonUpdateParticipants.Click += new System.EventHandler(this.buttonLogout_Click);
 
 
 
             currentTabPage.Controls.Add(labelPost);
             currentTabPage.Controls.Add(textBoxDescription);
             currentTabPage.Controls.Add(pictureBoxAttachedImage);
+            currentTabPage.Controls.Add(labelParticipants);
             currentTabPage.Controls.Add(listBoxParticipants);
+            currentTabPage.Controls.Add(buttonUpdateParticipants);
+            currentTabPage.Controls.Add(buttonChooseWinner);
 
         }
     }
