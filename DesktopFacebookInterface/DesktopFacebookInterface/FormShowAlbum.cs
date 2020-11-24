@@ -1,13 +1,13 @@
-﻿using FacebookWrapper.ObjectModel;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
-    public partial class FormShowAlbum : Form
+    internal partial class FormShowAlbum : Form
     {
-        Album m_Album;
-        readonly string[] m_AlbumPhotos;
+        private readonly string[] m_AlbumPhotos; 
+        private Album m_Album;
         private int m_PhotoIndex = 0;
 
         public FormShowAlbum(Album i_Album)

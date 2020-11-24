@@ -7,13 +7,12 @@ namespace DesktopFacebookInterface
 {
     public class AppSettings
     {
-        public Point m_WindowLocation { get; set; }
-        public Size m_WindowSize { get; set; }
-        public bool m_RememberUser { get; set; }
-        public string m_UserAccessToken { get; set; }
-
-        private readonly static string r_defaultFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public Point m_WindowLocation;
+        public Size m_WindowSize;
+        public bool m_RememberUser;
+        public string m_UserAccessToken;
         private const string k_defaultFileName = "appSettings.xml";
+        private static readonly string sr_defaultFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         private AppSettings()
         {
@@ -23,25 +22,14 @@ namespace DesktopFacebookInterface
             m_UserAccessToken = null;
         }
 
-        public void SaveFile()
-        {
-            string path = String.Format(@"{0}\\{1}", r_defaultFolder, k_defaultFileName);
-            FileMode fileModeToUse = File.Exists(path) ? FileMode.Truncate : FileMode.Create;
-
-            using (Stream stream = new FileStream(path, fileModeToUse))
-            {
-                XmlSerializer serializer = new XmlSerializer(this.GetType());
-                serializer.Serialize(stream, this);
-            }
-        }
-
         public static AppSettings LoadFile()
         {
             AppSettings appSettings;
-            string path = String.Format(@"{0}\\{1}", r_defaultFolder, k_defaultFileName);
-            if (File.Exists(path))
+            string filePath = string.Format(@"{0}\\{1}", sr_defaultFolder, k_defaultFileName);
+
+            if (File.Exists(filePath))
             {
-                using (Stream stream = new FileStream(path, FileMode.Open))
+                using (Stream stream = new FileStream(filePath, FileMode.Open))
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(AppSettings));
                     appSettings = serializer.Deserialize(stream) as AppSettings;
@@ -53,6 +41,18 @@ namespace DesktopFacebookInterface
             }
 
             return appSettings;
+        }
+
+        public void SaveFile()
+        {
+            string filePath = string.Format(@"{0}\\{1}", sr_defaultFolder, k_defaultFileName);
+            FileMode fileMode = File.Exists(filePath) ? FileMode.Truncate : FileMode.Create;
+
+            using (Stream stream = new FileStream(filePath, fileMode))
+            {
+                XmlSerializer serializer = new XmlSerializer(this.GetType());
+                serializer.Serialize(stream, this);
+            }
         }
     }
 }

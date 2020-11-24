@@ -1,6 +1,6 @@
 ﻿namespace DesktopFacebookInterface
 {
-    partial class FormShowAlbum
+    internal partial class FormShowAlbum
     {
         /// <summary>
         /// Required designer variable.
@@ -17,6 +17,7 @@
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 

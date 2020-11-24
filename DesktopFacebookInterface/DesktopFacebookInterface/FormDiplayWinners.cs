@@ -1,5 +1,4 @@
-﻿using FacebookWrapper.ObjectModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,13 +6,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
-    public partial class FormDiplayWinners : Form
+    internal partial class FormDiplayWinners : Form
     {
-        readonly List<User> m_ContestWinners;
-        int m_IndexInWinnerList = 0;
+        private readonly List<User> m_ContestWinners;
+        private int m_IndexInWinnerList = 0;
+
         public FormDiplayWinners(List<User> i_ContestWinners)
         {
             m_ContestWinners = i_ContestWinners;

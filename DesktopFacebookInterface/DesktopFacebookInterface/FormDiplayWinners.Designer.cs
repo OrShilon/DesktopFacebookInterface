@@ -1,6 +1,6 @@
 ﻿namespace DesktopFacebookInterface
 {
-    partial class FormDiplayWinners
+    internal partial class FormDiplayWinners
     {
         /// <summary>
         /// Required designer variable.

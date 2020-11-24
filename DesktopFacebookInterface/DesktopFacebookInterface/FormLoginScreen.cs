@@ -7,11 +7,10 @@ using FacebookWrapper;
 
 namespace DesktopFacebookInterface
 {
-    public partial class FormLoginScreen : Form
+    internal partial class FormLoginScreen : Form
     {
-        AppSettings m_AppSettings;
-        LoginResult m_LoginResult;
-
+        private AppSettings m_AppSettings;
+        private LoginResult m_LoginResult;
         protected const string k_AppId = "370214274434054";
 
         public FormLoginScreen()
@@ -44,7 +43,6 @@ namespace DesktopFacebookInterface
                 {
                     m_LoginResult = FacebookService.Connect(m_AppSettings.m_UserAccessToken);
                 }
-
                 catch (FacebookOAuthException e)
                 {
                     m_LoginResult = null;
@@ -59,7 +57,8 @@ namespace DesktopFacebookInterface
             {
                 try
                 {
-                    m_LoginResult = FacebookService.Login(k_AppId,
+                    m_LoginResult = FacebookService.Login(
+                        k_AppId,
                         "public_profile",
                         "email",
                         "publish_to_groups",
@@ -84,6 +83,7 @@ namespace DesktopFacebookInterface
                     MessageBox.Show(foae.Message);
                 }
             }
+
             if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
             {
                 closeFormAndShowHome();

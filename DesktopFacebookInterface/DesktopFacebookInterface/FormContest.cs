@@ -11,11 +11,12 @@ using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
-    public partial class FormContest : Form
+    internal partial class FormContest : Form
     {
-        private int m_TabIndex = 0;
-        User m_LoginUser;
         private readonly List<ContestLogic> m_ListOfContests;
+        private int m_TabIndex = 0;
+        private User m_LoginUser;
+
         public FormContest(User i_LoginUser)
         {
             m_LoginUser = i_LoginUser;
@@ -36,7 +37,6 @@ namespace DesktopFacebookInterface
 
             if (e.State == DrawItemState.Selected)
             {
-
                 // Draw a different background color, and don't paint a focus rectangle.
                 _textBrush = new SolidBrush(Color.Black);
                 //g.FillRectangle(Brushes.White, e.Bounds);
@@ -68,11 +68,19 @@ namespace DesktopFacebookInterface
 
             FormAddContest newFormContest = new FormAddContest();
             newFormContest.ShowDialog();
+
             if(newFormContest.DialogResult == DialogResult.OK)
             {
-                ContestLogic newContest = new ContestLogic(m_TabIndex + 1, m_LoginUser, newFormContest.Status, newFormContest.ImagePath,
-                                            newFormContest.LikeCondition, newFormContest.CommentCondition, newFormContest.NumberOfWinners);
+                ContestLogic newContest = new ContestLogic(
+                    m_TabIndex + 1, 
+                    m_LoginUser,
+                    newFormContest.Status,
+                    newFormContest.ImagePath,
+                    newFormContest.LikeRequired,
+                    newFormContest.CommentRequired,
+                    newFormContest.NumberOfWinners);
                 m_ListOfContests.Add(newContest);
+
                 try
                 {
                     newContest.PostContestStatus();
@@ -85,6 +93,7 @@ namespace DesktopFacebookInterface
                 {
                     MessageBox.Show(ex.Message);
                 }
+
                 tabPageContest.Location = new Point(104, 4);
                 tabPageContest.Name = string.Format("tabPageContest{0}", m_TabIndex + 1);
                 tabPageContest.Size = new Size(867, 616);
@@ -94,11 +103,10 @@ namespace DesktopFacebookInterface
                 tabControlContest.Controls.Add(tabPageContest);
                 buildContest(tabPageContest);
                 m_TabIndex++;
-
             }
             else if(newFormContest.DialogResult == DialogResult.Cancel)
             {
-
+                // missing code
             }
         }
 
@@ -118,7 +126,7 @@ namespace DesktopFacebookInterface
             Button buttonDeleteConstest = new Button();
 
             labelPost.AutoSize = true;
-            labelPost.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            labelPost.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelPost.Location = new Point(10, 10);
             labelPost.Name = "labelPost";
             labelPost.Size = new Size(195, 25);
@@ -149,8 +157,8 @@ namespace DesktopFacebookInterface
                 pictureBoxAttachedImage.TabIndex = 2;
                 pictureBoxAttachedImage.TabStop = false;
 
-                labelPicture.Location = new Point(pictureBoxAttachedImage.Location.X ,labelPost.Location.Y);
-                labelPicture.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+                labelPicture.Location = new Point(pictureBoxAttachedImage.Location.X, labelPost.Location.Y);
+                labelPicture.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
                 labelPicture.Margin = new Padding(2, 2, 2, 2);
                 labelPicture.Name = "textBoxContestDescription";
                 labelPicture.Text = "Image attached to the post:";
@@ -161,7 +169,7 @@ namespace DesktopFacebookInterface
             }
 
             labelParticipants.AutoSize = true;
-            labelParticipants.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            labelParticipants.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelParticipants.Location = new Point(textBoxDescription.Location.X, textBoxDescription.Bottom + 15);
             labelParticipants.Name = "labelParticipants";
             labelParticipants.Size = new Size(100, 25);
@@ -178,7 +186,7 @@ namespace DesktopFacebookInterface
             listBoxParticipants.TabIndex = 4;
 
             labelContestrequirements.AutoSize = true;
-            labelContestrequirements.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            labelContestrequirements.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelContestrequirements.Location = new Point(textBoxDescription.Right - labelContestrequirements.Width, labelParticipants.Location.Y);
             labelContestrequirements.Name = "labelContestrequirements";
             labelContestrequirements.Size = new Size(100, 25);
@@ -187,13 +195,13 @@ namespace DesktopFacebookInterface
             labelContestrequirements.TabStop = false;
 
             checkBoxLikeCondition.AutoSize = true;
-            checkBoxLikeCondition.Location = new Point(labelContestrequirements.Location.X , listBoxParticipants.Bottom - (int)(listBoxParticipants.Height / 1.5));
+            checkBoxLikeCondition.Location = new Point(labelContestrequirements.Location.X, listBoxParticipants.Bottom - (int)(listBoxParticipants.Height / 1.5));
             checkBoxLikeCondition.Name = "checkBoxLikeCondition";
             checkBoxLikeCondition.Size = new Size(123, 24);
             checkBoxLikeCondition.TabIndex = 6;
             checkBoxLikeCondition.Text = "Like my post";
             checkBoxLikeCondition.UseVisualStyleBackColor = true;
-            checkBoxLikeCondition.Checked = m_ListOfContests[m_TabIndex].m_LikeCondition;
+            checkBoxLikeCondition.Checked = m_ListOfContests[m_TabIndex].m_LikeRequired;
             checkBoxLikeCondition.Enabled = false;
 
             checkBoxCommentCondition.AutoSize = true;
@@ -203,16 +211,16 @@ namespace DesktopFacebookInterface
             checkBoxCommentCondition.TabIndex = 7;
             checkBoxCommentCondition.Text = "Comment my post";
             checkBoxCommentCondition.UseVisualStyleBackColor = true;
-            checkBoxCommentCondition.Checked = m_ListOfContests[m_TabIndex].m_CommentCondition;
+            checkBoxCommentCondition.Checked = m_ListOfContests[m_TabIndex].m_CommentRequired;
             checkBoxCommentCondition.Enabled = false;
 
-            buttonUpdateParticipants.Location = new Point(listBoxParticipants.Left + (listBoxParticipants.Width / 4) , listBoxParticipants.Bottom + 10);
+            buttonUpdateParticipants.Location = new Point(listBoxParticipants.Left + (listBoxParticipants.Width / 4), listBoxParticipants.Bottom + 10);
             buttonUpdateParticipants.Margin = new Padding(5, 6, 5, 6);
             buttonUpdateParticipants.Name = string.Format("buttonUpdateParticipants{0}", m_ListOfContests.Count);
             buttonUpdateParticipants.Size = new Size(120, 35);
             buttonUpdateParticipants.TabIndex = 8;
             buttonUpdateParticipants.Text = "Update participants";
-            buttonUpdateParticipants.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            buttonUpdateParticipants.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             //buttonUpdateParticipants.UseVisualStyleBackColor = true;
             buttonUpdateParticipants.Click += new EventHandler(this.buttonUpdateParticipants_Click);
 
@@ -223,7 +231,7 @@ namespace DesktopFacebookInterface
             buttonChooseWinner.TabIndex = 9;
             buttonChooseWinner.BackColor = Color.Green;
             buttonChooseWinner.Text = m_ListOfContests[m_ListOfContests.Count - 1].m_NumberOfWinners < 2 ? "Choose winner" : "Choose winners";
-            buttonChooseWinner.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            buttonChooseWinner.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             //buttonChooseWinner.UseVisualStyleBackColor = true;
             buttonChooseWinner.Click += new EventHandler(this.buttonChooseWinner_Click);
 
@@ -234,7 +242,7 @@ namespace DesktopFacebookInterface
             buttonDeleteConstest.TabIndex = 10;
             buttonDeleteConstest.BackColor = Color.Red;
             buttonDeleteConstest.Text = "Delete contest";
-            buttonDeleteConstest.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            buttonDeleteConstest.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             //buttonDeleteConstest.UseVisualStyleBackColor = true;
             buttonDeleteConstest.Click += new EventHandler(this.buttonDeleteConstest_Click);
 
@@ -256,9 +264,11 @@ namespace DesktopFacebookInterface
         {
             Button button = (Button)sender;
             int index = (button.Name[button.Name.Length - 1] - '0') - 1;
+
             try
             {
                 m_ListOfContests[index].UpdateParticipantsList();
+
                 if (m_ListOfContests[index].r_ParticipantsList.Count == 0)
                 {
                     MessageBox.Show("No user meets the requirements of your contest.");
@@ -273,11 +283,13 @@ namespace DesktopFacebookInterface
                 MessageBox.Show("No user meets the requirements of your contest.");
             }
         }
+
         private void buttonChooseWinner_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             int index = (button.Name[button.Name.Length - 1] - '0') - 1;
-            m_ListOfContests[index].ChooseWinners();
+            m_ListOfContests[index].GenerateWinners();
+
             if(m_ListOfContests[index].r_ContestWinners.Count > 0)
             {
                 FormDiplayWinners displayWinners = new FormDiplayWinners(m_ListOfContests[index].r_ContestWinners);
@@ -300,15 +312,10 @@ namespace DesktopFacebookInterface
                 m_TabIndex--;
             }
         }
+
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             this.Hide();
-        }
-
-        private void SaveContestsInfo()
-        {
-            //m_ContestsFile.r_ContestsList = this.m_ListOfContests;
-            //m_ContestsFile.SaveFile();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)

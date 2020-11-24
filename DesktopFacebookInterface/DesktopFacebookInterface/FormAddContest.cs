@@ -9,15 +9,14 @@ using System.Windows.Forms;
 
 namespace DesktopFacebookInterface
 {
-    public partial class FormAddContest : Form
+    internal partial class FormAddContest : Form
     {
         private string m_ContestDescription = string.Empty;
         private string m_AttachedImagePath = null;
-        private bool m_LikeCondition = false;
-        private bool m_CommentCondition = false;
+        private bool m_LikeRequired = false;
+        private bool m_CommentRequired = false;
         private int m_NumberOfWinnersCondition = -1;
         private string m_MissingDetails = string.Empty;
-
 
         public FormAddContest()
         {
@@ -32,7 +31,7 @@ namespace DesktopFacebookInterface
         private void linkLabelAttachImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = ("Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG");
+            ofd.Filter = "Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 m_AttachedImagePath = ofd.FileName;
@@ -46,13 +45,13 @@ namespace DesktopFacebookInterface
                 m_MissingDetails = string.Format("Missing constest description.{0}", Environment.NewLine);
             }
 
-            if ((m_LikeCondition = checkBoxLikes.Checked) == false && (m_CommentCondition = checkBoxComments.Checked) == false)
+            if ((m_LikeRequired = checkBoxLikes.Checked) == false && (m_CommentRequired = checkBoxComments.Checked) == false)
             {
                 m_MissingDetails += string.Format("You need to choose at least on option of the requirements.{0}", Environment.NewLine);
             }
             else
             {
-                m_CommentCondition = checkBoxComments.Checked;
+                m_CommentRequired = checkBoxComments.Checked;
             }
 
             if ((m_NumberOfWinnersCondition = comboBoxNumOfWinners.SelectedIndex) == -1)
@@ -78,7 +77,6 @@ namespace DesktopFacebookInterface
             {
                 return m_ContestDescription;
             }
-
         }
 
         public string ImagePath
@@ -87,25 +85,22 @@ namespace DesktopFacebookInterface
             {
                 return m_AttachedImagePath;
             }
-
         }
 
-        public bool LikeCondition
+        public bool LikeRequired
         {
             get
             {
-                return m_LikeCondition;
+                return m_LikeRequired;
             }
-
         }
 
-        public bool CommentCondition
+        public bool CommentRequired
         {
             get
             {
-                return m_CommentCondition;
+                return m_CommentRequired;
             }
-
         }
 
         public int NumberOfWinners
@@ -114,7 +109,6 @@ namespace DesktopFacebookInterface
             {
                 return m_NumberOfWinnersCondition + 1; // index 0 --> 1 winner, index 1 --> 2 winners.........
             }
-
         }
     }
 }
