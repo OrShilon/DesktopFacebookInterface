@@ -39,6 +39,7 @@ namespace DesktopFacebookInterface
         {
             AppSettings appSettings;
             string path = String.Format(@"{0}\\{1}", r_defaultFolder, k_defaultFileName);
+
             if (File.Exists(path))
             {
                 using (Stream stream = new FileStream(path, FileMode.Open))

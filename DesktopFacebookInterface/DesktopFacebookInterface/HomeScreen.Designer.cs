@@ -272,7 +272,7 @@
             // 
             // buttonContestMenu
             // 
-            this.buttonContestMenu.Location = new System.Drawing.Point(598, 146);
+            this.buttonContestMenu.Location = new System.Drawing.Point(598, 72);
             this.buttonContestMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonContestMenu.Name = "buttonContestMenu";
             this.buttonContestMenu.Size = new System.Drawing.Size(80, 49);
@@ -299,7 +299,7 @@
             this.Controls.Add(this.PictureBoxCoverPhoto);
             this.Controls.Add(this.tabControlHomeScreen);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.MinimumSize = new System.Drawing.Size(282, 196);
+            this.MinimumSize = new System.Drawing.Size(280, 188);
             this.Name = "HomeScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HomeScreen";
