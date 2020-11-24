@@ -1,11 +1,5 @@
 ﻿using FacebookWrapper.ObjectModel;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace DesktopFacebookInterface
@@ -14,13 +8,14 @@ namespace DesktopFacebookInterface
     {
         Album m_Album;
         readonly string[] m_AlbumPhotos;
-        int indexInAlbum = 0;
+        private int m_PhotoIndex = 0;
 
         public ShowAlbum(Album i_Album)
         {
-            m_Album = i_Album;
             InitializeComponent();
-            labelAlbumName.Text = m_Album.Name;
+            this.BackColor = System.Drawing.Color.FromArgb(66, 103, 178);
+            m_Album = i_Album;
+            this.Text = m_Album.Name;
             m_AlbumPhotos = new string[m_Album.Photos.Count];
             buildImageArray();
         }
@@ -44,30 +39,30 @@ namespace DesktopFacebookInterface
 
         private void displayImage()
         {
-            pictureBoxImage.LoadAsync(m_AlbumPhotos[indexInAlbum]);
+            pictureBoxImage.LoadAsync(m_AlbumPhotos[m_PhotoIndex]);
             UpdateButtonPrevious();
             UpdateButtonNext();
         }
 
         private void UpdateButtonPrevious()
         {
-            ButtonPrevious.Enabled = (indexInAlbum == 0) ? false : true;
+            ButtonPrevious.Enabled = (m_PhotoIndex == 0) ? false : true;
         }
 
         private void UpdateButtonNext()
         {
-            ButtonNext.Enabled = (indexInAlbum == m_AlbumPhotos.Length - 1) ? false : true;
+            ButtonNext.Enabled = (m_PhotoIndex == m_AlbumPhotos.Length - 1) ? false : true;
         }
 
         private void ButtonNext_Click(object sender, EventArgs e)
         {
-            if(indexInAlbum == m_AlbumPhotos.Length - 1)
+            if(m_PhotoIndex == m_AlbumPhotos.Length - 1)
             {
-                indexInAlbum = 0;
+                m_PhotoIndex = 0;
             }
             else
             {
-                indexInAlbum++;
+                m_PhotoIndex++;
             }
 
             displayImage();
@@ -75,13 +70,13 @@ namespace DesktopFacebookInterface
 
         private void ButtonPrevious_Click(object sender, EventArgs e)
         {
-            if (indexInAlbum == 0)
+            if (m_PhotoIndex == 0)
             {
-                indexInAlbum = m_AlbumPhotos.Length - 1;
+                m_PhotoIndex = m_AlbumPhotos.Length - 1;
             }
             else
             {
-                indexInAlbum--;
+                m_PhotoIndex--;
             }
 
             displayImage();

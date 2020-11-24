@@ -20,7 +20,6 @@ namespace DesktopFacebookInterface
             m_LoginUser = i_LoginUser;
             InitializeComponent();
             m_ListOfContests = new List<ContestLogic>();
-
         }
 
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
@@ -70,7 +69,7 @@ namespace DesktopFacebookInterface
             newFormConstest.ShowDialog();
             if(newFormConstest.DialogResult == DialogResult.OK)
             {
-                ContestLogic newContest = new ContestLogic(m_LoginUser, newFormConstest.Status, newFormConstest.ImagePath,
+                ContestLogic newContest = new ContestLogic(m_TabIndex + 1, m_LoginUser, newFormConstest.Status, newFormConstest.ImagePath,
                     newFormConstest.LikeCondition, newFormConstest.CommentCondition, newFormConstest.NumberOfWinners);
                 m_ListOfContests.Add(newContest);
                 tabPageContest.Location = new Point(104, 4);
@@ -174,6 +173,17 @@ namespace DesktopFacebookInterface
             currentTabPage.Controls.Add(buttonUpdateParticipants);
             currentTabPage.Controls.Add(buttonChooseWinner);
 
+        }
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            SaveContestsInfo();
+            base.OnFormClosed(e);
+        }
+
+        private void SaveContestsInfo()
+        {
+            //m_ContestsFile.r_ContestsList = this.m_ListOfContests;
+            //m_ContestsFile.SaveFile();
         }
     }
 }
