@@ -65,12 +65,12 @@ namespace DesktopFacebookInterface
                 tabPageContest.Padding = new Padding(3);
             }
 
-            FormAddContest newFormConstest = new FormAddContest();
-            newFormConstest.ShowDialog();
-            if(newFormConstest.DialogResult == DialogResult.OK)
+            FormAddContest newFormContest = new FormAddContest();
+            newFormContest.ShowDialog();
+            if(newFormContest.DialogResult == DialogResult.OK)
             {
-                ContestLogic newContest = new ContestLogic(m_TabIndex + 1, m_LoginUser, newFormConstest.Status, newFormConstest.ImagePath,
-                    newFormConstest.LikeCondition, newFormConstest.CommentCondition, newFormConstest.NumberOfWinners);
+                ContestLogic newContest = new ContestLogic(m_TabIndex + 1, m_LoginUser, newFormContest.Status, newFormContest.ImagePath,
+                    newFormContest.LikeCondition, newFormContest.CommentCondition, newFormContest.NumberOfWinners);
                 m_ListOfContests.Add(newContest);
                 tabPageContest.Location = new Point(104, 4);
                 tabPageContest.Name = string.Format("tabPageContest{0}", m_TabIndex + 1);
@@ -83,7 +83,7 @@ namespace DesktopFacebookInterface
                 m_TabIndex++;
 
             }
-            else if(newFormConstest.DialogResult == DialogResult.Cancel)
+            else if(newFormContest.DialogResult == DialogResult.Cancel)
             {
 
             }
@@ -168,13 +168,13 @@ namespace DesktopFacebookInterface
 
             buttonChooseWinner.Location = new Point(buttonUpdateParticipants.Right + 25, buttonUpdateParticipants.Location.Y);
             buttonChooseWinner.Margin = new Padding(5, 6, 5, 6);
-            buttonChooseWinner.Name = "buttonChooseWinner";
+            buttonChooseWinner.Name = string.Format("buttonChooseWinner{0}", m_ListOfContests.Count);
             buttonChooseWinner.Size = new Size(120, 35);
             buttonChooseWinner.TabIndex = 6;
             buttonChooseWinner.Text = m_ListOfContests[m_ListOfContests.Count - 1].m_NumberOfWinners < 2 ? "Choose winner" : "Choose winners";
             buttonChooseWinner.Font = new Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             buttonChooseWinner.UseVisualStyleBackColor = true;
-            //buttonUpdateParticipants.Click += new System.EventHandler(this.buttonLogout_Click);
+            buttonChooseWinner.Click += new EventHandler(this.buttonChooseWinner_Click);
 
 
 
@@ -189,9 +189,19 @@ namespace DesktopFacebookInterface
         private void buttonUpdateParticipants_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            char character = button.Name[button.Name.Length - 1];
-            int temp = (character - '0') - 1;
-            m_ListOfContests[temp].UpdateParticipantsList();
+            int index = (button.Name[button.Name.Length - 1] - '0') - 1;
+            m_ListOfContests[index].UpdateParticipantsList();
+        }
+        private void buttonChooseWinner_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            int index = (button.Name[button.Name.Length - 1] - '0') - 1;
+            m_ListOfContests[index].ChooseWinners();
+            if(m_ListOfContests[index].r_ContestWinners.Count > 0)
+            {
+                FormDiplayWinners displayWinners = new FormDiplayWinners(m_ListOfContests[index].r_ContestWinners);
+                displayWinners.ShowDialog();
+            }
         }
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
