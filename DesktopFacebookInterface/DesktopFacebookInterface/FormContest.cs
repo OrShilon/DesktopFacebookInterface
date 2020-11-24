@@ -80,6 +80,7 @@ namespace DesktopFacebookInterface
                 tabPageContest.Text = string.Format("Contest {0}", m_TabIndex + 1);
                 tabPageContest.UseVisualStyleBackColor = true;
                 tabControlContest.Controls.Add(tabPageContest);
+                buildContest(tabPageContest);
                 m_TabIndex++;
 
             }
@@ -87,6 +88,60 @@ namespace DesktopFacebookInterface
             {
 
             }
+        }
+
+        private void buildContest(TabPage currentTabPage)
+        {
+            Label labelPost = new Label();
+            Label labelParticipants = new Label();
+            TextBox textBoxDescription = new TextBox();
+            PictureBox pictureBoxAttachedImage = new PictureBox();
+            ListBox listBoxParticipants = new ListBox();
+            Button buttonUpdateParticipants = new Button();
+            Button buttonChooseWinner = new Button();
+
+            labelPost.AutoSize = true;
+            labelPost.Font = new Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            labelPost.Location = new Point(10, 10);
+            labelPost.Name = "labelPost";
+            labelPost.Size = new Size(195, 25);
+            labelPost.Text = "Contest description:";
+            labelPost.TabIndex = 0;
+            labelPost.TabStop = false;
+
+            textBoxDescription.Location = new Point(labelPost.Location.X, labelPost.Location.Y + 20);
+            textBoxDescription.Margin = new Padding(2, 2, 2, 2);
+            textBoxDescription.Multiline = true;
+            textBoxDescription.Name = "textBoxContestDescription";
+            //textBoxDescription.Text = m_ListOfContests[m_ListOfContests.Count - 1]
+            textBoxDescription.Size = new Size(420, 120);
+            textBoxDescription.TabIndex = 1;
+
+            pictureBoxAttachedImage.Location = new Point(textBoxDescription.Right + 15, textBoxDescription.Location.Y);
+            pictureBoxAttachedImage.Margin = new Padding(5, 6, 5, 6);
+            pictureBoxAttachedImage.Name = "pictureBoxAttachedImage";
+            pictureBoxAttachedImage.Size = new Size(200, 145);
+            pictureBoxAttachedImage.SizeMode = PictureBoxSizeMode.StretchImage;
+            //pictureBoxAttachedImage.LoadAsync(m_ListOfContests[m_ListOfContests.Count - 1])
+            pictureBoxAttachedImage.TabIndex = 2;
+            pictureBoxAttachedImage.TabStop = false;
+
+            listBoxParticipants.AutoSize = true;
+            listBoxParticipants.Font = new Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            listBoxParticipants.Location = new Point(textBoxDescription.Location.X, textBoxDescription.Location.Y + 30);
+            listBoxParticipants.Name = "listBoxParticipants";
+            listBoxParticipants.Size = new Size(195, 25);
+            listBoxParticipants.Text = "List of participants:";
+            listBoxParticipants.TabIndex = 3;
+            listBoxParticipants.TabStop = false;
+
+
+
+            currentTabPage.Controls.Add(labelPost);
+            currentTabPage.Controls.Add(textBoxDescription);
+            currentTabPage.Controls.Add(pictureBoxAttachedImage);
+            currentTabPage.Controls.Add(listBoxParticipants);
+
         }
     }
 }
