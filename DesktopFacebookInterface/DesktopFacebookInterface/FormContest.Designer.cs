@@ -37,11 +37,11 @@
             this.tabControlContest.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.tabControlContest.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControlContest.ItemSize = new System.Drawing.Size(25, 100);
-            this.tabControlContest.Location = new System.Drawing.Point(0, 62);
+            this.tabControlContest.Location = new System.Drawing.Point(-7, 62);
             this.tabControlContest.Multiline = true;
             this.tabControlContest.Name = "tabControlContest";
             this.tabControlContest.SelectedIndex = 0;
-            this.tabControlContest.Size = new System.Drawing.Size(1053, 598);
+            this.tabControlContest.Size = new System.Drawing.Size(1062, 770);
             this.tabControlContest.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlContest.TabIndex = 0;
             this.tabControlContest.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
@@ -50,7 +50,7 @@
             // 
             this.buttonAddContest.Location = new System.Drawing.Point(4, 5);
             this.buttonAddContest.Name = "buttonAddContest";
-            this.buttonAddContest.Size = new System.Drawing.Size(93, 54);
+            this.buttonAddContest.Size = new System.Drawing.Size(142, 54);
             this.buttonAddContest.TabIndex = 1;
             this.buttonAddContest.Text = "Add new contest";
             this.buttonAddContest.UseVisualStyleBackColor = true;
@@ -60,7 +60,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1050, 659);
+            this.ClientSize = new System.Drawing.Size(1048, 714);
             this.Controls.Add(this.buttonAddContest);
             this.Controls.Add(this.tabControlContest);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

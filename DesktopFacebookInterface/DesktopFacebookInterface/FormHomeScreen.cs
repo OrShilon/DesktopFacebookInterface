@@ -312,7 +312,7 @@ namespace DesktopFacebookInterface
             }
             else
             {
-                m_FormContest.Show();
+                m_FormContest.ShowDialog();
             }
         }
 

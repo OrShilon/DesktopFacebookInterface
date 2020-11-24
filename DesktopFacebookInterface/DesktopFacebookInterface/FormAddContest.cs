@@ -50,6 +50,10 @@ namespace DesktopFacebookInterface
             {
                 m_MissingDetails += string.Format("You need to choose at least on option of the requirements.{0}", Environment.NewLine);
             }
+            else
+            {
+                m_CommentCondition = checkBoxComments.Checked;
+            }
 
             if ((m_NumberOfWinnersCondition = comboBoxNumOfWinners.SelectedIndex) == -1)
             {
