@@ -124,6 +124,7 @@ namespace DesktopFacebookInterface
                 pictureBoxAttachedImage.Name = "pictureBoxAttachedImage";
                 pictureBoxAttachedImage.Size = new Size(200, labelDescription.Height);
                 pictureBoxAttachedImage.SizeMode = PictureBoxSizeMode.StretchImage;
+                pictureBoxAttachedImage.BorderStyle = BorderStyle.FixedSingle;
                 pictureBoxAttachedImage.Image = Image.FromFile(m_ListOfContests[m_ListOfContests.Count - 1].m_ImagePath);
                 pictureBoxAttachedImage.TabIndex = 2;
                 pictureBoxAttachedImage.TabStop = false;
@@ -213,6 +214,11 @@ namespace DesktopFacebookInterface
         {
             //m_ContestsFile.r_ContestsList = this.m_ListOfContests;
             //m_ContestsFile.SaveFile();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            this.Hide();
         }
     }
 }

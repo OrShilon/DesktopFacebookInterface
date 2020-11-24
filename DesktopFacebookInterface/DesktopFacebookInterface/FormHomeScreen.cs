@@ -14,6 +14,8 @@ namespace DesktopFacebookInterface
         User m_LoginUser;
         UserInformationWrapper m_UserInfo;
         string m_AttachedImagePath;
+        FormContest m_FormContest;
+        bool m_isFirstContestClick = true;
 
         public FormHomeScreen(LoginResult i_LoginResult, User i_LoginUser, AppSettings i_AppSettings)
         {
@@ -288,8 +290,16 @@ namespace DesktopFacebookInterface
 
         private void buttonContestMenu_Click(object sender, EventArgs e)
         {
-            FormContest formContest = new FormContest(m_LoginUser);
-            formContest.ShowDialog();
+            if (m_isFirstContestClick)
+            {
+                m_FormContest = new FormContest(m_LoginUser);
+                m_FormContest.ShowDialog();
+                m_isFirstContestClick = false;
+            }
+            else
+            {
+                m_FormContest.Show();
+            }
         }
     }
 }
