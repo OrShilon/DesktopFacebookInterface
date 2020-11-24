@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
@@ -35,14 +36,97 @@ namespace DesktopFacebookInterface
 
         public void UpdateParticipantsList()
         {
-            foreach (Comment postComment in m_ContestPost.Comments)
-            {
-                User postCommentUser = postComment.From;
-                if (m_ContestPost.LikedBy.Contains(postCommentUser))
+                if(m_CommentCondition && m_LikeCondition)
                 {
-                    r_ParticipantsList.Add(postCommentUser);
-                    m_ParticipantsCount++;
+                    updateBeLikesAndComments();
                 }
+                else if(m_CommentCondition)
+                {
+                    updateByComments();
+                }
+                else
+                {
+                    UpdateByLikes();
+                }
+        }
+
+        private void UpdateByLikes()
+        {
+            try
+            {
+                if (m_ContestPost != null)
+                {
+                    foreach (User currentUser in m_ContestPost.LikedBy)
+                    {
+                        r_ParticipantsList.Add(currentUser);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No user meets the requirements of your contest.");
+                }
+            }
+            catch(Facebook.FacebookOAuthException)
+            {
+                MessageBox.Show("Unable to load. No permission.");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No user meets the requirements of your contest.");
+            }
+        }
+
+        private void updateByComments()
+        {
+            try
+            {
+                if(m_ContestPost != null)
+                {
+                    foreach (Comment postComment in m_ContestPost.Comments)
+                    {
+                        User postCommentUser = postComment.From;
+                        r_ParticipantsList.Add(postCommentUser);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No user meets the requirements of your contest.");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No user meets the requirements of your contest.");
+            }
+        }
+
+        private void updateBeLikesAndComments()
+        {
+            try
+            {
+                if (m_ContestPost != null)
+                {
+                    foreach (Comment postComment in m_ContestPost.Comments)
+                    {
+                        User postCommentUser = postComment.From;
+                        if (m_ContestPost.LikedBy.Contains(postCommentUser))
+                        {
+                            r_ParticipantsList.Add(postCommentUser);
+                            m_ParticipantsCount++;
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No user meets the requirements of your contest.");
+                }
+            }
+            catch (Facebook.FacebookOAuthException)
+            {
+                MessageBox.Show("Unable to load. No permission.");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No user meets the requirements of your contest.");
             }
         }
 
