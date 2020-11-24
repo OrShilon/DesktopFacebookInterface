@@ -306,7 +306,6 @@
             this.Name = "HomeScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HomeScreen";
-            this.Load += new System.EventHandler(this.HomeScreen_Load);
             this.Resize += new System.EventHandler(this.HomeScreen_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxProfile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCoverPhoto)).EndInit();

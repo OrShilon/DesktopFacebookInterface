@@ -46,11 +46,6 @@ namespace DesktopFacebookInterface
             base.OnShown(e);
         }
 
-        private void HomeScreen_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             FacebookService.Logout(new Action(loggedOutFinished));
