@@ -1,22 +1,24 @@
-﻿using Facebook;
-using FacebookWrapper;
-using FacebookWrapper.ObjectModel;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Facebook;
+using FacebookWrapper;
+using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
-    public partial class FormHomeScreen : Form
+    internal partial class FormHomeScreen : Form
     {
-        LoginResult m_LoginResult;
-        AppSettings m_AppSettings;
-        User m_LoginUser;
-        UserInformationWrapper m_UserInfo;
-        string m_AttachedImagePath;
-        FormContest m_FormContest;
-        bool m_isFirstContestClick = true;
+        private const bool v_firstContestClick = true;
+        private const bool v_buttonVisible = true;
         private const string k_textBoxPostStatusMsg = "Post something!";
+        private LoginResult m_LoginResult;
+        private AppSettings m_AppSettings;
+        private User m_LoginUser;
+        private UserInformationWrapper m_UserInfo;
+        private string m_AttachedImagePath;
+        private FormContest m_FormContest;
+        private bool m_isFirstContestClick = v_firstContestClick;
 
         public FormHomeScreen(LoginResult i_LoginResult, User i_LoginUser, AppSettings i_AppSettings)
         {
@@ -43,6 +45,7 @@ namespace DesktopFacebookInterface
                 this.Size = m_AppSettings.m_WindowSize;
                 this.Location = m_AppSettings.m_WindowLocation;
             }
+
             base.OnShown(e);
         }
 
@@ -145,7 +148,6 @@ namespace DesktopFacebookInterface
                 }
 
                 prevLabel = labelInfo;
-
             }
         }
 
@@ -202,6 +204,7 @@ namespace DesktopFacebookInterface
                 MessageBox.Show("No pages to retrieve :(");
             }
         }
+
         private void fetchEvents()
         {
             listBoxEvents.Items.Clear();
@@ -232,7 +235,6 @@ namespace DesktopFacebookInterface
             {
                 MessageBox.Show("No friends to retrieve :(");
             }
-
         }
 
         private void SaveAppSettings()
@@ -259,14 +261,14 @@ namespace DesktopFacebookInterface
         }
 
         //private void HomeScreen_Resize(object sender, EventArgs e)
-        //{
+        // {
         //    buttonLogout.Location = new Point(this.Width - 110, buttonLogout.Location.Y);
         //    //tabControlHomeScreen.Width = this.Width - 100;
         //    tabControlHomeScreen.Width = this.Width - buttonPostStatus.Right - 20;
         //    tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Bottom - 45;
         //    //tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Height;
         //    //listBoxTimeline.Height = this.Height - labelTimeline.Location.Y;
-        //}                                                                                ~~~~~~~~~~~~~~~~REMEMBER EVENT IN DEISGNER ~~~~~~~~~~~~~~~
+        // }                                                                                ~~~~~~~~~~~~~~~~REMEMBER EVENT IN DEISGNER ~~~~~~~~~~~~~~~
 
         private void buttonPostStatus_Click(object sender, EventArgs e)
         {
@@ -288,18 +290,18 @@ namespace DesktopFacebookInterface
         private void buttonAttachImage_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = ("Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG");
+            ofd.Filter = "Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
             if(ofd.ShowDialog() == DialogResult.OK)
             {
                 m_AttachedImagePath  = ofd.FileName;
-                buttonCancelAttachment.Visible = true;
+                buttonCancelAttachment.Visible = v_buttonVisible;
             }
         }
 
         private void buttonCancelAttachment_Click(object sender, EventArgs e)
         {
             m_AttachedImagePath = null;
-            buttonCancelAttachment.Visible = false;
+            buttonCancelAttachment.Visible = !v_buttonVisible;
         }
 
         private void buttonContestMenu_Click(object sender, EventArgs e)
@@ -308,7 +310,7 @@ namespace DesktopFacebookInterface
             {
                 m_FormContest = new FormContest(m_LoginUser);
                 m_FormContest.ShowDialog();
-                m_isFirstContestClick = false;
+                m_isFirstContestClick = !v_firstContestClick;
             }
             else
             {

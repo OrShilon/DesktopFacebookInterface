@@ -1,6 +1,6 @@
 ﻿namespace DesktopFacebookInterface
 {
-    enum eTabOptions
+    public enum eTabOptions
     {
         About,
         Albums,

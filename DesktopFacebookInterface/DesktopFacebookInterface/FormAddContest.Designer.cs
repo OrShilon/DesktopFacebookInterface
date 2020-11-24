@@ -1,6 +1,6 @@
 ﻿namespace DesktopFacebookInterface
 {
-    partial class FormAddContest
+    internal partial class FormAddContest
     {
         /// <summary>
         /// Required designer variable.

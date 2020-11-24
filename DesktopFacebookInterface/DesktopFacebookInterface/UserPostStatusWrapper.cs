@@ -4,7 +4,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
-    static class UserPostStatusWrapper
+    internal static class UserPostStatusWrapper
     {
         public static GeoPostedItem PostStatus(User i_User, string i_ImagePath, string i_Status)
         {
