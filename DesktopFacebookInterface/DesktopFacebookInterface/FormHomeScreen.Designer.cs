@@ -215,6 +215,8 @@
             this.textBoxPostStatus.Size = new System.Drawing.Size(194, 20);
             this.textBoxPostStatus.TabIndex = 5;
             this.textBoxPostStatus.Text = "Post something!";
+            this.textBoxPostStatus.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxPostStatus_MouseClick);
+            this.textBoxPostStatus.Leave += new System.EventHandler(this.textBoxPostStatus_Leave);
             // 
             // labelPostStatus
             // 

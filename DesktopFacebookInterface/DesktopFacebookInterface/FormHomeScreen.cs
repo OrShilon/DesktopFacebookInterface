@@ -16,6 +16,7 @@ namespace DesktopFacebookInterface
         string m_AttachedImagePath;
         FormContest m_FormContest;
         bool m_isFirstContestClick = true;
+        private const string k_textBoxMsg = "Post something!";
 
         public FormHomeScreen(LoginResult i_LoginResult, User i_LoginUser, AppSettings i_AppSettings)
         {
@@ -299,6 +300,22 @@ namespace DesktopFacebookInterface
             else
             {
                 m_FormContest.Show();
+            }
+        }
+
+        private void textBoxPostStatus_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (textBoxPostStatus.Text == k_textBoxMsg)
+            {
+                textBoxPostStatus.Text = string.Empty;
+            }
+        }
+
+        private void textBoxPostStatus_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxPostStatus.Text))
+            {
+                textBoxPostStatus.Text = k_textBoxMsg;
             }
         }
     }
