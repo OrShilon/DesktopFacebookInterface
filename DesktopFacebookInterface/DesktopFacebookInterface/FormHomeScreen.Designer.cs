@@ -1,6 +1,6 @@
 ﻿namespace DesktopFacebookInterface
 {
-    partial class HomeScreen
+    partial class FormHomeScreen
     {
         /// <summary>
         /// Required designer variable.
@@ -60,10 +60,10 @@
             // 
             // buttonLogout
             // 
-            this.buttonLogout.Location = new System.Drawing.Point(598, 23);
+            this.buttonLogout.Location = new System.Drawing.Point(519, 145);
             this.buttonLogout.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonLogout.Name = "buttonLogout";
-            this.buttonLogout.Size = new System.Drawing.Size(80, 23);
+            this.buttonLogout.Size = new System.Drawing.Size(80, 49);
             this.buttonLogout.TabIndex = 2;
             this.buttonLogout.Text = "Logout";
             this.buttonLogout.UseVisualStyleBackColor = true;
@@ -71,20 +71,20 @@
             // 
             // PictureBoxProfile
             // 
-            this.PictureBoxProfile.Location = new System.Drawing.Point(250, 47);
+            this.PictureBoxProfile.Location = new System.Drawing.Point(249, 46);
             this.PictureBoxProfile.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.PictureBoxProfile.Name = "PictureBoxProfile";
-            this.PictureBoxProfile.Size = new System.Drawing.Size(100, 74);
+            this.PictureBoxProfile.Size = new System.Drawing.Size(80, 80);
             this.PictureBoxProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureBoxProfile.TabIndex = 1;
             this.PictureBoxProfile.TabStop = false;
             // 
             // PictureBoxCoverPhoto
             // 
-            this.PictureBoxCoverPhoto.Location = new System.Drawing.Point(0, -1);
+            this.PictureBoxCoverPhoto.Location = new System.Drawing.Point(10, 5);
             this.PictureBoxCoverPhoto.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.PictureBoxCoverPhoto.Name = "PictureBoxCoverPhoto";
-            this.PictureBoxCoverPhoto.Size = new System.Drawing.Size(566, 122);
+            this.PictureBoxCoverPhoto.Size = new System.Drawing.Size(588, 122);
             this.PictureBoxCoverPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureBoxCoverPhoto.TabIndex = 0;
             this.PictureBoxCoverPhoto.TabStop = false;
@@ -96,21 +96,21 @@
             this.tabControlHomeScreen.Controls.Add(this.tabPageFriends);
             this.tabControlHomeScreen.Controls.Add(this.tabPagePages);
             this.tabControlHomeScreen.Controls.Add(this.tabPageEvents);
-            this.tabControlHomeScreen.Location = new System.Drawing.Point(272, 126);
-            this.tabControlHomeScreen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControlHomeScreen.Location = new System.Drawing.Point(305, 217);
+            this.tabControlHomeScreen.Margin = new System.Windows.Forms.Padding(2);
             this.tabControlHomeScreen.Name = "tabControlHomeScreen";
             this.tabControlHomeScreen.SelectedIndex = 0;
-            this.tabControlHomeScreen.Size = new System.Drawing.Size(304, 235);
+            this.tabControlHomeScreen.Size = new System.Drawing.Size(294, 150);
             this.tabControlHomeScreen.TabIndex = 3;
             this.tabControlHomeScreen.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlHomeScreen_Selected);
             // 
             // tabPageAbout
             // 
             this.tabPageAbout.Location = new System.Drawing.Point(4, 22);
-            this.tabPageAbout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageAbout.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageAbout.Name = "tabPageAbout";
-            this.tabPageAbout.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tabPageAbout.Size = new System.Drawing.Size(296, 209);
+            this.tabPageAbout.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPageAbout.Size = new System.Drawing.Size(286, 124);
             this.tabPageAbout.TabIndex = 0;
             this.tabPageAbout.Text = "About";
             this.tabPageAbout.UseVisualStyleBackColor = true;
@@ -119,10 +119,10 @@
             // 
             this.tabPageAlbums.Controls.Add(this.listBoxAlbums);
             this.tabPageAlbums.Location = new System.Drawing.Point(4, 22);
-            this.tabPageAlbums.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageAlbums.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageAlbums.Name = "tabPageAlbums";
             this.tabPageAlbums.Padding = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.tabPageAlbums.Size = new System.Drawing.Size(296, 209);
+            this.tabPageAlbums.Size = new System.Drawing.Size(286, 124);
             this.tabPageAlbums.TabIndex = 1;
             this.tabPageAlbums.Text = "Albums";
             this.tabPageAlbums.UseVisualStyleBackColor = true;
@@ -144,7 +144,7 @@
             this.tabPageFriends.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.tabPageFriends.Name = "tabPageFriends";
             this.tabPageFriends.Padding = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.tabPageFriends.Size = new System.Drawing.Size(296, 209);
+            this.tabPageFriends.Size = new System.Drawing.Size(286, 124);
             this.tabPageFriends.TabIndex = 4;
             this.tabPageFriends.Text = "Friends";
             this.tabPageFriends.UseVisualStyleBackColor = true;
@@ -162,9 +162,9 @@
             // 
             this.tabPagePages.Controls.Add(this.listBoxPages);
             this.tabPagePages.Location = new System.Drawing.Point(4, 22);
-            this.tabPagePages.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPagePages.Margin = new System.Windows.Forms.Padding(2);
             this.tabPagePages.Name = "tabPagePages";
-            this.tabPagePages.Size = new System.Drawing.Size(296, 209);
+            this.tabPagePages.Size = new System.Drawing.Size(286, 124);
             this.tabPagePages.TabIndex = 2;
             this.tabPagePages.Text = "Pages";
             this.tabPagePages.UseVisualStyleBackColor = true;
@@ -182,9 +182,9 @@
             // 
             this.tabPageEvents.Controls.Add(this.listBoxEvents);
             this.tabPageEvents.Location = new System.Drawing.Point(4, 22);
-            this.tabPageEvents.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageEvents.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageEvents.Name = "tabPageEvents";
-            this.tabPageEvents.Size = new System.Drawing.Size(296, 209);
+            this.tabPageEvents.Size = new System.Drawing.Size(286, 124);
             this.tabPageEvents.TabIndex = 3;
             this.tabPageEvents.Text = "Events";
             this.tabPageEvents.UseVisualStyleBackColor = true;
@@ -201,16 +201,16 @@
             // listBoxTimeline
             // 
             this.listBoxTimeline.FormattingEnabled = true;
-            this.listBoxTimeline.Location = new System.Drawing.Point(8, 229);
-            this.listBoxTimeline.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBoxTimeline.Location = new System.Drawing.Point(8, 233);
+            this.listBoxTimeline.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxTimeline.Name = "listBoxTimeline";
-            this.listBoxTimeline.Size = new System.Drawing.Size(204, 134);
+            this.listBoxTimeline.Size = new System.Drawing.Size(256, 134);
             this.listBoxTimeline.TabIndex = 4;
             // 
             // textBoxPostStatus
             // 
-            this.textBoxPostStatus.Location = new System.Drawing.Point(8, 155);
-            this.textBoxPostStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxPostStatus.Location = new System.Drawing.Point(11, 148);
+            this.textBoxPostStatus.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxPostStatus.Name = "textBoxPostStatus";
             this.textBoxPostStatus.Size = new System.Drawing.Size(194, 20);
             this.textBoxPostStatus.TabIndex = 5;
@@ -219,7 +219,7 @@
             // labelPostStatus
             // 
             this.labelPostStatus.AutoSize = true;
-            this.labelPostStatus.Location = new System.Drawing.Point(8, 131);
+            this.labelPostStatus.Location = new System.Drawing.Point(11, 133);
             this.labelPostStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPostStatus.Name = "labelPostStatus";
             this.labelPostStatus.Size = new System.Drawing.Size(62, 13);
@@ -228,10 +228,10 @@
             // 
             // buttonPostStatus
             // 
-            this.buttonPostStatus.Location = new System.Drawing.Point(210, 155);
-            this.buttonPostStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonPostStatus.Location = new System.Drawing.Point(209, 146);
+            this.buttonPostStatus.Margin = new System.Windows.Forms.Padding(2);
             this.buttonPostStatus.Name = "buttonPostStatus";
-            this.buttonPostStatus.Size = new System.Drawing.Size(58, 17);
+            this.buttonPostStatus.Size = new System.Drawing.Size(58, 23);
             this.buttonPostStatus.TabIndex = 7;
             this.buttonPostStatus.Text = "Post";
             this.buttonPostStatus.UseVisualStyleBackColor = true;
@@ -240,7 +240,7 @@
             // labelTimeline
             // 
             this.labelTimeline.AutoSize = true;
-            this.labelTimeline.Location = new System.Drawing.Point(10, 201);
+            this.labelTimeline.Location = new System.Drawing.Point(11, 218);
             this.labelTimeline.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTimeline.Name = "labelTimeline";
             this.labelTimeline.Size = new System.Drawing.Size(49, 13);
@@ -249,10 +249,10 @@
             // 
             // buttonAttachImage
             // 
-            this.buttonAttachImage.Location = new System.Drawing.Point(108, 176);
-            this.buttonAttachImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAttachImage.Location = new System.Drawing.Point(11, 172);
+            this.buttonAttachImage.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAttachImage.Name = "buttonAttachImage";
-            this.buttonAttachImage.Size = new System.Drawing.Size(92, 18);
+            this.buttonAttachImage.Size = new System.Drawing.Size(92, 26);
             this.buttonAttachImage.TabIndex = 9;
             this.buttonAttachImage.Text = "Attach Image";
             this.buttonAttachImage.UseVisualStyleBackColor = true;
@@ -260,10 +260,10 @@
             // 
             // buttonCancelAttachment
             // 
-            this.buttonCancelAttachment.Location = new System.Drawing.Point(88, 176);
-            this.buttonCancelAttachment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonCancelAttachment.Location = new System.Drawing.Point(107, 172);
+            this.buttonCancelAttachment.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCancelAttachment.Name = "buttonCancelAttachment";
-            this.buttonCancelAttachment.Size = new System.Drawing.Size(16, 18);
+            this.buttonCancelAttachment.Size = new System.Drawing.Size(20, 26);
             this.buttonCancelAttachment.TabIndex = 10;
             this.buttonCancelAttachment.Text = "X";
             this.buttonCancelAttachment.UseVisualStyleBackColor = true;
@@ -272,8 +272,8 @@
             // 
             // buttonContestMenu
             // 
-            this.buttonContestMenu.Location = new System.Drawing.Point(598, 72);
-            this.buttonContestMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonContestMenu.Location = new System.Drawing.Point(305, 145);
+            this.buttonContestMenu.Margin = new System.Windows.Forms.Padding(2);
             this.buttonContestMenu.Name = "buttonContestMenu";
             this.buttonContestMenu.Size = new System.Drawing.Size(80, 49);
             this.buttonContestMenu.TabIndex = 12;
@@ -281,11 +281,11 @@
             this.buttonContestMenu.UseVisualStyleBackColor = true;
             this.buttonContestMenu.Click += new System.EventHandler(this.buttonContestMenu_Click);
             // 
-            // HomeScreen
+            // FormHomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 363);
+            this.ClientSize = new System.Drawing.Size(609, 389);
             this.Controls.Add(this.buttonContestMenu);
             this.Controls.Add(this.buttonCancelAttachment);
             this.Controls.Add(this.buttonAttachImage);
@@ -300,10 +300,9 @@
             this.Controls.Add(this.tabControlHomeScreen);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MinimumSize = new System.Drawing.Size(280, 188);
-            this.Name = "HomeScreen";
+            this.Name = "FormHomeScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HomeScreen";
-            this.Resize += new System.EventHandler(this.HomeScreen_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxProfile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCoverPhoto)).EndInit();
             this.tabControlHomeScreen.ResumeLayout(false);
