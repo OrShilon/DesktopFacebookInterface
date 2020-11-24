@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using Facebook;
 using FacebookWrapper.ObjectModel;
 
@@ -26,9 +22,9 @@ namespace DesktopFacebookInterface
                 }
                 MessageBox.Show("Status posted successfully!");
             }
-            catch (FacebookOAuthException foae)
+            catch (FacebookOAuthException)
             {
-                MessageBox.Show(foae.Message);
+                MessageBox.Show("Status post failed: No permissions.");
             }
 
             return newPostedItem;

@@ -7,25 +7,25 @@ namespace DesktopFacebookInterface
 {
     public class AppSettings
     {
-        public Point WindowLocation { get; set; }
-        public Size WindowSize { get; set; }
-        public bool RememberUser { get; set; }
-        public string UserAccessToken { get; set; }
+        public Point m_WindowLocation { get; set; }
+        public Size m_WindowSize { get; set; }
+        public bool m_RememberUser { get; set; }
+        public string m_UserAccessToken { get; set; }
 
-        private readonly static string defaultFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        private readonly static string defaultFileName = "appSettings.xml";
+        private readonly static string r_defaultFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        private const string k_defaultFileName = "appSettings.xml";
 
         private AppSettings()
         {
-            WindowLocation = new Point(0, 0);
-            WindowSize = new Size(0, 0);
-            RememberUser = false;
-            UserAccessToken = null;
+            m_WindowLocation = new Point(0, 0);
+            m_WindowSize = new Size(0, 0);
+            m_RememberUser = false;
+            m_UserAccessToken = null;
         }
 
         public void SaveFile()
         {
-            string path = String.Format(@"{0}\\{1}", defaultFolder, defaultFileName);
+            string path = String.Format(@"{0}\\{1}", r_defaultFolder, k_defaultFileName);
             FileMode fileModeToUse = File.Exists(path) ? FileMode.Truncate : FileMode.Create;
 
             using (Stream stream = new FileStream(path, fileModeToUse))
@@ -38,7 +38,7 @@ namespace DesktopFacebookInterface
         public static AppSettings LoadFile()
         {
             AppSettings appSettings;
-            string path = String.Format(@"{0}\\{1}", defaultFolder, defaultFileName);
+            string path = String.Format(@"{0}\\{1}", r_defaultFolder, k_defaultFileName);
             if (File.Exists(path))
             {
                 using (Stream stream = new FileStream(path, FileMode.Open))
