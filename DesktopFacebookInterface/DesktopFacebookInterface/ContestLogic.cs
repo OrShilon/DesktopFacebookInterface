@@ -135,16 +135,22 @@ namespace DesktopFacebookInterface
             bool[] winnersIndex = new bool[m_NumberOfWinners];
             int countWinners = 0;
             Random rnd = new Random();
-
-            while (countWinners < m_NumberOfWinners)
+            if (r_ParticipantsList.Count >= m_NumberOfWinners)
             {
-                int winningIndex = rnd.Next(0, r_ParticipantsList.Count - 1);
-                if (!winnersIndex[winningIndex])
+                while (countWinners < m_NumberOfWinners)
                 {
-                    r_ContestWinners.Add(r_ParticipantsList[winningIndex]);
-                    winnersIndex[winningIndex] = true;
-                    countWinners++;
+                    int winningIndex = rnd.Next(0, r_ParticipantsList.Count - 1);
+                    if (!winnersIndex[winningIndex])
+                    {
+                        r_ContestWinners.Add(r_ParticipantsList[winningIndex]);
+                        winnersIndex[winningIndex] = true;
+                        countWinners++;
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show(string.Format("Not enough participants to choose {0}.", m_NumberOfWinners > 1 ? "winners" : "winner"));
             }
         }
     }

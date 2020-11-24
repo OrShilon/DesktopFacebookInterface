@@ -69,6 +69,7 @@
             this.Margin = new System.Windows.Forms.Padding(1);
             this.MaximizeBox = false;
             this.Name = "FormContest";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormContest";
             this.ResumeLayout(false);
 
