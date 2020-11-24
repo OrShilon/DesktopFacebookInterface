@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Facebook;
@@ -19,7 +14,7 @@ namespace DesktopFacebookInterface
         LoginResult m_LoginResult;
         User m_LoginUser;
 
-        const string k_AppId = "370214274434054";
+        protected const string k_AppId = "370214274434054";
 
         public FormLoginScreen()
         {
@@ -27,29 +22,30 @@ namespace DesktopFacebookInterface
             InitializeComponent();
             this.BackColor = Color.FromArgb(66, 103, 178);
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = m_AppSettings.WindowLocation;
-            this.checkBoxRememberUser.Checked = m_AppSettings.RememberUser;
+            this.Location = m_AppSettings.m_WindowLocation;
+            this.checkBoxRememberUser.Checked = m_AppSettings.m_RememberUser;
         }
 
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            Thread t1 = new Thread(new ThreadStart(ConnectByUserAccessToken));
+            Thread t1 = new Thread(new ThreadStart(connectByUserAccessToken));
             t1.Start();
             t1.Join();
+
             if (m_LoginResult != null)
             {
                 closeFormAndShowHome();
             }
         }
 
-        private void ConnectByUserAccessToken()
+        private void connectByUserAccessToken()
         {
-            if (m_AppSettings.RememberUser && !string.IsNullOrEmpty(m_AppSettings.UserAccessToken))
+            if (m_AppSettings.m_RememberUser && !string.IsNullOrEmpty(m_AppSettings.m_UserAccessToken))
             {
                 try
                 {
-                    m_LoginResult = FacebookService.Connect(m_AppSettings.UserAccessToken);
+                    m_LoginResult = FacebookService.Connect(m_AppSettings.m_UserAccessToken);
                     m_LoginUser = m_LoginResult.LoggedInUser;
                 }
 
@@ -61,29 +57,36 @@ namespace DesktopFacebookInterface
             }
         }
 
-        private void LoginAndInit()
+        private void loginAndInit()
         {
             if (m_LoginResult == null)
             {
-                m_LoginResult = FacebookService.Login(k_AppId,
-                    "public_profile",
-                    "email",
-                    "publish_to_groups",
-                    "user_birthday",
-                    "user_age_range",
-                    "user_gender",
-                    "user_link",
-                    "user_tagged_places",
-                    "user_videos",
-                    "publish_to_groups",
-                    "groups_access_member_info",
-                    "user_friends",
-                    "user_events",
-                    "user_likes",
-                    "user_location",
-                    "user_photos",
-                    "user_posts",
-                    "user_hometown");
+                try
+                {
+                    m_LoginResult = FacebookService.Login(k_AppId,
+                        "public_profile",
+                        "email",
+                        "publish_to_groups",
+                        "user_birthday",
+                        "user_age_range",
+                        "user_gender",
+                        "user_link",
+                        "user_tagged_places",
+                        "user_videos",
+                        "publish_to_groups",
+                        "groups_access_member_info",
+                        "user_friends",
+                        "user_events",
+                        "user_likes",
+                        "user_location",
+                        "user_photos",
+                        "user_posts",
+                        "user_hometown");
+                }
+                catch (FacebookOAuthException foae)
+                {
+                    MessageBox.Show(foae.Message);
+                }
             }
             if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
             {
@@ -106,12 +109,12 @@ namespace DesktopFacebookInterface
 
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
-            LoginAndInit();
+            loginAndInit();
         }
 
         private void checkBoxRememberUser_CheckedChanged(object sender, EventArgs e)
         {
-            m_AppSettings.RememberUser = checkBoxRememberUser.Checked;
+            m_AppSettings.m_RememberUser = checkBoxRememberUser.Checked;
         }
     }
 }

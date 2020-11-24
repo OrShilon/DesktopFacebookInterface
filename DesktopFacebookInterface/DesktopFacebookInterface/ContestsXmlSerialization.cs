@@ -7,18 +7,18 @@ namespace DesktopFacebookInterface
 {
     public class ContestsXmlSerialization
     {
-        public readonly List<ContestLogic> m_ContestsList;
-        private readonly static string defaultFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        private readonly static string defaultFileName = "ContestsFile.xml";
+        public readonly List<ContestLogic> r_ContestsList;
+        private readonly static string r_DefaultFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        private const string k_DefaultFileName = "ContestsFile.xml";
 
         public ContestsXmlSerialization(List<ContestLogic> i_ContestsList)
         {
-            m_ContestsList = i_ContestsList;
+            r_ContestsList = i_ContestsList;
         }
 
         public void SaveFile()
         {
-            string path = String.Format(@"{0}\\{1}", defaultFolder, defaultFileName);
+            string path = String.Format(@"{0}\\{1}", r_DefaultFolder, k_DefaultFileName);
             FileMode fileModeToUse = File.Exists(path) ? FileMode.Truncate : FileMode.Create;
 
             using (Stream stream = new FileStream(path, fileModeToUse))
@@ -31,7 +31,7 @@ namespace DesktopFacebookInterface
         public static ContestsXmlSerialization LoadFile()
         {
             ContestsXmlSerialization contestsFile = null;
-            string path = String.Format(@"{0}\\{1}", defaultFolder, defaultFileName);
+            string path = String.Format(@"{0}\\{1}", r_DefaultFolder, k_DefaultFileName);
 
             if (File.Exists(path))
             {

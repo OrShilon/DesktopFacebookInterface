@@ -2,12 +2,7 @@
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace DesktopFacebookInterface
@@ -18,7 +13,7 @@ namespace DesktopFacebookInterface
         AppSettings m_AppSettings;
         User m_LoginUser;
         UserInformationWrapper m_UserInfo;
-        string m_AttachedImagePath = null;
+        string m_AttachedImagePath;
 
         public HomeScreen(LoginResult i_LoginResult, User i_LoginUser, AppSettings i_AppSettings)
         {
@@ -26,6 +21,7 @@ namespace DesktopFacebookInterface
             m_LoginUser = i_LoginUser;
             m_AppSettings = i_AppSettings;
             m_UserInfo = new UserInformationWrapper(m_LoginUser);
+            m_AttachedImagePath = null;
             InitializeComponent();
             this.Text = string.Format("Facebook - {0}", m_UserInfo.m_FullName);
             PictureBoxProfile.LoadAsync(m_UserInfo.m_ProfileImage);
@@ -37,11 +33,11 @@ namespace DesktopFacebookInterface
 
         protected override void OnShown(EventArgs e)
         {
-            if (!m_AppSettings.WindowSize.IsEmpty)
+            if (!m_AppSettings.m_WindowSize.IsEmpty)
             {
                 this.StartPosition = FormStartPosition.Manual;
-                this.Size = m_AppSettings.WindowSize;
-                this.Location = m_AppSettings.WindowLocation;
+                this.Size = m_AppSettings.m_WindowSize;
+                this.Location = m_AppSettings.m_WindowLocation;
             }
             base.OnShown(e);
         }
@@ -54,8 +50,8 @@ namespace DesktopFacebookInterface
         private void loggedOutFinished()
         {
             m_LoginUser = null;
-            m_AppSettings.UserAccessToken = null;
-            m_AppSettings.RememberUser = false;
+            m_AppSettings.m_UserAccessToken = null;
+            m_AppSettings.m_RememberUser = false;
             m_AppSettings.SaveFile();
             MessageBox.Show("You are now logged out!");
             this.Hide();
@@ -91,9 +87,10 @@ namespace DesktopFacebookInterface
 
         private void tabControlHomeScreen_Selected(object sender, TabControlEventArgs e)
         {
+            eTabOptions tabClicked = (eTabOptions)tabControlHomeScreen.SelectedIndex;
             try
             {
-                switch ((eTabOptions)tabControlHomeScreen.SelectedIndex)
+                switch (tabClicked)
                 {
                     case eTabOptions.About:
                         fetchAbout();
@@ -114,13 +111,9 @@ namespace DesktopFacebookInterface
                         break;
                 }
             }
-            catch(FacebookOAuthException fe)
+            catch(FacebookOAuthException)
             {
-                MessageBox.Show("No Permissions!");
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Unknown Error.");
+                MessageBox.Show(string.Format("Unable to load: No Permissions to view {0}.", tabClicked));
             }
         }
 
@@ -150,35 +143,6 @@ namespace DesktopFacebookInterface
                 prevLabel = labelInfo;
 
             }
-
-
-
-
-
-
-            //Label labelName = new Label();
-            //labelName.Text = "Name: " + m_UserInfo.m_FullName;
-            //labelName.Width += 100;
-            //selectedTab.Controls.Add(labelName);
-            //Label labelBirthday = new Label();
-            //labelBirthday.Text = "Birthday: " + m_UserInfo.m_Birthday;
-            //labelBirthday.Location = new Point(labelName.Location.X, labelName.Location.Y + 25);
-            //labelBirthday.Width += 100;
-            //selectedTab.Controls.Add(labelBirthday);
-            //Label labelGender = new Label();
-            //labelGender.Text = "Gender: " + m_UserInfo.m_Gender;
-            //labelGender.Location = new Point(labelBirthday.Location.X, labelBirthday.Location.Y + 25);
-            //labelGender.Width += 100;
-            //selectedTab.Controls.Add(labelGender);
-            //Label labelEmail = new Label();
-            //labelEmail.Text = "Email: " + m_UserInfo.m_Email;
-            //labelEmail.Width += 100;
-            //labelEmail.Location = new Point(labelGender.Location.X, labelGender.Location.Y + 25);
-            //selectedTab.Controls.Add(labelEmail);
-            //Label labelCity = new Label();
-            //labelCity.Text = "City: " + m_UserInfo.m_City;
-            //labelCity.Location = new Point(labelEmail.Location.X, labelEmail.Location.Y + 25);
-
         }
 
         private void fetchAlbums()
@@ -216,14 +180,6 @@ namespace DesktopFacebookInterface
                     ShowAlbum album = new ShowAlbum(selectedAlbum);
                     album.ShowDialog();
                 }
-                /*if (selectedAlbum.PictureAlbumURL != null)
-                {
-                    pictureBoxAlbum.LoadAsync(selectedAlbum.PictureAlbumURL);
-                }
-                else
-                {
-                    pictureBoxProfile.Image = pictureBoxProfile.ErrorImage;
-                }*/
             }
         }
 
@@ -263,8 +219,6 @@ namespace DesktopFacebookInterface
             listBoxFriends.Items.Clear();
             listBoxFriends.DisplayMember = "Name";
 
-            
-
             foreach (User friend in m_LoginUser.Friends)
             {
                 listBoxFriends.Items.Add(friend.Name);
@@ -279,16 +233,16 @@ namespace DesktopFacebookInterface
 
         private void SaveAppSettings()
         {
-            m_AppSettings.WindowLocation = this.Location;
-            m_AppSettings.WindowSize = this.Size;
+            m_AppSettings.m_WindowLocation = this.Location;
+            m_AppSettings.m_WindowSize = this.Size;
 
-            if (m_AppSettings.RememberUser)
+            if (m_AppSettings.m_RememberUser)
             {
-                m_AppSettings.UserAccessToken = m_LoginResult.AccessToken;
+                m_AppSettings.m_UserAccessToken = m_LoginResult.AccessToken;
             }
             else
             {
-                m_AppSettings.UserAccessToken = null;
+                m_AppSettings.m_UserAccessToken = null;
             }
 
             m_AppSettings.SaveFile();

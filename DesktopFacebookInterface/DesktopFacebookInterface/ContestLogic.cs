@@ -14,16 +14,16 @@ namespace DesktopFacebookInterface
         public string m_Status { get; internal set; }
         public string m_ImagePath { get; internal set; }
         public GeoPostedItem m_ContestPost { get; internal set; }
-        public readonly List<User> m_ContestWinners;
-        public readonly List<User> m_ParticipantsList;
+        public readonly List<User> r_ContestWinners;
+        public readonly List<User> r_ParticipantsList;
 
         public ContestLogic(User i_User, string i_Status, string i_ImagePath, bool i_LikeCondition, bool i_CommentCondition, int i_NumberOfWinners)
         {
             m_LikeCondition = i_LikeCondition;
             m_CommentCondition = i_CommentCondition;
             m_NumberOfWinners = i_NumberOfWinners;
-            m_ParticipantsList = new List<User>();
-            m_ContestWinners = new List<User>();
+            r_ParticipantsList = new List<User>();
+            r_ContestWinners = new List<User>();
             m_ContestCondition = true;
             m_ContestPost = UserPostStatusWrapper.PostStatus(i_User, i_ImagePath, i_Status);
             m_Status = i_Status; // We save this property because PostStatus doesnt work
@@ -37,7 +37,7 @@ namespace DesktopFacebookInterface
                 User postCommentUser = postComment.From;
                 if (m_ContestPost.LikedBy.Contains(postCommentUser))
                 {
-                    m_ParticipantsList.Add(postCommentUser);
+                    r_ParticipantsList.Add(postCommentUser);
                     m_ParticipantsCount++;
                 }
             }
@@ -51,59 +51,14 @@ namespace DesktopFacebookInterface
 
             while (countWinners < m_NumberOfWinners)
             {
-                int winningIndex = rnd.Next(0, m_ParticipantsList.Count - 1);
+                int winningIndex = rnd.Next(0, r_ParticipantsList.Count - 1);
                 if (!winnersIndex[winningIndex])
                 {
-                    m_ContestWinners.Add(m_ParticipantsList[winningIndex]);
+                    r_ContestWinners.Add(r_ParticipantsList[winningIndex]);
                     winnersIndex[winningIndex] = true;
                     countWinners++;
                 }
             }
         }
-
-        //public int Count
-        //{
-        //    get
-        //    {
-        //        return m_ParticipantsCount;
-        //    }
-        //}
-
-        //public int NumberOfWinners
-        //{
-        //    get
-        //    {
-        //        return m_NumberOfWinners;
-        //    }
-        //}
-
-        //public bool IsContestRunning()
-        //{
-        //    return m_ContestCondition;
-        //}
-
-        //public List<User> ContestWinners
-        //{
-        //    get
-        //    {
-        //        return m_ContestWinners;
-        //    }
-        //}
-
-        //public Status Status
-        //{
-        //    get
-        //    {
-        //        return m_ContestStatus;
-        //    }
-        //}
-
-        //public List<User> ParticipantsList
-        //{
-        //    get
-        //    {
-        //        return m_ParticipantsList;
-        //    }
-        //}
     }
 }
