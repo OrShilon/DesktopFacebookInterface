@@ -19,8 +19,6 @@ namespace DesktopFacebookInterface
             m_AppSettings = AppSettings.LoadFile();
             InitializeComponent();
             this.BackColor = Color.FromArgb(66, 103, 178);
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = m_AppSettings.m_WindowLocation;
             this.checkBoxRememberUser.Checked = m_AppSettings.m_RememberUser;
         }
 
@@ -99,7 +97,7 @@ namespace DesktopFacebookInterface
         private void closeFormAndShowHome()
         {
             this.Hide();
-            HomeScreen homeScreen = new HomeScreen(m_LoginResult, m_LoginResult.LoggedInUser, m_AppSettings);
+            FormHomeScreen homeScreen = new FormHomeScreen(m_LoginResult, m_LoginResult.LoggedInUser, m_AppSettings);
             this.Close();
         }
 

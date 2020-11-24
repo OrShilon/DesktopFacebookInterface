@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace DesktopFacebookInterface
 {
-    public partial class HomeScreen : Form
+    public partial class FormHomeScreen : Form
     {
         LoginResult m_LoginResult;
         AppSettings m_AppSettings;
@@ -15,7 +15,7 @@ namespace DesktopFacebookInterface
         UserInformationWrapper m_UserInfo;
         string m_AttachedImagePath;
 
-        public HomeScreen(LoginResult i_LoginResult, User i_LoginUser, AppSettings i_AppSettings)
+        public FormHomeScreen(LoginResult i_LoginResult, User i_LoginUser, AppSettings i_AppSettings)
         {
             m_LoginResult = i_LoginResult;
             m_LoginUser = i_LoginUser;
@@ -177,7 +177,7 @@ namespace DesktopFacebookInterface
                 }
                 else
                 {
-                    ShowAlbum album = new ShowAlbum(selectedAlbum);
+                    FormShowAlbum album = new FormShowAlbum(selectedAlbum);
                     album.ShowDialog();
                 }
             }
@@ -254,15 +254,15 @@ namespace DesktopFacebookInterface
             base.OnFormClosed(e);
         }
 
-        private void HomeScreen_Resize(object sender, EventArgs e)
-        {
-            buttonLogout.Location = new Point(this.Width - 110, buttonLogout.Location.Y);
-            //tabControlHomeScreen.Width = this.Width - 100;
-            tabControlHomeScreen.Width = this.Width - buttonPostStatus.Right - 20;
-            tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Bottom - 45;
-            //tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Height;
-            //listBoxTimeline.Height = this.Height - labelTimeline.Location.Y;
-        }
+        //private void HomeScreen_Resize(object sender, EventArgs e)
+        //{
+        //    buttonLogout.Location = new Point(this.Width - 110, buttonLogout.Location.Y);
+        //    //tabControlHomeScreen.Width = this.Width - 100;
+        //    tabControlHomeScreen.Width = this.Width - buttonPostStatus.Right - 20;
+        //    tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Bottom - 45;
+        //    //tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Height;
+        //    //listBoxTimeline.Height = this.Height - labelTimeline.Location.Y;
+        //}                                                                                ~~~~~~~~~~~~~~~~REMEMBER EVENT IN DEISGNER ~~~~~~~~~~~~~~~
 
         private void buttonPostStatus_Click(object sender, EventArgs e)
         {

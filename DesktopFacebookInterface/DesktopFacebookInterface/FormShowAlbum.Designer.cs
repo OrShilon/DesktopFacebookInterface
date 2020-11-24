@@ -1,6 +1,6 @@
 ﻿namespace DesktopFacebookInterface
 {
-    partial class ShowAlbum
+    partial class FormShowAlbum
     {
         /// <summary>
         /// Required designer variable.
@@ -79,7 +79,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ShowAlbum";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ShowAlbum";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).EndInit();
             this.ResumeLayout(false);

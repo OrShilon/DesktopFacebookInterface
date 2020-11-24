@@ -4,13 +4,13 @@ using System.Windows.Forms;
 
 namespace DesktopFacebookInterface
 {
-    public partial class ShowAlbum : Form
+    public partial class FormShowAlbum : Form
     {
         Album m_Album;
         readonly string[] m_AlbumPhotos;
         private int m_PhotoIndex = 0;
 
-        public ShowAlbum(Album i_Album)
+        public FormShowAlbum(Album i_Album)
         {
             InitializeComponent();
             this.BackColor = System.Drawing.Color.FromArgb(66, 103, 178);

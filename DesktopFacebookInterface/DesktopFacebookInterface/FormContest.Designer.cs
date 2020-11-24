@@ -37,7 +37,7 @@
             this.tabControlContest.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.tabControlContest.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControlContest.ItemSize = new System.Drawing.Size(25, 100);
-            this.tabControlContest.Location = new System.Drawing.Point(2, 45);
+            this.tabControlContest.Location = new System.Drawing.Point(8, 8);
             this.tabControlContest.Margin = new System.Windows.Forms.Padding(2);
             this.tabControlContest.Multiline = true;
             this.tabControlContest.Name = "tabControlContest";
@@ -49,7 +49,7 @@
             // 
             // buttonAddContest
             // 
-            this.buttonAddContest.Location = new System.Drawing.Point(11, 4);
+            this.buttonAddContest.Location = new System.Drawing.Point(8, 417);
             this.buttonAddContest.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddContest.Name = "buttonAddContest";
             this.buttonAddContest.Size = new System.Drawing.Size(62, 35);
@@ -65,9 +65,7 @@
             this.ClientSize = new System.Drawing.Size(703, 433);
             this.Controls.Add(this.buttonAddContest);
             this.Controls.Add(this.tabControlContest);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(1);
-            this.MaximizeBox = false;
             this.Name = "FormContest";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormContest";

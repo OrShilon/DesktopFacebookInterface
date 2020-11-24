@@ -83,6 +83,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "FormLoginScreen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Desktop Facebook Login";
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxFacebook)).EndInit();
             this.ResumeLayout(false);
