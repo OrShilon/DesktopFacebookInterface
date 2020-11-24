@@ -1,26 +1,19 @@
 ﻿using System;
-using System.Drawing;
-using System.IO;
+using System.Collections.Generic;
 using System.Xml.Serialization;
+using System.IO;
 
 namespace DesktopFacebookInterface
 {
-    public class AppSettings
+    public class ContestsXmlSerialization
     {
-        public Point WindowLocation { get; set; }
-        public Size WindowSize { get; set; }
-        public bool RememberUser { get; set; }
-        public string UserAccessToken { get; set; }
-
+        public readonly List<ContestLogic> m_ContestsList;
         private readonly static string defaultFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        private readonly static string defaultFileName = "appSettings.xml";
+        private readonly static string defaultFileName = "ContestsFile.xml";
 
-        private AppSettings()
+        public ContestsXmlSerialization(List<ContestLogic> i_ContestsList)
         {
-            WindowLocation = new Point(0, 0);
-            WindowSize = new Size(0, 0);
-            RememberUser = false;
-            UserAccessToken = null;
+            m_ContestsList = i_ContestsList;
         }
 
         public void SaveFile()
@@ -35,24 +28,21 @@ namespace DesktopFacebookInterface
             }
         }
 
-        public static AppSettings LoadFile()
+        public static ContestsXmlSerialization LoadFile()
         {
-            AppSettings appSettings;
+            ContestsXmlSerialization contestsFile = null;
             string path = String.Format(@"{0}\\{1}", defaultFolder, defaultFileName);
+
             if (File.Exists(path))
             {
                 using (Stream stream = new FileStream(path, FileMode.Open))
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(AppSettings));
-                    appSettings = serializer.Deserialize(stream) as AppSettings;
+                    XmlSerializer serializer = new XmlSerializer(typeof(ContestsXmlSerialization));
+                    contestsFile = serializer.Deserialize(stream) as ContestsXmlSerialization;
                 }
             }
-            else
-            {
-                appSettings = new AppSettings();
-            }
 
-            return appSettings;
+            return contestsFile;
         }
     }
 }

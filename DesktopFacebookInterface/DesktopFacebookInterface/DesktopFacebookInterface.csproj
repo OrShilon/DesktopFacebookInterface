@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
     <Compile Include="ContestLogic.cs" />
+    <Compile Include="ContestsXmlSerialization.cs" />
     <Compile Include="eTabOptions.cs" />
     <Compile Include="FormAddContest.cs">
       <SubType>Form</SubType>

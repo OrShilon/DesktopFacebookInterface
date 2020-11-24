@@ -10,18 +10,19 @@ namespace DesktopFacebookInterface
 {
     static class UserPostStatusWrapper
     {
-        public static void PostStatus(User i_User, string i_ImagePath, string i_Status)
+        public static GeoPostedItem PostStatus(User i_User, string i_ImagePath, string i_Status)
         {
+            GeoPostedItem newPostedItem = null;
             try
             {
                 if (i_ImagePath == null)
                 {
-                    i_User.PostStatus(i_Status);
+                    newPostedItem = i_User.PostStatus(i_Status);
 
                 }
                 else
                 {
-                    i_User.PostPhoto(i_ImagePath, i_Status);
+                    newPostedItem = i_User.PostPhoto(i_ImagePath, i_Status);
                 }
                 MessageBox.Show("Status posted successfully!");
             }
@@ -29,6 +30,8 @@ namespace DesktopFacebookInterface
             {
                 MessageBox.Show(foae.Message);
             }
+
+            return newPostedItem;
         }
     }
 }
