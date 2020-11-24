@@ -4,7 +4,6 @@ using System.Threading;
 using System.Windows.Forms;
 using Facebook;
 using FacebookWrapper;
-using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
@@ -12,7 +11,6 @@ namespace DesktopFacebookInterface
     {
         AppSettings m_AppSettings;
         LoginResult m_LoginResult;
-        User m_LoginUser;
 
         protected const string k_AppId = "370214274434054";
 
@@ -29,7 +27,8 @@ namespace DesktopFacebookInterface
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            Thread t1 = new Thread(new ThreadStart(connectByUserAccessToken));
+
+            Thread t1 = new Thread(new ThreadStart(connectWithAccessToken));
             t1.Start();
             t1.Join();
 
@@ -39,14 +38,13 @@ namespace DesktopFacebookInterface
             }
         }
 
-        private void connectByUserAccessToken()
+        private void connectWithAccessToken()
         {
             if (m_AppSettings.m_RememberUser && !string.IsNullOrEmpty(m_AppSettings.m_UserAccessToken))
             {
                 try
                 {
                     m_LoginResult = FacebookService.Connect(m_AppSettings.m_UserAccessToken);
-                    m_LoginUser = m_LoginResult.LoggedInUser;
                 }
 
                 catch (FacebookOAuthException e)
@@ -90,8 +88,6 @@ namespace DesktopFacebookInterface
             }
             if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
             {
-                m_LoginUser = m_LoginResult.LoggedInUser;
-                PictureBoxProfilePicture.Image = m_LoginUser.ImageNormal;
                 closeFormAndShowHome();
             }
             else
@@ -103,7 +99,7 @@ namespace DesktopFacebookInterface
         private void closeFormAndShowHome()
         {
             this.Hide();
-            HomeScreen homeScreen = new HomeScreen(m_LoginResult, m_LoginUser, m_AppSettings);
+            HomeScreen homeScreen = new HomeScreen(m_LoginResult, m_LoginResult.LoggedInUser, m_AppSettings);
             this.Close();
         }
 

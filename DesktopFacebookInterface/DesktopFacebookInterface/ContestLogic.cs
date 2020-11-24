@@ -6,19 +6,22 @@ namespace DesktopFacebookInterface
 {
     public class ContestLogic
     {
-        public int m_ParticipantsCount { get; internal set; }
-        public bool m_ContestCondition { get; internal set; }
-        public bool m_LikeCondition { get; internal set; }
-        public bool m_CommentCondition { get; internal set; }
-        public int m_NumberOfWinners { get; internal set; }
-        public string m_Status { get; internal set; }
-        public string m_ImagePath { get; internal set; }
-        public GeoPostedItem m_ContestPost { get; internal set; }
+        public int m_ContestID { get; }
+        public int m_ParticipantsCount { get; set; }
+        public bool m_ContestCondition { get; }
+        public bool m_LikeCondition { get; }
+        public bool m_CommentCondition { get; }
+        public int m_NumberOfWinners { get; }
+        public string m_Status { get; }
+        public string m_ImagePath { get; }
+        public GeoPostedItem m_ContestPost { get; }
         public readonly List<User> r_ContestWinners;
         public readonly List<User> r_ParticipantsList;
 
-        public ContestLogic(User i_User, string i_Status, string i_ImagePath, bool i_LikeCondition, bool i_CommentCondition, int i_NumberOfWinners)
+        public ContestLogic(int i_ContestID, User i_User, string i_Status, string i_ImagePath, bool i_LikeCondition, bool i_CommentCondition, int i_NumberOfWinners)
         {
+            m_ContestID = i_ContestID;
+            m_ParticipantsCount = 0;
             m_LikeCondition = i_LikeCondition;
             m_CommentCondition = i_CommentCondition;
             m_NumberOfWinners = i_NumberOfWinners;
