@@ -11,6 +11,8 @@ namespace DesktopFacebookInterface
         public bool m_LikeCondition { get; internal set; }
         public bool m_CommentCondition { get; internal set; }
         public int m_NumberOfWinners { get; internal set; }
+        public string m_Status { get; internal set; }
+        public string m_ImagePath { get; internal set; }
         public GeoPostedItem m_ContestPost { get; internal set; }
         public readonly List<User> m_ContestWinners;
         public readonly List<User> m_ParticipantsList;
@@ -22,9 +24,10 @@ namespace DesktopFacebookInterface
             m_NumberOfWinners = i_NumberOfWinners;
             m_ParticipantsList = new List<User>();
             m_ContestWinners = new List<User>();
-            // code to post status and put in m_ContestStatus
             m_ContestCondition = true;
             m_ContestPost = UserPostStatusWrapper.PostStatus(i_User, i_ImagePath, i_Status);
+            m_Status = i_Status; // We save this property because PostStatus doesnt work
+            m_ImagePath = i_ImagePath; // We save this property because PostStatus doesnt work
         }
 
         public void UpdateParticipantsList()
