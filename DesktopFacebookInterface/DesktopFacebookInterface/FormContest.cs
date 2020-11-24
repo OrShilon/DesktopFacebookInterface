@@ -38,8 +38,8 @@ namespace DesktopFacebookInterface
             {
 
                 // Draw a different background color, and don't paint a focus rectangle.
-                _textBrush = new SolidBrush(Color.Red);
-                g.FillRectangle(Brushes.Gray, e.Bounds);
+                _textBrush = new SolidBrush(Color.Black);
+                //g.FillRectangle(Brushes.White, e.Bounds);
             }
             else
             {
@@ -94,7 +94,8 @@ namespace DesktopFacebookInterface
         {
             Label labelPost = new Label();
             Label labelParticipants = new Label();
-            TextBox textBoxDescription = new TextBox();
+            Label labelDescription = new Label();
+            Label labelPicture = new Label();
             PictureBox pictureBoxAttachedImage = new PictureBox();
             ListBox listBoxParticipants = new ListBox();
             Button buttonUpdateParticipants = new Button();
@@ -109,71 +110,89 @@ namespace DesktopFacebookInterface
             labelPost.TabIndex = 0;
             labelPost.TabStop = false;
 
-            textBoxDescription.Location = new Point(labelPost.Location.X, labelPost.Bottom + 20);
-            textBoxDescription.Margin = new Padding(2, 2, 2, 2);
-            textBoxDescription.Multiline = true;
-            textBoxDescription.Name = "textBoxContestDescription";
-            textBoxDescription.Text = m_ListOfContests[m_ListOfContests.Count - 1].m_Status;
-            textBoxDescription.Size = new Size(420, 120);
-            textBoxDescription.TabIndex = 1;
+            labelDescription.Location = new Point(labelPost.Location.X, labelPost.Bottom + 20);
+            labelDescription.Margin = new Padding(2, 2, 2, 2);
+            labelDescription.Name = "textBoxContestDescription";
+            labelDescription.Text = m_ListOfContests[m_ListOfContests.Count - 1].m_Status;
+            labelDescription.Size = new Size(350, 160);
+            labelDescription.BorderStyle = BorderStyle.FixedSingle;
+            labelDescription.TabIndex = 1;
 
             if(m_ListOfContests[m_ListOfContests.Count - 1].m_ImagePath != null)
             {
-                pictureBoxAttachedImage.Location = new Point(textBoxDescription.Right + 15, textBoxDescription.Location.Y);
+                pictureBoxAttachedImage.Location = new Point(labelDescription.Right + 15, labelDescription.Location.Y);
                 pictureBoxAttachedImage.Margin = new Padding(5, 6, 5, 6);
                 pictureBoxAttachedImage.Name = "pictureBoxAttachedImage";
-                pictureBoxAttachedImage.Size = new Size(200, 145);
+                pictureBoxAttachedImage.Size = new Size(200, labelDescription.Height);
                 pictureBoxAttachedImage.SizeMode = PictureBoxSizeMode.StretchImage;
                 pictureBoxAttachedImage.Image = Image.FromFile(m_ListOfContests[m_ListOfContests.Count - 1].m_ImagePath);
                 pictureBoxAttachedImage.TabIndex = 2;
                 pictureBoxAttachedImage.TabStop = false;
+
+                labelPicture.Location = new Point(pictureBoxAttachedImage.Location.X ,labelPost.Location.Y);
+                labelPicture.Font = new Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                labelPicture.Margin = new Padding(2, 2, 2, 2);
+                labelPicture.Name = "textBoxContestDescription";
+                labelPicture.Text = "Image attached to the post:";
+                labelPicture.Size = new Size(195, 25);
+
+                currentTabPage.Controls.Add(labelPicture);
+                currentTabPage.Controls.Add(pictureBoxAttachedImage);
             }
 
             labelParticipants.AutoSize = true;
             labelParticipants.Font = new Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            labelParticipants.Location = new Point(textBoxDescription.Location.X, textBoxDescription.Bottom + 15);
+            labelParticipants.Location = new Point(labelDescription.Location.X, labelDescription.Bottom + 15);
             labelParticipants.Name = "labelParticipants";
-            labelParticipants.Size = new Size(195, 25);
+            labelParticipants.Size = new Size(100, 25);
             labelParticipants.Text = "List of participants:";
             labelParticipants.TabIndex = 3;
             labelParticipants.TabStop = false;
 
             listBoxParticipants.FormattingEnabled = true;
             listBoxParticipants.ItemHeight = 20;
-            listBoxParticipants.Location = new Point(labelParticipants.Right + 20, labelParticipants.Location.Y);
+            listBoxParticipants.Location = new Point(labelDescription.Location.X, labelParticipants.Bottom + 20);
             listBoxParticipants.Margin = new Padding(3, 2, 3, 2);
             listBoxParticipants.Name = "listBoxParticipants";
-            listBoxParticipants.Size = new Size(220, 200);
+            listBoxParticipants.Size = new Size(220, 100);
             listBoxParticipants.TabIndex = 4;
 
-            buttonUpdateParticipants.Location = new Point((currentTabPage.Width / 2) - 50, currentTabPage.Height - 30);
+            buttonUpdateParticipants.Location = new Point(listBoxParticipants.Right + 40, (listBoxParticipants.Bottom - listBoxParticipants.Height / 2) - buttonUpdateParticipants.Height / 2);
             buttonUpdateParticipants.Margin = new Padding(5, 6, 5, 6);
-            buttonUpdateParticipants.Name = "buttonUpdateParticipants";
-            buttonUpdateParticipants.Size = new Size(160, 45);
+            buttonUpdateParticipants.Name = string.Format("buttonUpdateParticipants{0}", m_ListOfContests.Count);
+            buttonUpdateParticipants.Size = new Size(120, 35);
             buttonUpdateParticipants.TabIndex = 5;
             buttonUpdateParticipants.Text = "Update participants";
+            buttonUpdateParticipants.Font = new Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             buttonUpdateParticipants.UseVisualStyleBackColor = true;
-            //buttonUpdateParticipants.Click += new System.EventHandler(this.buttonLogout_Click);
+            buttonUpdateParticipants.Click += new EventHandler(this.buttonUpdateParticipants_Click);
 
-            buttonChooseWinner.Location = new Point(buttonUpdateParticipants.Right + 30, currentTabPage.Height - 30);
+            buttonChooseWinner.Location = new Point(buttonUpdateParticipants.Right + 25, buttonUpdateParticipants.Location.Y);
             buttonChooseWinner.Margin = new Padding(5, 6, 5, 6);
             buttonChooseWinner.Name = "buttonChooseWinner";
-            buttonChooseWinner.Size = new Size(160, 45);
+            buttonChooseWinner.Size = new Size(120, 35);
             buttonChooseWinner.TabIndex = 6;
             buttonChooseWinner.Text = m_ListOfContests[m_ListOfContests.Count - 1].m_NumberOfWinners < 2 ? "Choose winner" : "Choose winners";
+            buttonChooseWinner.Font = new Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             buttonChooseWinner.UseVisualStyleBackColor = true;
             //buttonUpdateParticipants.Click += new System.EventHandler(this.buttonLogout_Click);
 
 
 
             currentTabPage.Controls.Add(labelPost);
-            currentTabPage.Controls.Add(textBoxDescription);
-            currentTabPage.Controls.Add(pictureBoxAttachedImage);
+            currentTabPage.Controls.Add(labelDescription);
             currentTabPage.Controls.Add(labelParticipants);
             currentTabPage.Controls.Add(listBoxParticipants);
             currentTabPage.Controls.Add(buttonUpdateParticipants);
             currentTabPage.Controls.Add(buttonChooseWinner);
+        }
 
+        private void buttonUpdateParticipants_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            char character = button.Name[button.Name.Length - 1];
+            int temp = (character - '0') - 1;
+            m_ListOfContests[temp].UpdateParticipantsList();
         }
     }
 }

@@ -37,20 +37,20 @@
             this.tabControlContest.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.tabControlContest.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControlContest.ItemSize = new System.Drawing.Size(25, 100);
-            this.tabControlContest.Location = new System.Drawing.Point(8, 8);
-            this.tabControlContest.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControlContest.Location = new System.Drawing.Point(2, 45);
+            this.tabControlContest.Margin = new System.Windows.Forms.Padding(2);
             this.tabControlContest.Multiline = true;
             this.tabControlContest.Name = "tabControlContest";
             this.tabControlContest.SelectedIndex = 0;
-            this.tabControlContest.Size = new System.Drawing.Size(650, 406);
+            this.tabControlContest.Size = new System.Drawing.Size(702, 389);
             this.tabControlContest.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlContest.TabIndex = 0;
             this.tabControlContest.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
             // buttonAddContest
             // 
-            this.buttonAddContest.Location = new System.Drawing.Point(8, 417);
-            this.buttonAddContest.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAddContest.Location = new System.Drawing.Point(11, 4);
+            this.buttonAddContest.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddContest.Name = "buttonAddContest";
             this.buttonAddContest.Size = new System.Drawing.Size(62, 35);
             this.buttonAddContest.TabIndex = 1;
@@ -62,10 +62,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 461);
+            this.ClientSize = new System.Drawing.Size(703, 433);
             this.Controls.Add(this.buttonAddContest);
             this.Controls.Add(this.tabControlContest);
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(1);
+            this.MaximizeBox = false;
             this.Name = "FormContest";
             this.Text = "FormContest";
             this.ResumeLayout(false);
