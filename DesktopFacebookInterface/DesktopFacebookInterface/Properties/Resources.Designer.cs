@@ -63,19 +63,9 @@ namespace DesktopFacebookInterface.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Facebook {
+        internal static System.Drawing.Bitmap ContestLogo {
             get {
-                object obj = ResourceManager.GetObject("Facebook", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap facebook_logo {
-            get {
-                object obj = ResourceManager.GetObject("facebook logo", resourceCulture);
+                object obj = ResourceManager.GetObject("ContestLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
