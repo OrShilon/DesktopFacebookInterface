@@ -154,6 +154,7 @@ namespace DesktopFacebookInterface
         private void fetchAlbums()
         {
             listBoxAlbums.Items.Clear();
+            listBoxAlbums.Size = tabControlHomeScreen.SelectedTab.Size;
             listBoxAlbums.DisplayMember = "Name";
 
             foreach(Album album in m_LoginUser.Albums)
@@ -193,6 +194,7 @@ namespace DesktopFacebookInterface
         private void fetchPages()
         {
             listBoxPages.Items.Clear();
+            listBoxPages.Size = tabControlHomeScreen.SelectedTab.Size;
             listBoxPages.DisplayMember = "Name";
 
             foreach (Page page in m_LoginUser.LikedPages)
@@ -209,6 +211,7 @@ namespace DesktopFacebookInterface
         private void fetchEvents()
         {
             listBoxEvents.Items.Clear();
+            listBoxEvents.Size = tabControlHomeScreen.SelectedTab.Size;
             listBoxEvents.DisplayMember = "Name";
 
             foreach (Event userEvent in m_LoginUser.Events)
@@ -225,6 +228,7 @@ namespace DesktopFacebookInterface
         private void fetchFriends()
         {
             listBoxFriends.Items.Clear();
+            listBoxFriends.Size = tabControlHomeScreen.SelectedTab.Size;
             listBoxFriends.DisplayMember = "Name";
 
             foreach (User friend in m_LoginUser.Friends)
