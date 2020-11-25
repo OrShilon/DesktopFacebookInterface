@@ -103,28 +103,19 @@ namespace DesktopFacebookInterface
             return listTimeLine;
         }
 
-        public string fetchPostsByDate(DateTime i_StartDate, DateTime i_EndDate)
+        public List<Post> fetchPostsByDate(DateTime i_StartDate, DateTime i_EndDate)
         {
-            StringBuilder filteredPosts = new StringBuilder();
+            List<Post> filteredPosts = new List<Post>();
 
             foreach (Post post in User.Posts)
             {
                 if (post.CreatedTime.Value.Date > i_StartDate && post.CreatedTime.Value.Date < i_EndDate)
                 {
-                    if (post.Message != null)
-                    {
-                        filteredPosts.Append(post.Message);
-                    }
-                    else if (post.Caption != null)
-                    {
-                        filteredPosts.Append(post.Caption);
-                    }
-
-                    filteredPosts.Append(Environment.NewLine);
+                    filteredPosts.Add(post);
                 }
             }
 
-            return filteredPosts.ToString();
+            return filteredPosts;
         }
 
         public List<Photo> fetchPhotosByDate(DateTime i_StartDate, DateTime i_EndDate)
@@ -143,6 +134,36 @@ namespace DesktopFacebookInterface
             }
 
             return filteredPics;
+        }
+
+        public List<Checkin> fetchCheckInsByDate(DateTime i_StartDate, DateTime i_EndDate)
+        {
+            List<Checkin> filteredCheckIns = new List<Checkin>();
+
+            foreach (Checkin checkin in m_LoginUser.Checkins)
+            {
+                if (checkin.CreatedTime.Value.Date > i_StartDate && checkin.CreatedTime.Value.Date < i_EndDate)
+                {
+                    filteredCheckIns.Add(checkin);
+                }
+            }
+
+            return filteredCheckIns;
+        }
+
+        public List<Event> fetchEventsByDate(DateTime i_StartDate, DateTime i_EndDate)
+        {
+            List<Event> filteredEvents = new List<Event>();
+
+            foreach (Event userEvent in m_LoginUser.Events)
+            {
+                if (userEvent.StartTime > i_StartDate && userEvent.StartTime < i_EndDate)
+                {
+                    filteredEvents.Add(userEvent);
+                }
+            }
+
+            return filteredEvents;
         }
     }
 }
