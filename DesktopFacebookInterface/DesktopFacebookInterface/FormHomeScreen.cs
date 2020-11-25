@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Facebook;
@@ -13,27 +14,24 @@ namespace DesktopFacebookInterface
         private const string k_AttachedFileTypeFilter = "Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
         private LoginResult m_LoginResult;
         private AppSettings m_AppSettings;
-        private User m_LoginUser;
         private UserInformationWrapper m_UserInfo;
-        private string m_AttachedImagePath;
         private FormContest m_FormContest;
+        private string m_AttachedImagePath = null;
         private bool m_IsFirstContestClick = true;
 
-        public FormHomeScreen(LoginResult i_LoginResult, User i_LoginUser, AppSettings i_AppSettings)
+        public FormHomeScreen(LoginResult i_LoginResult, AppSettings i_AppSettings)
         {
             m_LoginResult = i_LoginResult;
-            m_LoginUser = i_LoginUser;
             m_AppSettings = i_AppSettings;
-            m_UserInfo = new UserInformationWrapper(m_LoginUser);
-            m_AttachedImagePath = null;
+            m_UserInfo = new UserInformationWrapper(i_LoginResult.LoggedInUser);
 
             InitializeComponent();
-            this.Text = string.Format("Facebook - {0}", m_UserInfo.m_FullName);
+            this.Text = string.Format("Facebook - {0}", m_UserInfo.User.Name);
             textBoxPostStatus.Text = k_TextBoxPostStatusMsg;
-            PictureBoxProfile.LoadAsync(m_UserInfo.m_ProfileImage);
-            PictureBoxCoverPhoto.LoadAsync(m_UserInfo.m_CoverImage);
-            fetchAbout();
-            fetchTimeline();
+            PictureBoxProfile.LoadAsync(m_UserInfo.User.PictureNormalURL);
+            PictureBoxCoverPhoto.LoadAsync(m_UserInfo.fetchCoverPhotoURL());
+            displayAbout();
+            displayTimeline();
         }
 
         protected override void OnShown(EventArgs e)
@@ -55,7 +53,6 @@ namespace DesktopFacebookInterface
 
         private void loggedOutFinished()
         {
-            m_LoginUser = null;
             m_AppSettings.m_UserAccessToken = null;
             m_AppSettings.m_RememberUser = false;
             m_AppSettings.SaveFile();
@@ -64,30 +61,16 @@ namespace DesktopFacebookInterface
             this.Close();
         }
 
-        private void fetchTimeline()
+        private void displayTimeline()
         {
+            List<string> listTimeLine = m_UserInfo.fetchTimeline();
+
             listBoxTimeline.Items.Clear();
             listBoxTimeline.DisplayMember = "Name";
 
-            foreach (Post post in m_LoginUser.Posts)
+            foreach (string post in listTimeLine)
             {
-                if (post.Message != null)
-                {
-                    listBoxTimeline.Items.Add(post.Message);
-                }
-                else if (post.Caption != null)
-                {
-                    listBoxTimeline.Items.Add(post.Caption);
-                }
-                else
-                {
-                    listBoxTimeline.Items.Add(string.Format("[{0}]", post.Type));
-                }
-            }
-
-            if (m_LoginUser.Posts.Count == 0)
-            {
-                listBoxTimeline.Items.Add("Your timeline has 0 posts!");
+                listBoxTimeline.Items.Add(post);
             }
         }
 
@@ -100,19 +83,19 @@ namespace DesktopFacebookInterface
                 switch (tabClicked)
                 {
                     case eTabOptions.About:
-                        fetchAbout();
+                        displayAbout();
                         break;
                     case eTabOptions.Albums:
-                        fetchAlbums();
+                        displayAlbums();
                         break;
                     case eTabOptions.Pages:
-                        fetchPages();
+                        displayPages();
                         break;
                     case eTabOptions.Events:
-                        fetchEvents();
+                        displayEvents();
                         break;
                     case eTabOptions.Friends:
-                        fetchFriends();
+                        displayFriends();
                         break;
                     default:
                         break;
@@ -124,16 +107,18 @@ namespace DesktopFacebookInterface
             }
         }
 
-        private void fetchAbout()
+        private void displayAbout()
         {
+            List<string> listAbout = m_UserInfo.fetchAbout();
+
             TabPage selectedTab = tabControlHomeScreen.SelectedTab;
             Label prevLabel = new Label();
 
-            foreach (string info in m_UserInfo.BasicInfo)
+            foreach (string info in listAbout)
             {
                 Label labelInfo = new Label();
 
-                if (m_UserInfo.BasicInfo[0].Equals(info))
+                if (listAbout[0].Equals(info))
                 {
                     labelInfo.Text = info;
                     labelInfo.Width += 100;
@@ -151,18 +136,18 @@ namespace DesktopFacebookInterface
             }
         }
 
-        private void fetchAlbums()
+        private void displayAlbums()
         {
             listBoxAlbums.Items.Clear();
             listBoxAlbums.Size = tabControlHomeScreen.SelectedTab.Size;
             listBoxAlbums.DisplayMember = "Name";
 
-            foreach (Album album in m_LoginUser.Albums)
+            foreach (Album album in m_UserInfo.User.Albums)
             {
                 listBoxAlbums.Items.Add(album);
             }
 
-            if (m_LoginUser.Albums.Count == 0)
+            if (m_UserInfo.User.Albums.Count == 0)
             {
                 MessageBox.Show("No Albums to retrieve :(");
             }
@@ -191,52 +176,52 @@ namespace DesktopFacebookInterface
             }
         }
 
-        private void fetchPages()
+        private void displayPages()
         {
             listBoxPages.Items.Clear();
             listBoxPages.Size = tabControlHomeScreen.SelectedTab.Size;
             listBoxPages.DisplayMember = "Name";
 
-            foreach (Page page in m_LoginUser.LikedPages)
+            foreach (Page page in m_UserInfo.User.LikedPages)
             {
                 listBoxPages.Items.Add(page);
             }
 
-            if (m_LoginUser.LikedPages.Count == 0)
+            if (m_UserInfo.User.LikedPages.Count == 0)
             {
                 MessageBox.Show("No pages to retrieve :(");
             }
         }
 
-        private void fetchEvents()
+        private void displayEvents()
         {
             listBoxEvents.Items.Clear();
             listBoxEvents.Size = tabControlHomeScreen.SelectedTab.Size;
             listBoxEvents.DisplayMember = "Name";
 
-            foreach (Event userEvent in m_LoginUser.Events)
+            foreach (Event userEvent in m_UserInfo.User.Events)
             {
                 listBoxEvents.Items.Add(userEvent);
             }
 
-            if (m_LoginUser.Events.Count == 0)
+            if (m_UserInfo.User.Events.Count == 0)
             {
                 MessageBox.Show("No events to retrieve :(");
             }
         }
 
-        private void fetchFriends()
+        private void displayFriends()
         {
             listBoxFriends.Items.Clear();
             listBoxFriends.Size = tabControlHomeScreen.SelectedTab.Size;
             listBoxFriends.DisplayMember = "Name";
 
-            foreach (User friend in m_LoginUser.Friends)
+            foreach (User friend in m_UserInfo.User.Friends)
             {
                 listBoxFriends.Items.Add(friend.Name);
             }
 
-            if (m_LoginUser.Friends.Count == 0)
+            if (m_UserInfo.User.Friends.Count == 0)
             {
                 MessageBox.Show("No friends to retrieve :(");
             }
@@ -269,7 +254,7 @@ namespace DesktopFacebookInterface
         {
             try
             {
-                GeoPostedItem postedItem = UserPostStatusWrapper.PostStatus(m_LoginUser, m_AttachedImagePath, textBoxPostStatus.Text);
+                GeoPostedItem postedItem = UserPostStatusWrapper.PostStatus(m_UserInfo.User, m_AttachedImagePath, textBoxPostStatus.Text);
                 MessageBox.Show(string.Format("Post published successfully!{1} Post ID: {0}", postedItem.Id, Environment.NewLine));
             }
             catch (FacebookOAuthException)
@@ -304,7 +289,7 @@ namespace DesktopFacebookInterface
         {
             if (m_IsFirstContestClick)
             {
-                m_FormContest = new FormContest(m_LoginUser);
+                m_FormContest = new FormContest(m_UserInfo.User);
                 m_FormContest.ShowDialog();
                 m_IsFirstContestClick = false;
             }
