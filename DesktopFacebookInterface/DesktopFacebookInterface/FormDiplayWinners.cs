@@ -7,32 +7,32 @@ namespace DesktopFacebookInterface
 {
     internal partial class FormDiplayWinners : Form
     {
-        private readonly List<User> m_contestWinners;
-        private int m_indexInWinnerList = 0;
+        private readonly List<User> m_ContestWinners;
+        private int m_IndexInWinnerList = 0;
 
         public FormDiplayWinners(List<User> i_ContestWinners)
         {
-            m_contestWinners = i_ContestWinners;
+            m_ContestWinners = i_ContestWinners;
             InitializeComponent();
             initWinners();
         }
 
         private void initWinners()
         {
-            labelNumOfWinner.Text = string.Format("Winner number: {0}", m_indexInWinnerList + 1);
-            labelvWinnerName.Text = string.Format("Full name: {0}", m_contestWinners[m_indexInWinnerList].Name);
-            pictureBoxWinnerPicture.LoadAsync(m_contestWinners[m_indexInWinnerList].PictureNormalURL);
+            labelNumOfWinner.Text = string.Format("Winner number: {0}", m_IndexInWinnerList + 1);
+            labelvWinnerName.Text = string.Format("Full name: {0}", m_ContestWinners[m_IndexInWinnerList].Name);
+            pictureBoxWinnerPicture.LoadAsync(m_ContestWinners[m_IndexInWinnerList].PictureNormalURL);
         }
 
         private void buttonPrevious_Click(object sender, EventArgs e)
         {
-            if (m_indexInWinnerList == 0)
+            if (m_IndexInWinnerList == 0)
             {
-                m_indexInWinnerList = m_contestWinners.Count - 1;
+                m_IndexInWinnerList = m_ContestWinners.Count - 1;
             }
             else
             {
-                m_indexInWinnerList--;
+                m_IndexInWinnerList--;
             }
 
             displayImage();
@@ -40,13 +40,13 @@ namespace DesktopFacebookInterface
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
-            if (m_indexInWinnerList == m_contestWinners.Count - 1)
+            if (m_IndexInWinnerList == m_ContestWinners.Count - 1)
             {
-                m_indexInWinnerList = 0;
+                m_IndexInWinnerList = 0;
             }
             else
             {
-                m_indexInWinnerList++;
+                m_IndexInWinnerList++;
             }
 
             displayImage();
@@ -54,19 +54,19 @@ namespace DesktopFacebookInterface
 
         private void displayImage()
         {
-            pictureBoxWinnerPicture.LoadAsync(m_contestWinners[m_indexInWinnerList].PictureNormalURL);
+            pictureBoxWinnerPicture.LoadAsync(m_ContestWinners[m_IndexInWinnerList].PictureNormalURL);
             updateButtonPrevious();
             updateButtonNext();
         }
 
         private void updateButtonPrevious()
         {
-            buttonPrevious.Enabled = (m_indexInWinnerList == 0) ? false : true;
+            buttonPrevious.Enabled = (m_IndexInWinnerList == 0) ? false : true;
         }
 
         private void updateButtonNext()
         {
-            buttonNext.Enabled = (m_indexInWinnerList == m_contestWinners.Count - 1) ? false : true;
+            buttonNext.Enabled = (m_IndexInWinnerList == m_ContestWinners.Count - 1) ? false : true;
         }
     }
 }

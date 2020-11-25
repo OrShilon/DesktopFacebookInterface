@@ -12,11 +12,12 @@ namespace DesktopFacebookInterface
 
         public FormShowAlbum(Album i_Album)
         {
+            m_Album = i_Album;
+            m_AlbumPhotos = new string[m_Album.Photos.Count];
+            
             InitializeComponent();
             this.BackColor = System.Drawing.Color.FromArgb(66, 103, 178);
-            m_Album = i_Album;
             this.Text = m_Album.Name;
-            m_AlbumPhotos = new string[m_Album.Photos.Count];
             buildImageArray();
         }
 
