@@ -3,67 +3,83 @@ using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
-    internal class UserInformationWrapper : User
+    internal class UserInformationWrapper
     {
-        public UserInformationWrapper() : base()
+        public string m_ProfileImage;
+        public string m_CoverImage;
+        public string m_FullName;
+        public string m_Email;
+        public string m_Gender;
+        public string m_Birthday;
+        public string m_City;
+        public string m_RelationshipStatus;
+        private readonly List<string> r_BasicInformation;
+        private User m_LoginUser;
+
+        public UserInformationWrapper(User i_LoginUser)
         {
+            m_LoginUser = i_LoginUser;
+            r_BasicInformation = new List<string>();
+            updateInformation();
+            m_ProfileImage = m_LoginUser.PictureNormalURL;
+            addCoverPhoto();
         }
 
-        public List<string> GetListInformation()
+        private void updateInformation()
         {
-            List<string> userInfo = new List<string>();
-
-            if (!string.IsNullOrEmpty(base.Name))
+            if (!string.IsNullOrEmpty(m_LoginUser.Name))
             {
-                userInfo.Add(string.Format("Name: {0}", base.Name));
+                r_BasicInformation.Add(string.Format("Name: {0}", m_FullName = m_LoginUser.Name));
             }
 
-            if (!string.IsNullOrEmpty(base.Gender.ToString()))
+            if (!string.IsNullOrEmpty(m_LoginUser.Gender.ToString()))
             {
-                userInfo.Add(string.Format("Gender: {0}", base.Gender.ToString()));
+                r_BasicInformation.Add(string.Format("Gender: {0}", m_Gender = m_LoginUser.Gender.ToString()));
             }
 
-            if (!string.IsNullOrEmpty(base.Birthday))
+            if (!string.IsNullOrEmpty(m_LoginUser.Birthday))
             {
-                userInfo.Add(string.Format("Birthday: {0}", base.Birthday));
+                r_BasicInformation.Add(string.Format("Birthday: {0}", m_Birthday = m_LoginUser.Birthday));
             }
 
-            if (!string.IsNullOrEmpty(base.Email))
+            if (!string.IsNullOrEmpty(m_LoginUser.Email))
             {
-                userInfo.Add(string.Format("Email: {0}", base.Email));
+                r_BasicInformation.Add(string.Format("Email: {0}", m_Email = m_LoginUser.Email));
             }
 
-            if (base.Hometown != null)
+            if (m_LoginUser.Hometown != null)
             {
-                if (!string.IsNullOrEmpty(base.Hometown.Name))
+                if (!string.IsNullOrEmpty(m_LoginUser.Hometown.Name))
                 {
-                    userInfo.Add(string.Format("City: {0}", base.Hometown.Name));
+                    r_BasicInformation.Add(string.Format("City: {0}", m_City = m_LoginUser.Hometown.Name));
                 }
             }
 
-            if (!string.IsNullOrEmpty(base.RelationshipStatus.Value.ToString()))
+            if (!string.IsNullOrEmpty(m_LoginUser.RelationshipStatus.Value.ToString()))
             {
-                userInfo.Add(string.Format("Relationship Status: {0}", base.RelationshipStatus.Value.ToString()));
+                r_BasicInformation.Add(string.Format("Relationship Status: {0}", m_RelationshipStatus = m_LoginUser.RelationshipStatus.Value.ToString()));
             }
-
-            return userInfo;
         }
 
-        public string fetchCoverPhotoURL()
+        public List<string> BasicInfo
         {
-            string coverPhotoURL = "";
+            get
+            {
+                return r_BasicInformation;
+            }
+        }
 
-            foreach (Album album in base.Albums)
+        private void addCoverPhoto()
+        {
+            foreach (Album album in m_LoginUser.Albums)
             {
                 string albumName = album.Name.ToLower();
 
                 if (albumName.Equals("cover photos"))
                 {
-                    coverPhotoURL = album.Photos[0].PictureNormalURL;
+                    m_CoverImage = album.Photos[0].PictureNormalURL;
                 }
             }
-
-            return coverPhotoURL;
-        }        
+        }
     }
 }
