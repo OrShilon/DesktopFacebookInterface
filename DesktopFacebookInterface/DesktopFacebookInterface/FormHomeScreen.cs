@@ -13,8 +13,7 @@ namespace DesktopFacebookInterface
         private const string k_AttachedFileTypeFilter = "Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
         private LoginResult m_LoginResult;
         private AppSettings m_AppSettings;
-        private User m_LoginUser;
-        private UserInformationWrapper m_UserInfo;
+        private UserInformationWrapper m_LoginUser;
         private string m_AttachedImagePath;
         private FormContest m_FormContest;
         private bool m_IsFirstContestClick = true;
@@ -22,16 +21,20 @@ namespace DesktopFacebookInterface
         public FormHomeScreen(LoginResult i_LoginResult, User i_LoginUser, AppSettings i_AppSettings)
         {
             m_LoginResult = i_LoginResult;
-            m_LoginUser = i_LoginUser;
+            m_LoginUser = (UserInformationWrapper) i_LoginUser;
             m_AppSettings = i_AppSettings;
-            m_UserInfo = new UserInformationWrapper(m_LoginUser);
             m_AttachedImagePath = null;
 
             InitializeComponent();
-            this.Text = string.Format("Facebook - {0}", m_UserInfo.m_FullName);
+            this.Text = string.Format("Facebook - {0}", m_LoginUser.Name);
             textBoxPostStatus.Text = k_TextBoxPostStatusMsg;
-            PictureBoxProfile.LoadAsync(m_UserInfo.m_ProfileImage);
-            PictureBoxCoverPhoto.LoadAsync(m_UserInfo.m_CoverImage);
+            PictureBoxProfile.LoadAsync(m_LoginUser.PictureNormalURL);
+            string coverPhotoURL = m_LoginUser.fetchCoverPhotoURL();
+
+            if (!string.IsNullOrEmpty(coverPhotoURL))
+            {
+                PictureBoxCoverPhoto.LoadAsync();
+            }
             fetchAbout();
             fetchTimeline();
         }
@@ -129,11 +132,11 @@ namespace DesktopFacebookInterface
             TabPage selectedTab = tabControlHomeScreen.SelectedTab;
             Label prevLabel = new Label();
 
-            foreach(string info in m_UserInfo.BasicInfo)
+            foreach(string info in m_LoginUser.BasicInfo)
             {
                 Label labelInfo = new Label();
 
-                if(m_UserInfo.BasicInfo[0].Equals(info))
+                if(m_LoginUser.BasicInfo[0].Equals(info))
                 {
                     labelInfo.Text = info;
                     labelInfo.Width += 100;
