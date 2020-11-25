@@ -11,13 +11,15 @@ namespace DesktopFacebookInterface
         UserInformationWrapper m_User;
         private DateTime m_StartDate;
         private DateTime m_EndDate;
-        private readonly List<CheckBox> m_MemoriesOptions;
+        private readonly List<CheckBox> r_MemoriesOptions;
+        private readonly List<string> r_Memories;
 
         public FormMemoriesFetch(UserInformationWrapper i_User)
         {
             m_User = i_User;
             InitializeComponent();
-            m_MemoriesOptions = new List<CheckBox>();
+            r_MemoriesOptions = new List<CheckBox>();
+            r_Memories = new List<string>();
             initMemoryOptionsList();
             monthCalendarStartDate.MinDate = new DateTime(2005, 1, 1);
             monthCalendarStartDate.MaxDate = DateTime.Today;
@@ -28,11 +30,11 @@ namespace DesktopFacebookInterface
         private void initMemoryOptionsList()
         {
 
-            m_MemoriesOptions.Add(checkBoxCheckAll);
-            m_MemoriesOptions.Add(checkBoxPosts);
-            m_MemoriesOptions.Add(checkBoxPhotos);
-            m_MemoriesOptions.Add(checkBoxCheckIn);
-            m_MemoriesOptions.Add(checkBoxEvents);
+            r_MemoriesOptions.Add(checkBoxCheckAll);
+            r_MemoriesOptions.Add(checkBoxPosts);
+            r_MemoriesOptions.Add(checkBoxPhotos);
+            r_MemoriesOptions.Add(checkBoxCheckIn);
+            r_MemoriesOptions.Add(checkBoxEvents);
 
         }
 
@@ -50,7 +52,27 @@ namespace DesktopFacebookInterface
 
         private void buttonFetchData_Click(object sender, EventArgs e)
         {
-            
+            foreach(string option in r_Memories)
+            {
+
+            }
+        }
+
+        private void displayPosts()
+        {
+            string posts = string.Format("{0}Posts:{0}", Environment.NewLine);
+        }
+        //private void displayPhotos()
+        //{
+
+        //}
+        private void displayCheckIn()
+        {
+            string checkIn = string.Format("{0}Check in:{0}", Environment.NewLine);
+        }
+        private void displayEvents()
+        {
+            string events = string.Format("{0}Events:{0}", Environment.NewLine);
         }
 
         private void checkBoxCheckAll_CheckedChanged(object sender, EventArgs e)
@@ -59,14 +81,14 @@ namespace DesktopFacebookInterface
 
             if(checkAll.Checked)
             {
-                foreach(CheckBox currentOption in m_MemoriesOptions)
+                foreach(CheckBox currentOption in r_MemoriesOptions)
                 {
                     currentOption.Checked = true;
                 }
             }
             else
             {
-                foreach (CheckBox currentOption in m_MemoriesOptions)
+                foreach (CheckBox currentOption in r_MemoriesOptions)
                 {
                     currentOption.Checked = false;
                 }
