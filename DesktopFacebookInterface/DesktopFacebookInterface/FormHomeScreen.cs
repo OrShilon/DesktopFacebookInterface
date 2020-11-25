@@ -13,7 +13,8 @@ namespace DesktopFacebookInterface
         private const string k_AttachedFileTypeFilter = "Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
         private LoginResult m_LoginResult;
         private AppSettings m_AppSettings;
-        private UserInformationWrapper m_LoginUser;
+        private User m_LoginUser;
+        private UserInformationWrapper m_UserInfo;
         private string m_AttachedImagePath;
         private FormContest m_FormContest;
         private bool m_IsFirstContestClick = true;
@@ -21,20 +22,16 @@ namespace DesktopFacebookInterface
         public FormHomeScreen(LoginResult i_LoginResult, User i_LoginUser, AppSettings i_AppSettings)
         {
             m_LoginResult = i_LoginResult;
-            m_LoginUser = (UserInformationWrapper) i_LoginUser;
+            m_LoginUser = i_LoginUser;
             m_AppSettings = i_AppSettings;
+            m_UserInfo = new UserInformationWrapper(m_LoginUser);
             m_AttachedImagePath = null;
 
             InitializeComponent();
-            this.Text = string.Format("Facebook - {0}", m_LoginUser.Name);
+            this.Text = string.Format("Facebook - {0}", m_UserInfo.m_FullName);
             textBoxPostStatus.Text = k_TextBoxPostStatusMsg;
-            PictureBoxProfile.LoadAsync(m_LoginUser.PictureNormalURL);
-            string coverPhotoURL = m_LoginUser.fetchCoverPhotoURL();
-
-            if (!string.IsNullOrEmpty(coverPhotoURL))
-            {
-                PictureBoxCoverPhoto.LoadAsync();
-            }
+            PictureBoxProfile.LoadAsync(m_UserInfo.m_ProfileImage);
+            PictureBoxCoverPhoto.LoadAsync(m_UserInfo.m_CoverImage);
             fetchAbout();
             fetchTimeline();
         }
@@ -121,7 +118,7 @@ namespace DesktopFacebookInterface
                         break;
                 }
             }
-            catch(FacebookOAuthException)
+            catch (FacebookOAuthException)
             {
                 MessageBox.Show(string.Format("Unable to load: No Permissions to view {0}.", tabClicked));
             }
@@ -132,11 +129,11 @@ namespace DesktopFacebookInterface
             TabPage selectedTab = tabControlHomeScreen.SelectedTab;
             Label prevLabel = new Label();
 
-            foreach(string info in m_LoginUser.BasicInfo)
+            foreach (string info in m_UserInfo.BasicInfo)
             {
                 Label labelInfo = new Label();
 
-                if(m_LoginUser.BasicInfo[0].Equals(info))
+                if (m_UserInfo.BasicInfo[0].Equals(info))
                 {
                     labelInfo.Text = info;
                     labelInfo.Width += 100;
@@ -160,12 +157,12 @@ namespace DesktopFacebookInterface
             listBoxAlbums.Size = tabControlHomeScreen.SelectedTab.Size;
             listBoxAlbums.DisplayMember = "Name";
 
-            foreach(Album album in m_LoginUser.Albums)
+            foreach (Album album in m_LoginUser.Albums)
             {
                 listBoxAlbums.Items.Add(album);
             }
 
-            if(m_LoginUser.Albums.Count == 0)
+            if (m_LoginUser.Albums.Count == 0)
             {
                 MessageBox.Show("No Albums to retrieve :(");
             }
@@ -182,7 +179,7 @@ namespace DesktopFacebookInterface
             {
                 Album selectedAlbum = listBoxAlbums.SelectedItem as Album;
 
-                if(selectedAlbum.Photos.Count < 1)
+                if (selectedAlbum.Photos.Count < 1)
                 {
                     MessageBox.Show("This album is empty");
                 }
@@ -290,9 +287,9 @@ namespace DesktopFacebookInterface
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = k_AttachedFileTypeFilter;
 
-            if(ofd.ShowDialog() == DialogResult.OK)
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
-                m_AttachedImagePath  = ofd.FileName;
+                m_AttachedImagePath = ofd.FileName;
                 buttonCancelAttachment.Visible = true;
             }
         }
