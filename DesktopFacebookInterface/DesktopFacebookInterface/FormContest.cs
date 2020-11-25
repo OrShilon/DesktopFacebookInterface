@@ -214,7 +214,7 @@ namespace DesktopFacebookInterface
             checkBoxLikeCondition.Name = string.Format("checkBoxLikeCondition{0}", m_ListOfContests.Count);
             checkBoxLikeCondition.Size = new Size(123, 24);
             checkBoxLikeCondition.TabIndex = 6;
-            checkBoxLikeCondition.Text = "Like my post";
+            checkBoxLikeCondition.Text = "Require to like my post";
             checkBoxLikeCondition.UseVisualStyleBackColor = true;
             checkBoxLikeCondition.Checked = m_ListOfContests[m_TabIndex].m_LikeRequired;
             checkBoxLikeCondition.Enabled = false;
@@ -224,7 +224,7 @@ namespace DesktopFacebookInterface
             checkBoxCommentCondition.Name = string.Format("checkBoxCommentCondition{0}", m_ListOfContests.Count);
             checkBoxCommentCondition.Size = new Size(163, 24);
             checkBoxCommentCondition.TabIndex = 7;
-            checkBoxCommentCondition.Text = "Comment my post";
+            checkBoxCommentCondition.Text = "Require to comment my post";
             checkBoxCommentCondition.UseVisualStyleBackColor = true;
             checkBoxCommentCondition.Checked = m_ListOfContests[m_TabIndex].m_CommentRequired;
             checkBoxCommentCondition.Enabled = false;
