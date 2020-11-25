@@ -5,7 +5,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
-    internal class UserInformationWrapper
+    public class UserInformationWrapper
     {
         private User m_LoginUser;
 

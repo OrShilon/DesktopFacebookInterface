@@ -317,7 +317,7 @@ namespace DesktopFacebookInterface
 
         private void buttonMemories_Click(object sender, EventArgs e)
         {
-            FormMemoriesFetch newForm = new FormMemoriesFetch();
+            FormMemoriesFetch newForm = new FormMemoriesFetch(m_UserInfo);
             newForm.ShowDialog();
         }
     }
