@@ -11,15 +11,12 @@ namespace DesktopFacebookInterface
         public int m_ContestID;
         public User m_ContestUser;
         public int m_ParticipantsCount;
-        public bool m_ContestCondition;
         public bool m_LikeRequired;
         public bool m_CommentRequired;
         public int m_NumberOfWinners;
         public string m_Status;
         public string m_ImagePath;
         public GeoPostedItem m_ContestPost;
-        private const bool v_contestRunning = true;
-        private const bool v_contestWinner = true;
 
         public ContestLogic(int i_ContestID, User i_User, string i_Status, string i_ImagePath, bool i_LikeRequired, bool i_CommentRequired, int i_NumberOfWinners)
         {
@@ -31,7 +28,6 @@ namespace DesktopFacebookInterface
             m_NumberOfWinners = i_NumberOfWinners;
             r_ParticipantsList = new List<User>();
             r_ContestWinners = new List<User>();
-            m_ContestCondition = v_contestRunning;
             m_Status = i_Status; // We save this property because PostStatus doesnt work
             m_ImagePath = i_ImagePath; // We save this property because PostStatus doesnt work
         }
@@ -54,7 +50,7 @@ namespace DesktopFacebookInterface
                     if (!winnersIndex[winningIndex])
                     {
                         r_ContestWinners.Add(r_ParticipantsList[winningIndex]);
-                        winnersIndex[winningIndex] = v_contestWinner;
+                        winnersIndex[winningIndex] = true;
                         countWinners++;
                     }
                 }
@@ -83,7 +79,11 @@ namespace DesktopFacebookInterface
             {
                 foreach (User currentUser in m_ContestPost.LikedBy)
                 {
-                    r_ParticipantsList.Add(currentUser);
+                    if (!r_ParticipantsList.Contains(currentUser))
+                    {
+                        r_ParticipantsList.Add(currentUser);
+                        m_ParticipantsCount++;
+                    }
                 }
             }
         }
@@ -95,7 +95,12 @@ namespace DesktopFacebookInterface
                 foreach (Comment postComment in m_ContestPost.Comments)
                 {
                     User postCommentUser = postComment.From;
-                    r_ParticipantsList.Add(postCommentUser);
+
+                    if (!r_ParticipantsList.Contains(postCommentUser))
+                    {
+                        r_ParticipantsList.Add(postCommentUser);
+                        m_ParticipantsCount++;
+                    }
                 }
             }
         }
@@ -109,8 +114,11 @@ namespace DesktopFacebookInterface
                     User postCommentUser = postComment.From;
                     if (m_ContestPost.LikedBy.Contains(postCommentUser))
                     {
-                        r_ParticipantsList.Add(postCommentUser);
-                        m_ParticipantsCount++;
+                        if (!r_ParticipantsList.Contains(postCommentUser))
+                        {
+                            r_ParticipantsList.Add(postCommentUser);
+                            m_ParticipantsCount++;
+                        }
                     }
                 }
             }

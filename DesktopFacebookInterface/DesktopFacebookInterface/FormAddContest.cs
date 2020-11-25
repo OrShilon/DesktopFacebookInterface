@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -11,18 +6,21 @@ namespace DesktopFacebookInterface
 {
     internal partial class FormAddContest : Form
     {
-        private string m_ContestDescription = string.Empty;
-        private string m_AttachedImagePath = null;
-        private bool m_LikeRequired = false;
-        private bool m_CommentRequired = false;
-        private int m_NumberOfWinnersCondition = -1;
-        private string m_MissingDetails = string.Empty;
+        private string m_contestDescription = string.Empty;
+        private string m_attachedImagePath = null;
+        private bool m_likeRequired = false;
+        private bool m_commentRequired = false;
+        private int m_numberOfWinnersCondition = -1;
+        private string m_missingDetails = string.Empty;
+        private const int k_maxNumberOfWinnersAllowed = 10;
+        private const string k_attachedFileTypeFilter = "Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
 
         public FormAddContest()
         {
             InitializeComponent();
             textBoxContestDetails.Text = string.Empty;
-            for(int i = 1; i < 11; i++)
+
+            for(int i = 1; i < k_maxNumberOfWinnersAllowed + 1; i++) // +1 because i starts at 1
             {
                 comboBoxNumOfWinners.Items.Add(i);
             }
@@ -31,43 +29,48 @@ namespace DesktopFacebookInterface
         private void linkLabelAttachImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
+            ofd.Filter = k_attachedFileTypeFilter;
+
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                m_AttachedImagePath = ofd.FileName;
+                m_attachedImagePath = ofd.FileName;
             }
         }
 
         private void buttonStartContest_Click(object sender, EventArgs e)
         {
-            if ((m_ContestDescription = textBoxContestDetails.Text).Equals(string.Empty))
+            StringBuilder missingDetails = new StringBuilder();
+
+            if ((m_contestDescription = textBoxContestDetails.Text).Equals(string.Empty))
             {
-                m_MissingDetails = string.Format("Missing constest description.{0}", Environment.NewLine);
+                missingDetails.Append(string.Format("Missing constest description.{0}", Environment.NewLine));
             }
 
-            if ((m_LikeRequired = checkBoxLikes.Checked) == false && (m_CommentRequired = checkBoxComments.Checked) == false)
+            if ((m_likeRequired = checkBoxLikes.Checked) == false && (m_commentRequired = checkBoxComments.Checked) == false)
             {
-                m_MissingDetails += string.Format("You need to choose at least on option of the requirements.{0}", Environment.NewLine);
+                missingDetails.Append(string.Format("You need to choose at least on option of the requirements.{0}", Environment.NewLine));
             }
             else
             {
-                m_CommentRequired = checkBoxComments.Checked;
+                m_commentRequired = checkBoxComments.Checked;
             }
 
-            if ((m_NumberOfWinnersCondition = comboBoxNumOfWinners.SelectedIndex) == -1)
+            if ((m_numberOfWinnersCondition = comboBoxNumOfWinners.SelectedIndex) == -1)
             {
-                m_MissingDetails += string.Format("You need to choose the number of winners.");
+                missingDetails.Append(string.Format("You need to choose the number of winners."));
             }
 
-            if (string.IsNullOrEmpty(m_MissingDetails))
+            m_missingDetails = missingDetails.ToString();
+
+            if (string.IsNullOrEmpty(m_missingDetails))
             {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                MessageBox.Show(m_MissingDetails);
-                m_MissingDetails = string.Empty;
+                MessageBox.Show(m_missingDetails);
+                m_missingDetails = string.Empty;
             }
         }
 
@@ -75,7 +78,7 @@ namespace DesktopFacebookInterface
         {
             get
             {
-                return m_ContestDescription;
+                return m_contestDescription;
             }
         }
 
@@ -83,7 +86,7 @@ namespace DesktopFacebookInterface
         {
             get
             {
-                return m_AttachedImagePath;
+                return m_attachedImagePath;
             }
         }
 
@@ -91,7 +94,7 @@ namespace DesktopFacebookInterface
         {
             get
             {
-                return m_LikeRequired;
+                return m_likeRequired;
             }
         }
 
@@ -99,7 +102,7 @@ namespace DesktopFacebookInterface
         {
             get
             {
-                return m_CommentRequired;
+                return m_commentRequired;
             }
         }
 
@@ -107,7 +110,7 @@ namespace DesktopFacebookInterface
         {
             get
             {
-                return m_NumberOfWinnersCondition + 1; // index 0 --> 1 winner, index 1 --> 2 winners.........
+                return m_numberOfWinnersCondition + 1; // index 0 --> 1 winner, index 1 --> 2 winners.........
             }
         }
     }
