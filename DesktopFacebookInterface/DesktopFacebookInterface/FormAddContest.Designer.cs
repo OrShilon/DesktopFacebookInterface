@@ -44,30 +44,27 @@
             // 
             this.labeltatus.AutoSize = true;
             this.labeltatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labeltatus.Location = new System.Drawing.Point(9, 8);
-            this.labeltatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labeltatus.Location = new System.Drawing.Point(14, 12);
             this.labeltatus.Name = "labeltatus";
-            this.labeltatus.Size = new System.Drawing.Size(141, 17);
+            this.labeltatus.Size = new System.Drawing.Size(193, 25);
             this.labeltatus.TabIndex = 0;
             this.labeltatus.Text = "Enter contest details:";
             // 
             // textBoxContestDetails
             // 
-            this.textBoxContestDetails.Location = new System.Drawing.Point(12, 34);
-            this.textBoxContestDetails.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxContestDetails.Location = new System.Drawing.Point(18, 52);
             this.textBoxContestDetails.Multiline = true;
             this.textBoxContestDetails.Name = "textBoxContestDetails";
-            this.textBoxContestDetails.Size = new System.Drawing.Size(499, 88);
+            this.textBoxContestDetails.Size = new System.Drawing.Size(746, 133);
             this.textBoxContestDetails.TabIndex = 1;
             // 
             // linkLabelAttachImage
             // 
             this.linkLabelAttachImage.AutoSize = true;
             this.linkLabelAttachImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabelAttachImage.Location = new System.Drawing.Point(9, 138);
-            this.linkLabelAttachImage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.linkLabelAttachImage.Location = new System.Drawing.Point(14, 212);
             this.linkLabelAttachImage.Name = "linkLabelAttachImage";
-            this.linkLabelAttachImage.Size = new System.Drawing.Size(90, 17);
+            this.linkLabelAttachImage.Size = new System.Drawing.Size(127, 25);
             this.linkLabelAttachImage.TabIndex = 2;
             this.linkLabelAttachImage.TabStop = true;
             this.linkLabelAttachImage.Text = "Attach Image";
@@ -76,10 +73,9 @@
             // checkBoxLikes
             // 
             this.checkBoxLikes.AutoSize = true;
-            this.checkBoxLikes.Location = new System.Drawing.Point(220, 172);
-            this.checkBoxLikes.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBoxLikes.Location = new System.Drawing.Point(330, 265);
             this.checkBoxLikes.Name = "checkBoxLikes";
-            this.checkBoxLikes.Size = new System.Drawing.Size(85, 17);
+            this.checkBoxLikes.Size = new System.Drawing.Size(123, 24);
             this.checkBoxLikes.TabIndex = 3;
             this.checkBoxLikes.Text = "Like my post";
             this.checkBoxLikes.UseVisualStyleBackColor = true;
@@ -87,10 +83,9 @@
             // checkBoxComments
             // 
             this.checkBoxComments.AutoSize = true;
-            this.checkBoxComments.Location = new System.Drawing.Point(323, 172);
-            this.checkBoxComments.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBoxComments.Location = new System.Drawing.Point(484, 265);
             this.checkBoxComments.Name = "checkBoxComments";
-            this.checkBoxComments.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxComments.Size = new System.Drawing.Size(163, 24);
             this.checkBoxComments.TabIndex = 4;
             this.checkBoxComments.Text = "Comment my post";
             this.checkBoxComments.UseVisualStyleBackColor = true;
@@ -99,19 +94,17 @@
             // 
             this.labelLikeOrComment.AutoSize = true;
             this.labelLikeOrComment.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLikeOrComment.Location = new System.Drawing.Point(9, 170);
-            this.labelLikeOrComment.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelLikeOrComment.Location = new System.Drawing.Point(14, 262);
             this.labelLikeOrComment.Name = "labelLikeOrComment";
-            this.labelLikeOrComment.Size = new System.Drawing.Size(203, 17);
+            this.labelLikeOrComment.Size = new System.Drawing.Size(276, 25);
             this.labelLikeOrComment.TabIndex = 5;
             this.labelLikeOrComment.Text = "Requirements for your contest:";
             // 
             // buttonStartContest
             // 
-            this.buttonStartContest.Location = new System.Drawing.Point(281, 250);
-            this.buttonStartContest.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonStartContest.Location = new System.Drawing.Point(422, 385);
             this.buttonStartContest.Name = "buttonStartContest";
-            this.buttonStartContest.Size = new System.Drawing.Size(107, 24);
+            this.buttonStartContest.Size = new System.Drawing.Size(160, 37);
             this.buttonStartContest.TabIndex = 6;
             this.buttonStartContest.Text = "Start contest!";
             this.buttonStartContest.UseVisualStyleBackColor = true;
@@ -119,41 +112,39 @@
             // 
             // buttonCancelContest
             // 
-            this.buttonCancelContest.Location = new System.Drawing.Point(403, 250);
-            this.buttonCancelContest.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonCancelContest.Location = new System.Drawing.Point(604, 385);
             this.buttonCancelContest.Name = "buttonCancelContest";
-            this.buttonCancelContest.Size = new System.Drawing.Size(107, 24);
+            this.buttonCancelContest.Size = new System.Drawing.Size(160, 37);
             this.buttonCancelContest.TabIndex = 7;
             this.buttonCancelContest.Text = "Cancel";
             this.buttonCancelContest.UseVisualStyleBackColor = true;
+            this.buttonCancelContest.Click += new System.EventHandler(this.buttonCancelContest_Click);
             // 
             // comboBoxNumOfWinners
             // 
             this.comboBoxNumOfWinners.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxNumOfWinners.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxNumOfWinners.FormattingEnabled = true;
-            this.comboBoxNumOfWinners.Location = new System.Drawing.Point(220, 202);
-            this.comboBoxNumOfWinners.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxNumOfWinners.Location = new System.Drawing.Point(330, 311);
             this.comboBoxNumOfWinners.Name = "comboBoxNumOfWinners";
-            this.comboBoxNumOfWinners.Size = new System.Drawing.Size(46, 21);
+            this.comboBoxNumOfWinners.Size = new System.Drawing.Size(67, 28);
             this.comboBoxNumOfWinners.TabIndex = 8;
             // 
             // labelNumOfWinners
             // 
             this.labelNumOfWinners.AutoSize = true;
             this.labelNumOfWinners.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNumOfWinners.Location = new System.Drawing.Point(9, 202);
-            this.labelNumOfWinners.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNumOfWinners.Location = new System.Drawing.Point(14, 311);
             this.labelNumOfWinners.Name = "labelNumOfWinners";
-            this.labelNumOfWinners.Size = new System.Drawing.Size(130, 17);
+            this.labelNumOfWinners.Size = new System.Drawing.Size(180, 25);
             this.labelNumOfWinners.TabIndex = 9;
             this.labelNumOfWinners.Text = "Number of winners:";
             // 
             // FormAddContest
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 292);
+            this.ClientSize = new System.Drawing.Size(800, 449);
             this.Controls.Add(this.labelNumOfWinners);
             this.Controls.Add(this.comboBoxNumOfWinners);
             this.Controls.Add(this.buttonCancelContest);
@@ -165,7 +156,6 @@
             this.Controls.Add(this.textBoxContestDetails);
             this.Controls.Add(this.labeltatus);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAddContest";

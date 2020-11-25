@@ -74,6 +74,11 @@ namespace DesktopFacebookInterface
             }
         }
 
+        private void buttonCancelContest_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         public string Status
         {
             get
