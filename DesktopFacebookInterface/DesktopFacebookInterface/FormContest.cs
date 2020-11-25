@@ -271,8 +271,8 @@ namespace DesktopFacebookInterface
 
         private void buttonUpdateParticipants_Click(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-            int index = (button.Name[button.Name.Length - 1] - '0') - 1;
+            Button buttonUpdateParticipants = (Button)sender;
+            int index = (buttonUpdateParticipants.Name[buttonUpdateParticipants.Name.Length - 1] - '0') - 1;
 
             try
             {
@@ -295,8 +295,8 @@ namespace DesktopFacebookInterface
 
         private void buttonChooseWinner_Click(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-            int index = (button.Name[button.Name.Length - 1] - '0') - 1;
+            Button buttonWinner = (Button)sender;
+            int index = (buttonWinner.Name[buttonWinner.Name.Length - 1] - '0') - 1;
             m_ListOfContests[index].GenerateWinners();
 
             if(m_ListOfContests[index].r_ContestWinners.Count > 0)
@@ -312,11 +312,11 @@ namespace DesktopFacebookInterface
 
         private void buttonDeleteConstest_Click(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-            TabPage tabPageToDelete = button.Parent as TabPage;
+            Button buttonDelete = (Button)sender;
+            TabPage tabPageToDelete = buttonDelete.Parent as TabPage;
 
             tabControlContest.TabPages.Remove(tabPageToDelete);
-            m_ListOfContests.RemoveAt((button.Name[button.Name.Length - 1] - '0') - 1);
+            m_ListOfContests.RemoveAt((buttonDelete.Name[buttonDelete.Name.Length - 1] - '0') - 1);
 
             handleIndexesAfterDelete();
         }
@@ -327,11 +327,33 @@ namespace DesktopFacebookInterface
 
             foreach(TabPage tabPage in tabControlContest.TabPages)
             {
-                tabPage.Name = tabPage.Name.Substring(0, tabPage.Name.Length - 1) + index;
-                tabPage.Text = tabPage.Text.Substring(0, tabPage.Text.Length - 1) + index;
+                if(tabPage.Name.Length > this.tabControlContest.TabPages[0].Name.Length) 
+                {
+                    tabPage.Name = tabPage.Name.Substring(0, tabPage.Name.Length - 2) + index;
+                    tabPage.Text = tabPage.Text.Substring(0, tabPage.Text.Length - 2) + index;
+                }
+                else
+                {
+                    tabPage.Name = tabPage.Name.Substring(0, tabPage.Name.Length - 1) + index;
+                    tabPage.Text = tabPage.Text.Substring(0, tabPage.Text.Length - 1) + index;
+                }
+
+                int controlIterator = 0;
+
                 foreach (Control control in tabPage.Controls)
                 {
-                    control.Name = control.Name.Substring(0, control.Name.Length - 1) + index;
+                    
+                    if (control.Name.Length > this.tabControlContest.TabPages[0].Controls[controlIterator].Name.Length)
+                    {
+                        control.Name = control.Name.Substring(0, control.Name.Length - 2) + index;
+                    }
+                    else
+                    {
+                        control.Name = control.Name.Substring(0, control.Name.Length - 1) + index;
+                    }
+
+                    controlIterator++;
+
                 }
 
                 index++;
