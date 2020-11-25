@@ -330,5 +330,10 @@ namespace DesktopFacebookInterface
             }
         }
 
+        private void buttonMemories_Click(object sender, EventArgs e)
+        {
+            FormMemoriesFetch newForm = new FormMemoriesFetch();
+            newForm.ShowDialog();
+        }
     }
 }
