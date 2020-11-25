@@ -103,15 +103,28 @@ namespace DesktopFacebookInterface
             return listTimeLine;
         }
 
-        public List<Post> fetchPostsByDate(DateTime i_StartDate, DateTime i_EndDate)
+        public List<string> fetchPostsByDate(DateTime i_StartDate, DateTime i_EndDate)
         {
-            List<Post> filteredPosts = new List<Post>();
+            List<string> filteredPosts = new List<string>();
 
             foreach (Post post in User.Posts)
             {
-                if (post.CreatedTime.Value.Date > i_StartDate && post.CreatedTime.Value.Date < i_EndDate)
+                DateTime createdDate = post.CreatedTime.Value.Date;
+
+                if (createdDate > i_StartDate && createdDate < i_EndDate)
                 {
-                    filteredPosts.Add(post);
+                    string postString = "";
+
+                    if (post.Message != null)
+                    {
+                        postString = post.Message;
+                    }
+                    else if (post.Caption != null)
+                    {
+                        postString = post.Caption;
+                    }
+
+                    filteredPosts.Add(string.Format("{0}: {1}",createdDate.ToString(), postString));
                 }
             }
 
@@ -136,30 +149,44 @@ namespace DesktopFacebookInterface
             return filteredPics;
         }
 
-        public List<Checkin> fetchCheckInsByDate(DateTime i_StartDate, DateTime i_EndDate)
+        public List<string> fetchCheckInsByDate(DateTime i_StartDate, DateTime i_EndDate)
         {
-            List<Checkin> filteredCheckIns = new List<Checkin>();
+            List<string> filteredCheckIns = new List<string>();
 
             foreach (Checkin checkin in m_LoginUser.Checkins)
             {
-                if (checkin.CreatedTime.Value.Date > i_StartDate && checkin.CreatedTime.Value.Date < i_EndDate)
+                DateTime createdDate = checkin.CreatedTime.Value.Date;
+
+                if (createdDate > i_StartDate && createdDate < i_EndDate)
                 {
-                    filteredCheckIns.Add(checkin);
+                    string checkInString = "";
+
+                    if (checkin.Message != null)
+                    {
+                        checkInString = checkin.Message;
+                    }
+                    else if (checkin.Caption != null)
+                    {
+                        checkInString = checkin.Caption;
+                    }
+
+                    filteredCheckIns.Add(string.Format("{0}: {1}", createdDate.ToString(), checkInString));
+
                 }
             }
 
             return filteredCheckIns;
         }
 
-        public List<Event> fetchEventsByDate(DateTime i_StartDate, DateTime i_EndDate)
+        public List<string> fetchEventsByDate(DateTime i_StartDate, DateTime i_EndDate)
         {
-            List<Event> filteredEvents = new List<Event>();
+            List<string> filteredEvents = new List<string>();
 
             foreach (Event userEvent in m_LoginUser.Events)
             {
                 if (userEvent.StartTime > i_StartDate && userEvent.StartTime < i_EndDate)
                 {
-                    filteredEvents.Add(userEvent);
+                    filteredEvents.Add(string.Format("{0}: {1}", userEvent.StartTime.ToString(), userEvent.Name));
                 }
             }
 
