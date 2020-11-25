@@ -1,85 +1,148 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
     internal class UserInformationWrapper
     {
-        public string m_ProfileImage;
-        public string m_CoverImage;
-        public string m_FullName;
-        public string m_Email;
-        public string m_Gender;
-        public string m_Birthday;
-        public string m_City;
-        public string m_RelationshipStatus;
-        private readonly List<string> r_BasicInformation;
         private User m_LoginUser;
 
         public UserInformationWrapper(User i_LoginUser)
         {
             m_LoginUser = i_LoginUser;
-            r_BasicInformation = new List<string>();
-            updateInformation();
-            m_ProfileImage = m_LoginUser.PictureNormalURL;
-            addCoverPhoto();
         }
 
-        private void updateInformation()
+        public User User
         {
+            get
+            {
+                return m_LoginUser;
+            }
+        }
+
+        public List<string> fetchAbout()
+        {
+            List<string> listUserInfo = new List<string>();
+
             if (!string.IsNullOrEmpty(m_LoginUser.Name))
             {
-                r_BasicInformation.Add(string.Format("Name: {0}", m_FullName = m_LoginUser.Name));
+                listUserInfo.Add(string.Format("Name: {0}", m_LoginUser.Name));
             }
 
             if (!string.IsNullOrEmpty(m_LoginUser.Gender.ToString()))
             {
-                r_BasicInformation.Add(string.Format("Gender: {0}", m_Gender = m_LoginUser.Gender.ToString()));
+                listUserInfo.Add(string.Format("Gender: {0}", m_LoginUser.Gender.ToString()));
             }
 
             if (!string.IsNullOrEmpty(m_LoginUser.Birthday))
             {
-                r_BasicInformation.Add(string.Format("Birthday: {0}", m_Birthday = m_LoginUser.Birthday));
+                listUserInfo.Add(string.Format("Birthday: {0}", m_LoginUser.Birthday));
             }
 
             if (!string.IsNullOrEmpty(m_LoginUser.Email))
             {
-                r_BasicInformation.Add(string.Format("Email: {0}", m_Email = m_LoginUser.Email));
+                listUserInfo.Add(string.Format("Email: {0}", m_LoginUser.Email));
             }
 
             if (m_LoginUser.Hometown != null)
             {
                 if (!string.IsNullOrEmpty(m_LoginUser.Hometown.Name))
                 {
-                    r_BasicInformation.Add(string.Format("City: {0}", m_City = m_LoginUser.Hometown.Name));
+                    listUserInfo.Add(string.Format("City: {0}", m_LoginUser.Hometown.Name));
                 }
             }
 
             if (!string.IsNullOrEmpty(m_LoginUser.RelationshipStatus.Value.ToString()))
             {
-                r_BasicInformation.Add(string.Format("Relationship Status: {0}", m_RelationshipStatus = m_LoginUser.RelationshipStatus.Value.ToString()));
+                listUserInfo.Add(string.Format("Relationship Status: {0}", m_LoginUser.RelationshipStatus.Value.ToString()));
             }
+
+            return listUserInfo;
         }
 
-        public List<string> BasicInfo
+        public string fetchCoverPhotoURL()
         {
-            get
-            {
-                return r_BasicInformation;
-            }
-        }
+            string coverPhotoURL = "";
 
-        private void addCoverPhoto()
-        {
             foreach (Album album in m_LoginUser.Albums)
             {
                 string albumName = album.Name.ToLower();
 
                 if (albumName.Equals("cover photos"))
                 {
-                    m_CoverImage = album.Photos[0].PictureNormalURL;
+                    coverPhotoURL = album.Photos[0].PictureNormalURL;
                 }
             }
+
+            return coverPhotoURL;
+        }
+
+        public List<string> fetchTimeline()
+        {
+            List<string> listTimeLine = new List<string>();
+
+            foreach (Post post in User.WallPosts)
+            {
+                if (post.Message != null)
+                {
+                    listTimeLine.Add(post.Message);
+                }
+                else if (post.Caption != null)
+                {
+                    listTimeLine.Add(post.Caption);
+                }
+            }
+
+            if (User.Posts.Count == 0)
+            {
+                listTimeLine.Add("Your timeline has 0 posts!");
+            }
+
+            return listTimeLine;
+        }
+
+        public string fetchPostsByDate(DateTime i_StartDate, DateTime i_EndDate)
+        {
+            StringBuilder filteredPosts = new StringBuilder();
+
+            foreach (Post post in User.Posts)
+            {
+                if (post.CreatedTime.Value.Date > i_StartDate && post.CreatedTime.Value.Date < i_EndDate)
+                {
+                    if (post.Message != null)
+                    {
+                        filteredPosts.Append(post.Message);
+                    }
+                    else if (post.Caption != null)
+                    {
+                        filteredPosts.Append(post.Caption);
+                    }
+
+                    filteredPosts.Append(Environment.NewLine);
+                }
+            }
+
+            return filteredPosts.ToString();
+        }
+
+        public List<Photo> fetchPhotosByDate(DateTime i_StartDate, DateTime i_EndDate)
+        {
+            List<Photo> filteredPics = new List<Photo>();
+
+            foreach (Album album in m_LoginUser.Albums)
+            {
+                foreach (Photo picture in album.Photos)
+                {
+                    if (picture.CreatedTime.Value.Date > i_StartDate && picture.CreatedTime.Value.Date < i_EndDate)
+                    {
+                        filteredPics.Add(picture);
+                    }
+                }
+            }
+
+            return filteredPics;
         }
     }
 }
