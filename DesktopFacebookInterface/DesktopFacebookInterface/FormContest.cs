@@ -47,50 +47,57 @@ namespace DesktopFacebookInterface
 
         private void buttonAddContest_Click(object sender, EventArgs e)
         {
-            TabPage tabPageContest = new TabPage();
-
-            if (m_TabIndex == 0)
+            if(m_TabIndex < 15)
             {
-                tabPageContest.Padding = new Padding(3);
+                TabPage tabPageContest = new TabPage();
+
+                if (m_TabIndex == 0)
+                {
+                    tabPageContest.Padding = new Padding(3);
+                }
+
+                FormAddContest newFormContest = new FormAddContest();
+                newFormContest.ShowDialog();
+
+                if (newFormContest.DialogResult == DialogResult.OK)
+                {
+                    ContestLogic newContest = new ContestLogic(
+                        m_TabIndex + 1,
+                        m_LoginUser,
+                        newFormContest.Status,
+                        newFormContest.ImagePath,
+                        newFormContest.LikeRequired,
+                        newFormContest.CommentRequired,
+                        newFormContest.NumberOfWinners);
+                    m_ListOfContests.Add(newContest);
+
+                    try
+                    {
+                        newContest.PostContestStatus();
+                    }
+                    catch (FacebookOAuthException)
+                    {
+                        MessageBox.Show("Failed to post status: No permissions.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                    tabPageContest.Location = new Point(104, 4);
+                    tabPageContest.Name = string.Format("tabPageContest{0}", m_TabIndex + 1);
+                    tabPageContest.Size = new Size(867, 616);
+                    tabPageContest.TabIndex = m_TabIndex;
+                    tabPageContest.Text = string.Format("Contest {0}", m_TabIndex + 1);
+                    tabPageContest.UseVisualStyleBackColor = true;
+                    tabControlContest.Controls.Add(tabPageContest);
+                    buildContest(tabPageContest);
+                    m_TabIndex++;
+                }
             }
-
-            FormAddContest newFormContest = new FormAddContest();
-            newFormContest.ShowDialog();
-
-            if(newFormContest.DialogResult == DialogResult.OK)
+            else
             {
-                ContestLogic newContest = new ContestLogic(
-                    m_TabIndex + 1,
-                    m_LoginUser,
-                    newFormContest.Status,
-                    newFormContest.ImagePath,
-                    newFormContest.LikeRequired,
-                    newFormContest.CommentRequired,
-                    newFormContest.NumberOfWinners);
-                m_ListOfContests.Add(newContest);
-
-                try
-                {
-                    newContest.PostContestStatus();
-                }
-                catch (FacebookOAuthException)
-                {
-                    MessageBox.Show("Failed to post status: No permissions.");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
-                tabPageContest.Location = new Point(104, 4);
-                tabPageContest.Name = string.Format("tabPageContest{0}", m_TabIndex + 1);
-                tabPageContest.Size = new Size(867, 616);
-                tabPageContest.TabIndex = m_TabIndex;
-                tabPageContest.Text = string.Format("Contest {0}", m_TabIndex + 1);
-                tabPageContest.UseVisualStyleBackColor = true;
-                tabControlContest.Controls.Add(tabPageContest);
-                buildContest(tabPageContest);
-                m_TabIndex++;
+                MessageBox.Show("You have reached the maximum number of contests.");
             }
         }
 
@@ -117,9 +124,9 @@ namespace DesktopFacebookInterface
                 currentTabPage.Controls.Add(pictureBoxAttachedImage);
             }
 
-            buildParticipantsControls(labelParticipants, textBoxDescription, listBoxParticipants);
+            buildParticipantsControls(labelParticipants, textBoxDescription, listBoxParticipants, labelContestrequirements, checkBoxCommentCondition);
             buildRequirementsControls(labelParticipants, labelContestrequirements, checkBoxCommentCondition, checkBoxLikeCondition, textBoxDescription, listBoxParticipants);
-            buildButtonsControls(listBoxParticipants, buttonUpdateParticipants, buttonChooseWinner, buttonDeleteConstest);
+            buildButtonsControls(listBoxParticipants, buttonUpdateParticipants, buttonChooseWinner, buttonDeleteConstest, labelParticipants);
 
             currentTabPage.Controls.Add(labelPost);
             currentTabPage.Controls.Add(textBoxDescription);
@@ -178,31 +185,11 @@ namespace DesktopFacebookInterface
             labelPicture.Size = new Size(195, 25);
         }
 
-        private void buildParticipantsControls(Label labelParticipants, TextBox textBoxDescription, ListBox listBoxParticipants)
-        {
-            labelParticipants.AutoSize = true;
-            labelParticipants.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelParticipants.Location = new Point(textBoxDescription.Location.X, textBoxDescription.Bottom + 15);
-            labelParticipants.Name = string.Format("labelParticipants{0}", m_ListOfContests.Count);
-            labelParticipants.Size = new Size(100, 25);
-            labelParticipants.Text = "List of participants:";
-            labelParticipants.TabIndex = 3;
-            labelParticipants.TabStop = false;
-
-            listBoxParticipants.FormattingEnabled = true;
-            listBoxParticipants.ItemHeight = 20;
-            listBoxParticipants.Location = new Point(textBoxDescription.Location.X, labelParticipants.Bottom + 10);
-            listBoxParticipants.Margin = new Padding(3, 2, 3, 2);
-            listBoxParticipants.Name = string.Format("listBoxParticipants{0}", m_ListOfContests.Count);
-            listBoxParticipants.Size = new Size(220, 100);
-            listBoxParticipants.TabIndex = 4;
-        }
-
         private void buildRequirementsControls(Label labelParticipants, Label labelContestrequirements, CheckBox checkBoxCommentCondition, CheckBox checkBoxLikeCondition, TextBox textBoxDescription, ListBox listBoxParticipants)
         {
             labelContestrequirements.AutoSize = true;
             labelContestrequirements.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelContestrequirements.Location = new Point(textBoxDescription.Right - labelContestrequirements.Width, labelParticipants.Location.Y);
+            labelContestrequirements.Location = new Point(textBoxDescription.Location.X, textBoxDescription.Bottom + 15);
             labelContestrequirements.Name = string.Format("labelContestrequirements{0}", m_ListOfContests.Count);
             labelContestrequirements.Size = new Size(100, 25);
             labelContestrequirements.Text = "List of requirements:";
@@ -210,7 +197,7 @@ namespace DesktopFacebookInterface
             labelContestrequirements.TabStop = false;
 
             checkBoxLikeCondition.AutoSize = true;
-            checkBoxLikeCondition.Location = new Point(labelContestrequirements.Location.X, listBoxParticipants.Bottom - (int)(listBoxParticipants.Height / 1.5));
+            checkBoxLikeCondition.Location = new Point(labelContestrequirements.Location.X, labelContestrequirements.Bottom + 15);
             checkBoxLikeCondition.Name = string.Format("checkBoxLikeCondition{0}", m_ListOfContests.Count);
             checkBoxLikeCondition.Size = new Size(123, 24);
             checkBoxLikeCondition.TabIndex = 6;
@@ -220,7 +207,7 @@ namespace DesktopFacebookInterface
             checkBoxLikeCondition.Enabled = false;
 
             checkBoxCommentCondition.AutoSize = true;
-            checkBoxCommentCondition.Location = new Point(checkBoxLikeCondition.Right + 15, checkBoxLikeCondition.Location.Y);
+            checkBoxCommentCondition.Location = new Point(labelContestrequirements.Location.X, checkBoxLikeCondition.Location.Y +(listBoxParticipants.Height / 2));
             checkBoxCommentCondition.Name = string.Format("checkBoxCommentCondition{0}", m_ListOfContests.Count);
             checkBoxCommentCondition.Size = new Size(163, 24);
             checkBoxCommentCondition.TabIndex = 7;
@@ -230,9 +217,29 @@ namespace DesktopFacebookInterface
             checkBoxCommentCondition.Enabled = false;
         }
 
-        private void buildButtonsControls(ListBox listBoxParticipants, Button buttonUpdateParticipants, Button buttonChooseWinner, Button buttonDeleteConstest)
+        private void buildParticipantsControls(Label labelParticipants, TextBox textBoxDescription, ListBox listBoxParticipants, Label labelContestrequirements, CheckBox checkBoxCommentCondition)
         {
-            buttonUpdateParticipants.Location = new Point(listBoxParticipants.Left + (listBoxParticipants.Width / 4), listBoxParticipants.Bottom + 10);
+            labelParticipants.AutoSize = true;
+            labelParticipants.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelParticipants.Location = new Point(checkBoxCommentCondition.Right + labelParticipants.Width - 10, textBoxDescription.Bottom + 15);
+            labelParticipants.Name = string.Format("labelParticipants{0}", m_ListOfContests.Count);
+            labelParticipants.Size = new Size(100, 25);
+            labelParticipants.Text = "List of participants:";
+            labelParticipants.TabIndex = 3;
+            labelParticipants.TabStop = false;
+
+            listBoxParticipants.FormattingEnabled = true;
+            listBoxParticipants.ItemHeight = 20;
+            listBoxParticipants.Location = new Point(labelParticipants.Location.X, labelParticipants.Bottom + 10);
+            listBoxParticipants.Margin = new Padding(3, 2, 3, 2);
+            listBoxParticipants.Name = string.Format("listBoxParticipants{0}", m_ListOfContests.Count);
+            listBoxParticipants.Size = new Size(170, 70);
+            listBoxParticipants.TabIndex = 4;
+        }
+
+        private void buildButtonsControls(ListBox listBoxParticipants, Button buttonUpdateParticipants, Button buttonChooseWinner, Button buttonDeleteConstest, Label labelParticipants)
+        {
+            buttonUpdateParticipants.Location = new Point(listBoxParticipants.Location.X + (listBoxParticipants.Width / 7) + 3, listBoxParticipants.Bottom + 10);
             buttonUpdateParticipants.Margin = new Padding(5, 6, 5, 6);
             buttonUpdateParticipants.Name = string.Format("buttonUpdateParticipants{0}", m_ListOfContests.Count);
             buttonUpdateParticipants.Size = new Size(120, 35);
@@ -241,7 +248,7 @@ namespace DesktopFacebookInterface
             buttonUpdateParticipants.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonUpdateParticipants.Click += new EventHandler(this.buttonUpdateParticipants_Click);
 
-            buttonChooseWinner.Location = new Point(buttonUpdateParticipants.Right + (buttonUpdateParticipants.Width / 4), buttonUpdateParticipants.Location.Y);
+            buttonChooseWinner.Location = new Point(listBoxParticipants.Right + (buttonChooseWinner.Width / 2), labelParticipants.Bottom);
             buttonChooseWinner.Margin = new Padding(5, 6, 5, 6);
             buttonChooseWinner.Name = string.Format("buttonChooseWinner{0}", m_ListOfContests.Count);
             buttonChooseWinner.Size = new Size(120, 35);
@@ -251,7 +258,7 @@ namespace DesktopFacebookInterface
             buttonChooseWinner.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonChooseWinner.Click += new EventHandler(this.buttonChooseWinner_Click);
 
-            buttonDeleteConstest.Location = new Point(buttonChooseWinner.Right + (buttonChooseWinner.Width / 4), buttonChooseWinner.Location.Y);
+            buttonDeleteConstest.Location = new Point(buttonChooseWinner.Location.X, buttonUpdateParticipants.Location.Y);
             buttonDeleteConstest.Margin = new Padding(5, 6, 5, 6);
             buttonDeleteConstest.Name = string.Format("buttonDeleteConstest{0}", m_ListOfContests.Count);
             buttonDeleteConstest.Size = new Size(120, 35);
