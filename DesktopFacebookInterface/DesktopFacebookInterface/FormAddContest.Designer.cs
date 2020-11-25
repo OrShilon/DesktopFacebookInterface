@@ -97,7 +97,7 @@
             this.labelLikeOrComment.Location = new System.Drawing.Point(14, 262);
             this.labelLikeOrComment.Name = "labelLikeOrComment";
             this.labelLikeOrComment.Size = new System.Drawing.Size(276, 25);
-            this.labelLikeOrComment.TabIndex = 5;
+            this.labelLikeOrComment.TabIndex = 0;
             this.labelLikeOrComment.Text = "Requirements for your contest:";
             // 
             // buttonStartContest
@@ -128,7 +128,7 @@
             this.comboBoxNumOfWinners.Location = new System.Drawing.Point(330, 311);
             this.comboBoxNumOfWinners.Name = "comboBoxNumOfWinners";
             this.comboBoxNumOfWinners.Size = new System.Drawing.Size(67, 28);
-            this.comboBoxNumOfWinners.TabIndex = 8;
+            this.comboBoxNumOfWinners.TabIndex = 5;
             // 
             // labelNumOfWinners
             // 
@@ -137,7 +137,7 @@
             this.labelNumOfWinners.Location = new System.Drawing.Point(14, 311);
             this.labelNumOfWinners.Name = "labelNumOfWinners";
             this.labelNumOfWinners.Size = new System.Drawing.Size(180, 25);
-            this.labelNumOfWinners.TabIndex = 9;
+            this.labelNumOfWinners.TabIndex = 0;
             this.labelNumOfWinners.Text = "Number of winners:";
             // 
             // FormAddContest
