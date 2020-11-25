@@ -98,6 +98,7 @@ namespace DesktopFacebookInterface
         {
             this.Hide();
             FormHomeScreen homeScreen = new FormHomeScreen(m_LoginResult, m_LoginResult.LoggedInUser, m_AppSettings);
+            homeScreen.ShowDialog();
             this.Close();
         }
 

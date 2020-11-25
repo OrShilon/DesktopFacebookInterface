@@ -11,8 +11,8 @@ namespace DesktopFacebookInterface
         public Size m_WindowSize;
         public bool m_RememberUser;
         public string m_UserAccessToken;
-        private const string k_defaultFileName = "appSettings.xml";
-        private static readonly string sr_defaultFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        private const string k_DefaultFileName = "appSettings.xml";
+        private static readonly string sr_DefaultFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         private AppSettings()
         {
@@ -25,7 +25,7 @@ namespace DesktopFacebookInterface
         public static AppSettings LoadFile()
         {
             AppSettings appSettings;
-            string filePath = string.Format(@"{0}\\{1}", sr_defaultFolder, k_defaultFileName);
+            string filePath = string.Format(@"{0}\\{1}", sr_DefaultFolder, k_DefaultFileName);
 
             if (File.Exists(filePath))
             {
@@ -45,7 +45,7 @@ namespace DesktopFacebookInterface
 
         public void SaveFile()
         {
-            string filePath = string.Format(@"{0}\\{1}", sr_defaultFolder, k_defaultFileName);
+            string filePath = string.Format(@"{0}\\{1}", sr_DefaultFolder, k_DefaultFileName);
             FileMode fileMode = File.Exists(filePath) ? FileMode.Truncate : FileMode.Create;
 
             using (Stream stream = new FileStream(filePath, fileMode))

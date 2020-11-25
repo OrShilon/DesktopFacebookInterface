@@ -9,16 +9,15 @@ namespace DesktopFacebookInterface
 {
     internal partial class FormHomeScreen : Form
     {
-        private const bool v_firstContestClick = true;
-        private const bool v_buttonVisible = true;
-        private const string k_textBoxPostStatusMsg = "Post something!";
+        private const string k_TextBoxPostStatusMsg = "Post something!";
+        private const string k_AttachedFileTypeFilter = "Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
         private LoginResult m_LoginResult;
         private AppSettings m_AppSettings;
         private User m_LoginUser;
         private UserInformationWrapper m_UserInfo;
         private string m_AttachedImagePath;
         private FormContest m_FormContest;
-        private bool m_isFirstContestClick = v_firstContestClick;
+        private bool m_IsFirstContestClick = true;
 
         public FormHomeScreen(LoginResult i_LoginResult, User i_LoginUser, AppSettings i_AppSettings)
         {
@@ -27,14 +26,14 @@ namespace DesktopFacebookInterface
             m_AppSettings = i_AppSettings;
             m_UserInfo = new UserInformationWrapper(m_LoginUser);
             m_AttachedImagePath = null;
+
             InitializeComponent();
             this.Text = string.Format("Facebook - {0}", m_UserInfo.m_FullName);
-            textBoxPostStatus.Text = k_textBoxPostStatusMsg;
+            textBoxPostStatus.Text = k_TextBoxPostStatusMsg;
             PictureBoxProfile.LoadAsync(m_UserInfo.m_ProfileImage);
             PictureBoxCoverPhoto.LoadAsync(m_UserInfo.m_CoverImage);
             fetchAbout();
             fetchTimeline();
-            this.ShowDialog();
         }
 
         protected override void OnShown(EventArgs e)
@@ -95,6 +94,7 @@ namespace DesktopFacebookInterface
         private void tabControlHomeScreen_Selected(object sender, TabControlEventArgs e)
         {
             eTabOptions tabClicked = (eTabOptions)tabControlHomeScreen.SelectedIndex;
+
             try
             {
                 switch (tabClicked)
@@ -177,6 +177,7 @@ namespace DesktopFacebookInterface
             if (listBoxAlbums.SelectedItems.Count == 1)
             {
                 Album selectedAlbum = listBoxAlbums.SelectedItem as Album;
+
                 if(selectedAlbum.Photos.Count < 1)
                 {
                     MessageBox.Show("This album is empty");
@@ -260,16 +261,6 @@ namespace DesktopFacebookInterface
             base.OnFormClosed(e);
         }
 
-        //private void HomeScreen_Resize(object sender, EventArgs e)
-        // {
-        //    buttonLogout.Location = new Point(this.Width - 110, buttonLogout.Location.Y);
-        //    //tabControlHomeScreen.Width = this.Width - 100;
-        //    tabControlHomeScreen.Width = this.Width - buttonPostStatus.Right - 20;
-        //    tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Bottom - 45;
-        //    //tabControlHomeScreen.Height = this.Height - PictureBoxCoverPhoto.Height;
-        //    //listBoxTimeline.Height = this.Height - labelTimeline.Location.Y;
-        // }                                                                                ~~~~~~~~~~~~~~~~REMEMBER EVENT IN DEISGNER ~~~~~~~~~~~~~~~
-
         private void buttonPostStatus_Click(object sender, EventArgs e)
         {
             try
@@ -290,27 +281,28 @@ namespace DesktopFacebookInterface
         private void buttonAttachImage_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
+            ofd.Filter = k_AttachedFileTypeFilter;
+
             if(ofd.ShowDialog() == DialogResult.OK)
             {
                 m_AttachedImagePath  = ofd.FileName;
-                buttonCancelAttachment.Visible = v_buttonVisible;
+                buttonCancelAttachment.Visible = true;
             }
         }
 
         private void buttonCancelAttachment_Click(object sender, EventArgs e)
         {
             m_AttachedImagePath = null;
-            buttonCancelAttachment.Visible = !v_buttonVisible;
+            buttonCancelAttachment.Visible = false;
         }
 
         private void buttonContestMenu_Click(object sender, EventArgs e)
         {
-            if (m_isFirstContestClick)
+            if (m_IsFirstContestClick)
             {
                 m_FormContest = new FormContest(m_LoginUser);
                 m_FormContest.ShowDialog();
-                m_isFirstContestClick = !v_firstContestClick;
+                m_IsFirstContestClick = false;
             }
             else
             {
@@ -320,7 +312,7 @@ namespace DesktopFacebookInterface
 
         private void textBoxPostStatus_MouseClick(object sender, MouseEventArgs e)
         {
-            if (textBoxPostStatus.Text == k_textBoxPostStatusMsg)
+            if (textBoxPostStatus.Text == k_TextBoxPostStatusMsg)
             {
                 textBoxPostStatus.Text = string.Empty;
             }
@@ -330,7 +322,7 @@ namespace DesktopFacebookInterface
         {
             if (string.IsNullOrWhiteSpace(textBoxPostStatus.Text))
             {
-                textBoxPostStatus.Text = k_textBoxPostStatusMsg;
+                textBoxPostStatus.Text = k_TextBoxPostStatusMsg;
             }
         }
     }
