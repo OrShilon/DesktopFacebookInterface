@@ -37,11 +37,11 @@
             // 
             // ButtonLogin
             // 
-            this.ButtonLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonLogin.Location = new System.Drawing.Point(134, 164);
+            this.ButtonLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonLogin.Location = new System.Drawing.Point(138, 164);
             this.ButtonLogin.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonLogin.Name = "ButtonLogin";
-            this.ButtonLogin.Size = new System.Drawing.Size(159, 32);
+            this.ButtonLogin.Size = new System.Drawing.Size(147, 32);
             this.ButtonLogin.TabIndex = 0;
             this.ButtonLogin.Text = "Login To Facebook";
             this.ButtonLogin.UseVisualStyleBackColor = true;
@@ -51,7 +51,7 @@
             // 
             this.checkBoxRememberUser.AutoSize = true;
             this.checkBoxRememberUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxRememberUser.ForeColor = System.Drawing.Color.Black;
+            this.checkBoxRememberUser.ForeColor = System.Drawing.Color.White;
             this.checkBoxRememberUser.Location = new System.Drawing.Point(153, 216);
             this.checkBoxRememberUser.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxRememberUser.Name = "checkBoxRememberUser";
@@ -64,7 +64,7 @@
             // PictureBoxFacebook
             // 
             this.PictureBoxFacebook.Image = global::DesktopFacebookInterface.Properties.Resources.FacebookLogo;
-            this.PictureBoxFacebook.Location = new System.Drawing.Point(0, 20);
+            this.PictureBoxFacebook.Location = new System.Drawing.Point(0, 18);
             this.PictureBoxFacebook.Margin = new System.Windows.Forms.Padding(2);
             this.PictureBoxFacebook.Name = "PictureBoxFacebook";
             this.PictureBoxFacebook.Size = new System.Drawing.Size(429, 123);
@@ -85,7 +85,7 @@
             this.MaximizeBox = false;
             this.Name = "FormLoginScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Login";
+            this.Text = "Desktop Facebook Login";
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxFacebook)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -17,9 +17,7 @@ namespace DesktopFacebookInterface
         {
             m_AppSettings = AppSettings.LoadFile();
             InitializeComponent();
-            this.BackColor = Color.FromArgb(60, 91, 154);
-            ButtonLogin.ForeColor = Color.FromArgb(60, 91, 154);
-            checkBoxRememberUser.ForeColor = Color.White;
+            this.BackColor = Color.FromArgb(66, 103, 178);
             this.checkBoxRememberUser.Checked = m_AppSettings.m_RememberUser;
         }
 
