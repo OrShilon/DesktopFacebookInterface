@@ -107,6 +107,7 @@ namespace DesktopFacebookInterface
             this.textBoxFetchResault.Location = new System.Drawing.Point(301, 78);
             this.textBoxFetchResault.Multiline = true;
             this.textBoxFetchResault.Name = "textBoxFetchResault";
+            this.textBoxFetchResault.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxFetchResault.Size = new System.Drawing.Size(439, 460);
             this.textBoxFetchResault.TabIndex = 10;
             // 
