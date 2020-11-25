@@ -8,12 +8,14 @@ namespace DesktopFacebookInterface
 {
     public partial class FormMemoriesFetch : Form
     {
+        UserInformationWrapper m_User;
         private DateTime m_StartDate;
         private DateTime m_EndDate;
         private readonly List<CheckBox> m_MemoriesOptions;
 
-        public FormMemoriesFetch()
+        public FormMemoriesFetch(UserInformationWrapper i_User)
         {
+            m_User = i_User;
             InitializeComponent();
             m_MemoriesOptions = new List<CheckBox>();
             initMemoryOptionsList();
