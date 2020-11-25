@@ -168,7 +168,7 @@ namespace DesktopFacebookInterface
             }
         }
 
-        private void listBoxAlbums_SelectedIndexChanged(object sender, EventArgs e)
+        private void listBoxAlbums_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             displaySelectedAlbum();
         }
@@ -329,5 +329,6 @@ namespace DesktopFacebookInterface
                 textBoxPostStatus.Text = k_TextBoxPostStatusMsg;
             }
         }
+
     }
 }
