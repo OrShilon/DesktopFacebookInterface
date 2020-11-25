@@ -52,27 +52,72 @@ namespace DesktopFacebookInterface
 
         private void buttonFetchData_Click(object sender, EventArgs e)
         {
-            foreach(string option in r_Memories)
-            {
+            textBoxFetchResault.Text = string.Empty;
+            r_Memories.Clear();
 
+            if (checkBoxPosts.Checked)
+            {
+                displayPosts();
+            }
+
+            if (checkBoxCheckIn.Checked)
+            {
+                displayCheckIn();
+            }
+
+            if (checkBoxEvents.Checked)
+            {
+                displayEvents();
+            }
+
+            foreach (string option in r_Memories)
+            {
+                textBoxFetchResault.Text += option + Environment.NewLine;
             }
         }
 
         private void displayPosts()
         {
-            string posts = string.Format("{0}Posts:{0}", Environment.NewLine);
+            string title = string.Format("{0}Posts:{0}", Environment.NewLine);
+            List<string> posts = m_User.fetchPostsByDate(m_StartDate, m_EndDate);
+
+            r_Memories.Add(title);
+
+            foreach(string post in posts)
+            {
+                r_Memories.Add(post);
+            }
         }
+
         //private void displayPhotos()
         //{
 
         //}
+
         private void displayCheckIn()
         {
-            string checkIn = string.Format("{0}Check in:{0}", Environment.NewLine);
+            string title = string.Format("{0}Check in:{0}", Environment.NewLine);
+            List<string> checkIn = m_User.fetchCheckInsByDate(m_StartDate, m_EndDate);
+
+            r_Memories.Add(title);
+
+            foreach (string post in checkIn)
+            {
+                r_Memories.Add(post);
+            }
         }
+
         private void displayEvents()
         {
-            string events = string.Format("{0}Events:{0}", Environment.NewLine);
+            string title = string.Format("{0}Events:{0}", Environment.NewLine);
+            List<string> events = m_User.fetchEventsByDate(m_StartDate, m_EndDate);
+
+            r_Memories.Add(title);
+
+            foreach (string post in events)
+            {
+                r_Memories.Add(post);
+            }
         }
 
         private void checkBoxCheckAll_CheckedChanged(object sender, EventArgs e)
