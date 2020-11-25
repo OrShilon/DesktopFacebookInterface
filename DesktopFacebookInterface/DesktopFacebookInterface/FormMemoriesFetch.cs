@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
+using static System.Windows.Forms.CheckedListBox;
 
 namespace DesktopFacebookInterface
 {
@@ -28,6 +30,16 @@ namespace DesktopFacebookInterface
         {
             m_EndDate = monthCalendarEndDate.SelectionStart;
             labelEndDate.Text = string.Format("End Date: {0}/{1}/{2}", m_EndDate.Day, m_EndDate.Month, m_EndDate.Year);
+        }
+
+        private void buttonFetchData_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void checkBoxEverything_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox everything = (CheckBox)sender;
         }
     }
 }
