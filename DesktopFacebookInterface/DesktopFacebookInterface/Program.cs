@@ -16,6 +16,7 @@ namespace DesktopFacebookInterface
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormLoginScreen());
+            //Application.Run(new FormMemoriesFetch());
         }
     }
 }
