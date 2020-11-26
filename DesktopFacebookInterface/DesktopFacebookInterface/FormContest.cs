@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Facebook;
-using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
     internal partial class FormContest : Form
     {
         private readonly List<ContestLogic> m_ListOfContests;
+        private UserInformationWrapper m_UserInfo;
         private int m_TabIndex = 0;
-        private User m_LoginUser;
 
-        public FormContest(User i_LoginUser)
+        public FormContest(UserInformationWrapper i_UserInfo)
         {
-            m_LoginUser = i_LoginUser;
+            m_UserInfo = i_UserInfo;
             m_ListOfContests = new List<ContestLogic>();
 
             InitializeComponent();
@@ -63,7 +62,7 @@ namespace DesktopFacebookInterface
                 {
                     ContestLogic newContest = new ContestLogic(
                         m_TabIndex + 1,
-                        m_LoginUser,
+                        m_UserInfo,
                         newFormContest.Status,
                         newFormContest.ImagePath,
                         newFormContest.LikeRequired,
