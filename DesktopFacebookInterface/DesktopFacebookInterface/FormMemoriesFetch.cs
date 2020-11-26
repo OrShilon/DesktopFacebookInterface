@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using static System.Windows.Forms.CheckedListBox;
@@ -13,10 +14,11 @@ namespace DesktopFacebookInterface
         private UserInformationWrapper m_User;
         private DateTime m_StartDate;
         private DateTime m_EndDate;
+        private string m_MissingDetails = string.Empty;
 
-        public FormMemoriesFetch(UserInformationWrapper i_User)
+        public FormMemoriesFetch(UserInformationWrapper i_UserInfo)
         {
-            m_User = i_User;
+            m_UserInfo = i_UserInfo;
             InitializeComponent();
             r_MemoriesOptions = new List<CheckBox>();
             r_Memories = new List<string>();
@@ -25,13 +27,14 @@ namespace DesktopFacebookInterface
             monthCalendarStartDate.MaxDate = DateTime.Today;
             monthCalendarEndDate.MinDate = new DateTime(2005, 1, 1);
             monthCalendarEndDate.MaxDate = DateTime.Today;
+            m_StartDate = new DateTime(1999, 1, 1);
+            m_EndDate = new DateTime(1999, 1, 1);
         }
 
         private void initMemoryOptionsList()
         {
             r_MemoriesOptions.Add(checkBoxCheckAll);
             r_MemoriesOptions.Add(checkBoxPosts);
-            r_MemoriesOptions.Add(checkBoxPhotos);
             r_MemoriesOptions.Add(checkBoxCheckIn);
             r_MemoriesOptions.Add(checkBoxEvents);
         }
@@ -40,6 +43,7 @@ namespace DesktopFacebookInterface
         {
             m_StartDate = monthCalendarStartDate.SelectionStart;
             labelStartDate.Text = string.Format("Start Date: {0}/{1}/{2}", m_StartDate.Day, m_StartDate.Month, m_StartDate.Year);
+            checkBoxSingleDay.Enabled = true;
         }
 
         private void monthCalendarEndDate_DateSelected(object sender, DateRangeEventArgs e)
@@ -51,7 +55,9 @@ namespace DesktopFacebookInterface
         private void buttonFetchData_Click(object sender, EventArgs e)
         {
             textBoxFetchResault.Text = string.Empty;
+            m_MissingDetails = string.Empty;
             r_Memories.Clear();
+            StringBuilder fetchResults = new StringBuilder();
 
             if (checkBoxPosts.Checked)
             {
@@ -70,14 +76,43 @@ namespace DesktopFacebookInterface
 
             foreach (string option in r_Memories)
             {
-                textBoxFetchResault.Text += option + Environment.NewLine;
+                fetchResults.Append(option + Environment.NewLine);
+            }
+
+            if(isValidForm(fetchResults))
+            {
+                textBoxFetchResault.Text = fetchResults.ToString();
+            }
+            else
+            {
+                MessageBox.Show(m_MissingDetails);
             }
         }
 
+        private bool isValidForm(StringBuilder i_fetchResult)
+        {
+            if (i_fetchResult.Length == 0)
+            {
+                m_MissingDetails += string.Format("At least 1 checkbox of options should be checked.{0}", Environment.NewLine);
+
+            }
+
+            if (m_StartDate < monthCalendarStartDate.MinDate)
+            {
+                m_MissingDetails += string.Format("Need to select start day.{0}", Environment.NewLine);
+            }
+
+            if (m_EndDate < monthCalendarEndDate.MinDate)
+            {
+                m_MissingDetails += string.Format("Need to select end day.{0}", Environment.NewLine);
+            }
+
+            return string.IsNullOrEmpty(m_MissingDetails);
+        }
         private void displayPosts()
         {
             string title = string.Format("{0}Posts:{0}", Environment.NewLine);
-            List<string> posts = m_User.fetchPostsByDate(m_StartDate, m_EndDate);
+            List<string> posts = m_UserInfo.fetchPostsByDate(m_StartDate, m_EndDate);
 
             r_Memories.Add(title);
 
@@ -90,7 +125,7 @@ namespace DesktopFacebookInterface
         private void displayCheckIn()
         {
             string title = string.Format("{0}Check in:{0}", Environment.NewLine);
-            List<string> checkIn = m_User.fetchCheckInsByDate(m_StartDate, m_EndDate);
+            List<string> checkIn = m_UserInfo.fetchCheckInsByDate(m_StartDate, m_EndDate);
 
             r_Memories.Add(title);
 
@@ -103,7 +138,7 @@ namespace DesktopFacebookInterface
         private void displayEvents()
         {
             string title = string.Format("{0}Events:{0}", Environment.NewLine);
-            List<string> events = m_User.fetchEventsByDate(m_StartDate, m_EndDate);
+            List<string> events = m_UserInfo.fetchEventsByDate(m_StartDate, m_EndDate);
 
             r_Memories.Add(title);
 
@@ -141,14 +176,6 @@ namespace DesktopFacebookInterface
             }
         }
 
-        private void checkBoxPhotos_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!checkBoxPhotos.Checked)
-            {
-                uncheckTheCheckAllButton();
-            }
-        }
-
         private void checkBoxCheckIn_CheckedChanged(object sender, EventArgs e)
         {
             if (!checkBoxCheckIn.Checked)
@@ -167,9 +194,9 @@ namespace DesktopFacebookInterface
 
         private void uncheckTheCheckAllButton()
         {
-            checkBoxCheckAll.CheckedChanged -= new EventHandler(this.checkBoxCheckAll_CheckedChanged);
+            checkBoxCheckAll.CheckedChanged -= new EventHandler(checkBoxCheckAll_CheckedChanged);
             checkBoxCheckAll.Checked = false;
-            checkBoxCheckAll.CheckedChanged += new EventHandler(this.checkBoxCheckAll_CheckedChanged);
+            checkBoxCheckAll.CheckedChanged += new EventHandler(checkBoxCheckAll_CheckedChanged);
         }
 
         private void checkBoxSingleDay_CheckedChanged(object sender, EventArgs e)
@@ -177,10 +204,14 @@ namespace DesktopFacebookInterface
             if(checkBoxSingleDay.Checked)
             {
                 monthCalendarEndDate.Enabled = false;
+                m_EndDate = monthCalendarStartDate.SelectionStart;
+                labelEndDate.Text = string.Format("End Date: {0}/{1}/{2}", m_StartDate.Day, m_StartDate.Month, m_StartDate.Year);
             }
             else
             {
                 monthCalendarEndDate.Enabled = true;
+                m_EndDate = monthCalendarEndDate.SelectionStart;
+                labelEndDate.Text = string.Format("End Date: {0}/{1}/{2}", m_EndDate.Day, m_EndDate.Month, m_EndDate.Year);
             }
         }
     }

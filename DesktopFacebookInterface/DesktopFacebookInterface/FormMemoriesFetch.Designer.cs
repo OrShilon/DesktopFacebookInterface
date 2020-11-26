@@ -37,7 +37,6 @@
             this.textBoxFetchResault = new System.Windows.Forms.TextBox();
             this.checkBoxCheckAll = new System.Windows.Forms.CheckBox();
             this.checkBoxPosts = new System.Windows.Forms.CheckBox();
-            this.checkBoxPhotos = new System.Windows.Forms.CheckBox();
             this.checkBoxCheckIn = new System.Windows.Forms.CheckBox();
             this.checkBoxEvents = new System.Windows.Forms.CheckBox();
             this.checkBoxSingleDay = new System.Windows.Forms.CheckBox();
@@ -89,7 +88,7 @@
             // 
             this.monthCalendarStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.monthCalendarStartDate.Location = new System.Drawing.Point(26, 263);
-            this.monthCalendarStartDate.Margin = new System.Windows.Forms.Padding(14, 14, 14, 14);
+            this.monthCalendarStartDate.Margin = new System.Windows.Forms.Padding(14);
             this.monthCalendarStartDate.MaxSelectionCount = 1;
             this.monthCalendarStartDate.Name = "monthCalendarStartDate";
             this.monthCalendarStartDate.ScrollChange = 1;
@@ -100,7 +99,7 @@
             // monthCalendarEndDate
             // 
             this.monthCalendarEndDate.Location = new System.Drawing.Point(26, 578);
-            this.monthCalendarEndDate.Margin = new System.Windows.Forms.Padding(14, 14, 14, 14);
+            this.monthCalendarEndDate.Margin = new System.Windows.Forms.Padding(14);
             this.monthCalendarEndDate.MaxSelectionCount = 1;
             this.monthCalendarEndDate.Name = "monthCalendarEndDate";
             this.monthCalendarEndDate.ShowToday = false;
@@ -139,21 +138,10 @@
             this.checkBoxPosts.UseVisualStyleBackColor = true;
             this.checkBoxPosts.CheckedChanged += new System.EventHandler(this.checkBoxPosts_CheckedChanged);
             // 
-            // checkBoxPhotos
-            // 
-            this.checkBoxPhotos.AutoSize = true;
-            this.checkBoxPhotos.Location = new System.Drawing.Point(26, 111);
-            this.checkBoxPhotos.Name = "checkBoxPhotos";
-            this.checkBoxPhotos.Size = new System.Drawing.Size(85, 24);
-            this.checkBoxPhotos.TabIndex = 13;
-            this.checkBoxPhotos.Text = "Photos";
-            this.checkBoxPhotos.UseVisualStyleBackColor = true;
-            this.checkBoxPhotos.CheckedChanged += new System.EventHandler(this.checkBoxPhotos_CheckedChanged);
-            // 
             // checkBoxCheckIn
             // 
             this.checkBoxCheckIn.AutoSize = true;
-            this.checkBoxCheckIn.Location = new System.Drawing.Point(26, 142);
+            this.checkBoxCheckIn.Location = new System.Drawing.Point(26, 110);
             this.checkBoxCheckIn.Name = "checkBoxCheckIn";
             this.checkBoxCheckIn.Size = new System.Drawing.Size(96, 24);
             this.checkBoxCheckIn.TabIndex = 14;
@@ -164,7 +152,7 @@
             // checkBoxEvents
             // 
             this.checkBoxEvents.AutoSize = true;
-            this.checkBoxEvents.Location = new System.Drawing.Point(26, 172);
+            this.checkBoxEvents.Location = new System.Drawing.Point(26, 141);
             this.checkBoxEvents.Name = "checkBoxEvents";
             this.checkBoxEvents.Size = new System.Drawing.Size(84, 24);
             this.checkBoxEvents.TabIndex = 15;
@@ -175,6 +163,7 @@
             // checkBoxSingleDay
             // 
             this.checkBoxSingleDay.AutoSize = true;
+            this.checkBoxSingleDay.Enabled = false;
             this.checkBoxSingleDay.Location = new System.Drawing.Point(122, 515);
             this.checkBoxSingleDay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBoxSingleDay.Name = "checkBoxSingleDay";
@@ -192,7 +181,6 @@
             this.Controls.Add(this.checkBoxSingleDay);
             this.Controls.Add(this.checkBoxEvents);
             this.Controls.Add(this.checkBoxCheckIn);
-            this.Controls.Add(this.checkBoxPhotos);
             this.Controls.Add(this.checkBoxPosts);
             this.Controls.Add(this.checkBoxCheckAll);
             this.Controls.Add(this.textBoxFetchResault);
@@ -204,6 +192,7 @@
             this.Controls.Add(this.labelStartDate);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximizeBox = false;
             this.Name = "FormMemoriesFetch";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormMemoriesFetch";
@@ -222,7 +211,6 @@
         private System.Windows.Forms.TextBox textBoxFetchResault;
         private System.Windows.Forms.CheckBox checkBoxCheckAll;
         private System.Windows.Forms.CheckBox checkBoxPosts;
-        private System.Windows.Forms.CheckBox checkBoxPhotos;
         private System.Windows.Forms.CheckBox checkBoxCheckIn;
         private System.Windows.Forms.CheckBox checkBoxEvents;
         private System.Windows.Forms.CheckBox checkBoxSingleDay;
