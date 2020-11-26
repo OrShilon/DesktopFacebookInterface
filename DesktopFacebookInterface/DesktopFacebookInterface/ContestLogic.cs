@@ -8,8 +8,8 @@ namespace DesktopFacebookInterface
     {
         public readonly List<User> r_ContestWinners;
         public readonly List<User> r_ParticipantsList;
+        public UserInformationWrapper m_UserInfo;
         public int m_ContestID;
-        public User m_ContestUser;
         public int m_ParticipantsCount;
         public bool m_LikeRequired;
         public bool m_CommentRequired;
@@ -18,10 +18,10 @@ namespace DesktopFacebookInterface
         public string m_ImagePath;
         public GeoPostedItem m_ContestPost;
 
-        public ContestLogic(int i_ContestID, User i_User, string i_Status, string i_ImagePath, bool i_LikeRequired, bool i_CommentRequired, int i_NumberOfWinners)
+        public ContestLogic(int i_ContestID, UserInformationWrapper i_UserInfo, string i_Status, string i_ImagePath, bool i_LikeRequired, bool i_CommentRequired, int i_NumberOfWinners)
         {
             m_ContestID = i_ContestID;
-            m_ContestUser = i_User;
+            m_UserInfo = i_UserInfo;
             m_ParticipantsCount = 0;
             m_LikeRequired = i_LikeRequired;
             m_CommentRequired = i_CommentRequired;
@@ -34,7 +34,7 @@ namespace DesktopFacebookInterface
 
         public void PostContestStatus() 
         {
-            m_ContestPost = UserPostStatusWrapper.PostStatus(m_ContestUser, m_ImagePath, m_Status);
+            m_ContestPost = m_UserInfo.PostStatus(m_ImagePath, m_Status);
         }
 
         public void GenerateWinners()

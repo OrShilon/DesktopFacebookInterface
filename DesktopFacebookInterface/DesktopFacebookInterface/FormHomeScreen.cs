@@ -254,7 +254,7 @@ namespace DesktopFacebookInterface
         {
             try
             {
-                GeoPostedItem postedItem = UserPostStatusWrapper.PostStatus(m_UserInfo.User, m_AttachedImagePath, textBoxPostStatus.Text);
+                GeoPostedItem postedItem = m_UserInfo.PostStatus(m_AttachedImagePath, textBoxPostStatus.Text);
                 MessageBox.Show(string.Format("Post published successfully!{1} Post ID: {0}", postedItem.Id, Environment.NewLine));
             }
             catch (FacebookOAuthException)
@@ -289,7 +289,7 @@ namespace DesktopFacebookInterface
         {
             if (m_IsFirstContestClick)
             {
-                m_FormContest = new FormContest(m_UserInfo.User);
+                m_FormContest = new FormContest(m_UserInfo);
                 m_FormContest.ShowDialog();
                 m_IsFirstContestClick = false;
             }
