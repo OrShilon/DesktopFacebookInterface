@@ -1,7 +1,6 @@
-﻿
-namespace DesktopFacebookInterface
+﻿namespace DesktopFacebookInterface
 {
-    partial class FormMemoriesFetch
+    public partial class FormMemoriesFetch
     {
         /// <summary>
         /// Required designer variable.

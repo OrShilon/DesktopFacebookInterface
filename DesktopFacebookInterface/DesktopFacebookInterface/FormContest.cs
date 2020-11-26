@@ -116,6 +116,7 @@ namespace DesktopFacebookInterface
             Button buttonDeleteConstest = new Button();
 
             buildPostControls(labelPost, textBoxDescription);
+
             if (m_ListOfContests[m_ListOfContests.Count - 1].m_ImagePath != null)
             {
                 buildPictureControls(labelPost, labelPicture, textBoxDescription, pictureBoxAttachedImage);
@@ -206,7 +207,7 @@ namespace DesktopFacebookInterface
             checkBoxLikeCondition.Enabled = false;
 
             checkBoxCommentCondition.AutoSize = true;
-            checkBoxCommentCondition.Location = new Point(labelContestrequirements.Location.X, checkBoxLikeCondition.Location.Y +(listBoxParticipants.Height / 2));
+            checkBoxCommentCondition.Location = new Point(labelContestrequirements.Location.X, checkBoxLikeCondition.Location.Y + (listBoxParticipants.Height / 2));
             checkBoxCommentCondition.Name = string.Format("checkBoxCommentCondition{0}", m_ListOfContests.Count);
             checkBoxCommentCondition.Size = new Size(163, 24);
             checkBoxCommentCondition.TabIndex = 7;
@@ -341,7 +342,6 @@ namespace DesktopFacebookInterface
 
                 foreach (Control control in tabPage.Controls)
                 {
-                    
                     if (control.Name.Length > this.tabControlContest.TabPages[0].Controls[controlIterator].Name.Length)
                     {
                         control.Name = control.Name.Substring(0, control.Name.Length - 2) + index;
@@ -352,13 +352,12 @@ namespace DesktopFacebookInterface
                     }
 
                     controlIterator++;
-
                 }
 
                 index++;
             }
 
-                m_TabIndex--;
+            m_TabIndex--;
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)

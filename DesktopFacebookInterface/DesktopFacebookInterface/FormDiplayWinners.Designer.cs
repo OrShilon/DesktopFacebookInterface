@@ -39,35 +39,39 @@
             // labelvWinnerName
             // 
             this.labelvWinnerName.AutoSize = true;
-            this.labelvWinnerName.Location = new System.Drawing.Point(80, 172);
+            this.labelvWinnerName.Location = new System.Drawing.Point(53, 112);
+            this.labelvWinnerName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelvWinnerName.Name = "labelvWinnerName";
-            this.labelvWinnerName.Size = new System.Drawing.Size(51, 20);
+            this.labelvWinnerName.Size = new System.Drawing.Size(35, 13);
             this.labelvWinnerName.TabIndex = 0;
             this.labelvWinnerName.Text = "Name";
             // 
             // labelNumOfWinner
             // 
             this.labelNumOfWinner.AutoSize = true;
-            this.labelNumOfWinner.Location = new System.Drawing.Point(80, 107);
+            this.labelNumOfWinner.Location = new System.Drawing.Point(53, 70);
+            this.labelNumOfWinner.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNumOfWinner.Name = "labelNumOfWinner";
-            this.labelNumOfWinner.Size = new System.Drawing.Size(117, 20);
+            this.labelNumOfWinner.Size = new System.Drawing.Size(79, 13);
             this.labelNumOfWinner.TabIndex = 1;
             this.labelNumOfWinner.Text = "Winner number";
             // 
             // pictureBoxWinnerPicture
             // 
-            this.pictureBoxWinnerPicture.Location = new System.Drawing.Point(333, 12);
+            this.pictureBoxWinnerPicture.Location = new System.Drawing.Point(222, 8);
+            this.pictureBoxWinnerPicture.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBoxWinnerPicture.Name = "pictureBoxWinnerPicture";
-            this.pictureBoxWinnerPicture.Size = new System.Drawing.Size(382, 275);
+            this.pictureBoxWinnerPicture.Size = new System.Drawing.Size(255, 179);
             this.pictureBoxWinnerPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxWinnerPicture.TabIndex = 2;
             this.pictureBoxWinnerPicture.TabStop = false;
             // 
             // buttonPrevious
             // 
-            this.buttonPrevious.Location = new System.Drawing.Point(222, 311);
+            this.buttonPrevious.Location = new System.Drawing.Point(148, 202);
+            this.buttonPrevious.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonPrevious.Name = "buttonPrevious";
-            this.buttonPrevious.Size = new System.Drawing.Size(130, 35);
+            this.buttonPrevious.Size = new System.Drawing.Size(87, 23);
             this.buttonPrevious.TabIndex = 3;
             this.buttonPrevious.Text = "Previous";
             this.buttonPrevious.UseVisualStyleBackColor = true;
@@ -75,9 +79,10 @@
             // 
             // buttonNext
             // 
-            this.buttonNext.Location = new System.Drawing.Point(398, 311);
+            this.buttonNext.Location = new System.Drawing.Point(265, 202);
+            this.buttonNext.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonNext.Name = "buttonNext";
-            this.buttonNext.Size = new System.Drawing.Size(130, 35);
+            this.buttonNext.Size = new System.Drawing.Size(87, 23);
             this.buttonNext.TabIndex = 4;
             this.buttonNext.Text = "Next";
             this.buttonNext.UseVisualStyleBackColor = true;
@@ -85,16 +90,17 @@
             // 
             // FormDiplayWinners
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(753, 397);
+            this.ClientSize = new System.Drawing.Size(502, 258);
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.buttonPrevious);
             this.Controls.Add(this.pictureBoxWinnerPicture);
             this.Controls.Add(this.labelNumOfWinner);
             this.Controls.Add(this.labelvWinnerName);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormDiplayWinners";
-            this.Text = "FormDiplayWinners";
+            this.Text = "Contest Winners";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWinnerPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

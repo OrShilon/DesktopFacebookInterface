@@ -8,11 +8,11 @@ namespace DesktopFacebookInterface
 {
     public partial class FormMemoriesFetch : Form
     {
-        UserInformationWrapper m_User;
-        private DateTime m_StartDate;
-        private DateTime m_EndDate;
         private readonly List<CheckBox> r_MemoriesOptions;
         private readonly List<string> r_Memories;
+        private UserInformationWrapper m_User;
+        private DateTime m_StartDate;
+        private DateTime m_EndDate;
 
         public FormMemoriesFetch(UserInformationWrapper i_User)
         {
@@ -29,13 +29,11 @@ namespace DesktopFacebookInterface
 
         private void initMemoryOptionsList()
         {
-
             r_MemoriesOptions.Add(checkBoxCheckAll);
             r_MemoriesOptions.Add(checkBoxPosts);
             r_MemoriesOptions.Add(checkBoxPhotos);
             r_MemoriesOptions.Add(checkBoxCheckIn);
             r_MemoriesOptions.Add(checkBoxEvents);
-
         }
 
         private void monthCalendarStartDate_DateSelected(object sender, DateRangeEventArgs e)
@@ -88,11 +86,6 @@ namespace DesktopFacebookInterface
                 r_Memories.Add(post);
             }
         }
-
-        //private void displayPhotos()
-        //{
-
-        //}
 
         private void displayCheckIn()
         {

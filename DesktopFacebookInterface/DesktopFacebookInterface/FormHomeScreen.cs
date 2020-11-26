@@ -149,7 +149,7 @@ namespace DesktopFacebookInterface
 
             if (m_UserInfo.User.Albums.Count == 0)
             {
-                MessageBox.Show("No Albums to retrieve :(");
+                MessageBox.Show("No Albums found");
             }
         }
 
@@ -189,7 +189,7 @@ namespace DesktopFacebookInterface
 
             if (m_UserInfo.User.LikedPages.Count == 0)
             {
-                MessageBox.Show("No pages to retrieve :(");
+                MessageBox.Show("No pages found");
             }
         }
 
@@ -206,7 +206,7 @@ namespace DesktopFacebookInterface
 
             if (m_UserInfo.User.Events.Count == 0)
             {
-                MessageBox.Show("No events to retrieve :(");
+                MessageBox.Show("No events found");
             }
         }
 
@@ -223,7 +223,7 @@ namespace DesktopFacebookInterface
 
             if (m_UserInfo.User.Friends.Count == 0)
             {
-                MessageBox.Show("No friends to retrieve :(");
+                MessageBox.Show("No friends found");
             }
         }
 

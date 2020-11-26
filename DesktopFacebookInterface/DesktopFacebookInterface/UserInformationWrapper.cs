@@ -80,7 +80,7 @@ namespace DesktopFacebookInterface
 
         public string fetchCoverPhotoURL()
         {
-            string coverPhotoURL = "";
+            string coverPhotoURL = string.Empty;
 
             foreach (Album album in User.Albums)
             {
@@ -129,7 +129,7 @@ namespace DesktopFacebookInterface
 
                 if (createdDate > i_StartDate && createdDate < i_EndDate)
                 {
-                    string postString = "";
+                    string postString = string.Empty;
 
                     if (post.Message != null)
                     {
@@ -148,7 +148,6 @@ namespace DesktopFacebookInterface
             {
                 filteredPosts.Add(string.Format("No posts found between {0} - {1}", i_StartDate, i_EndDate));
             }
-
 
             return filteredPosts;
         }
@@ -181,7 +180,7 @@ namespace DesktopFacebookInterface
 
                 if (createdDate > i_StartDate && createdDate < i_EndDate)
                 {
-                    string checkInString = "";
+                    string checkInString = string.Empty;
 
                     if (checkin.Message != null)
                     {
@@ -193,7 +192,6 @@ namespace DesktopFacebookInterface
                     }
 
                     filteredCheckIns.Add(string.Format("{0}/{1}/{2}: {3}", createdDate.Day, createdDate.Month, createdDate.Year, checkInString));
-
                 }
             }
 
