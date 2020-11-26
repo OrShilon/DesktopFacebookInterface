@@ -113,7 +113,7 @@
             // 
             this.tabPageAbout.Location = new System.Drawing.Point(4, 29);
             this.tabPageAbout.Name = "tabPageAbout";
-            this.tabPageAbout.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageAbout.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageAbout.Size = new System.Drawing.Size(433, 198);
             this.tabPageAbout.TabIndex = 0;
             this.tabPageAbout.Text = "About";
@@ -291,7 +291,7 @@
             // buttonMemories
             // 
             this.buttonMemories.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonMemories.Location = new System.Drawing.Point(611, 225);
+            this.buttonMemories.Location = new System.Drawing.Point(611, 223);
             this.buttonMemories.Name = "buttonMemories";
             this.buttonMemories.Size = new System.Drawing.Size(120, 75);
             this.buttonMemories.TabIndex = 11;

@@ -152,24 +152,6 @@ namespace DesktopFacebookInterface
             return filteredPosts;
         }
 
-        public List<Photo> fetchPhotosByDate(DateTime i_StartDate, DateTime i_EndDate)
-        {
-            List<Photo> filteredPics = new List<Photo>();
-
-            foreach (Album album in User.Albums)
-            {
-                foreach (Photo picture in album.Photos)
-                {
-                    if (picture.CreatedTime.Value.Date > i_StartDate && picture.CreatedTime.Value.Date < i_EndDate)
-                    {
-                        filteredPics.Add(picture);
-                    }
-                }
-            }
-
-            return filteredPics;
-        }
-
         public List<string> fetchCheckInsByDate(DateTime i_StartDate, DateTime i_EndDate)
         {
             List<string> filteredCheckIns = new List<string>();

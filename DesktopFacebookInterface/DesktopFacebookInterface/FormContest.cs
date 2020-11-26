@@ -8,6 +8,7 @@ namespace DesktopFacebookInterface
 {
     internal partial class FormContest : Form
     {
+        private const int k_MaxNumberOfContests = 15;
         private readonly List<ContestLogic> m_ListOfContests;
         private UserInformationWrapper m_UserInfo;
         private int m_TabIndex = 0;
@@ -46,7 +47,7 @@ namespace DesktopFacebookInterface
 
         private void buttonAddContest_Click(object sender, EventArgs e)
         {
-            if(m_TabIndex < 15)
+            if(m_TabIndex < k_MaxNumberOfContests)
             {
                 TabPage tabPageContest = new TabPage();
 
@@ -100,7 +101,7 @@ namespace DesktopFacebookInterface
             }
         }
 
-        private void buildContest(TabPage currentTabPage)
+        private void buildContest(TabPage i_CurrentTabPage)
         {
             Label labelPost = new Label();
             Label labelParticipants = new Label();
@@ -120,153 +121,153 @@ namespace DesktopFacebookInterface
             if (m_ListOfContests[m_ListOfContests.Count - 1].m_ImagePath != null)
             {
                 buildPictureControls(labelPost, labelPicture, textBoxDescription, pictureBoxAttachedImage);
-                currentTabPage.Controls.Add(labelPicture);
-                currentTabPage.Controls.Add(pictureBoxAttachedImage);
+                i_CurrentTabPage.Controls.Add(labelPicture);
+                i_CurrentTabPage.Controls.Add(pictureBoxAttachedImage);
             }
 
             buildParticipantsControls(labelParticipants, textBoxDescription, listBoxParticipants, labelContestrequirements, checkBoxCommentCondition);
             buildRequirementsControls(labelParticipants, labelContestrequirements, checkBoxCommentCondition, checkBoxLikeCondition, textBoxDescription, listBoxParticipants);
             buildButtonsControls(listBoxParticipants, buttonUpdateParticipants, buttonChooseWinner, buttonDeleteConstest, labelParticipants);
 
-            currentTabPage.Controls.Add(labelPost);
-            currentTabPage.Controls.Add(textBoxDescription);
-            currentTabPage.Controls.Add(labelParticipants);
-            currentTabPage.Controls.Add(listBoxParticipants);
-            currentTabPage.Controls.Add(labelContestrequirements);
-            currentTabPage.Controls.Add(checkBoxLikeCondition);
-            currentTabPage.Controls.Add(checkBoxCommentCondition);
-            currentTabPage.Controls.Add(buttonUpdateParticipants);
-            currentTabPage.Controls.Add(buttonChooseWinner);
-            currentTabPage.Controls.Add(buttonDeleteConstest);
+            i_CurrentTabPage.Controls.Add(labelPost);
+            i_CurrentTabPage.Controls.Add(textBoxDescription);
+            i_CurrentTabPage.Controls.Add(labelParticipants);
+            i_CurrentTabPage.Controls.Add(listBoxParticipants);
+            i_CurrentTabPage.Controls.Add(labelContestrequirements);
+            i_CurrentTabPage.Controls.Add(checkBoxLikeCondition);
+            i_CurrentTabPage.Controls.Add(checkBoxCommentCondition);
+            i_CurrentTabPage.Controls.Add(buttonUpdateParticipants);
+            i_CurrentTabPage.Controls.Add(buttonChooseWinner);
+            i_CurrentTabPage.Controls.Add(buttonDeleteConstest);
 
-            tabControlContest.SelectedTab = currentTabPage;
+            tabControlContest.SelectedTab = i_CurrentTabPage;
         }
 
-        private void buildPostControls(Label labelPost, TextBox textBoxDescription)
+        private void buildPostControls(Label i_LabelPost, TextBox i_TextBoxDescription)
         {
-            labelPost.AutoSize = true;
-            labelPost.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelPost.Location = new Point(10, 10);
-            labelPost.Name = string.Format("labelPost{0}", m_ListOfContests.Count);
-            labelPost.Size = new Size(195, 25);
-            labelPost.Text = "Contest description:";
-            labelPost.TabIndex = 0;
-            labelPost.TabStop = false;
+            i_LabelPost.AutoSize = true;
+            i_LabelPost.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            i_LabelPost.Location = new Point(10, 10);
+            i_LabelPost.Name = string.Format("labelPost{0}", m_ListOfContests.Count);
+            i_LabelPost.Size = new Size(195, 25);
+            i_LabelPost.Text = "Contest description:";
+            i_LabelPost.TabIndex = 0;
+            i_LabelPost.TabStop = false;
 
-            textBoxDescription.Location = new Point(labelPost.Location.X, labelPost.Bottom + 10);
-            textBoxDescription.Margin = new Padding(2, 2, 2, 2);
-            textBoxDescription.Name = string.Format("textBoxContestDescription{0}", m_ListOfContests.Count);
-            textBoxDescription.Text = m_ListOfContests[m_ListOfContests.Count - 1].m_Status;
-            textBoxDescription.Size = new Size(350, 160);
-            textBoxDescription.ScrollBars = ScrollBars.Vertical;
-            textBoxDescription.Multiline = true;
-            textBoxDescription.WordWrap = true;
-            textBoxDescription.ReadOnly = true;
-            textBoxDescription.TabIndex = 1;
+            i_TextBoxDescription.Location = new Point(i_LabelPost.Location.X, i_LabelPost.Bottom + 10);
+            i_TextBoxDescription.Margin = new Padding(2, 2, 2, 2);
+            i_TextBoxDescription.Name = string.Format("textBoxContestDescription{0}", m_ListOfContests.Count);
+            i_TextBoxDescription.Text = m_ListOfContests[m_ListOfContests.Count - 1].m_Status;
+            i_TextBoxDescription.Size = new Size(350, 160);
+            i_TextBoxDescription.ScrollBars = ScrollBars.Vertical;
+            i_TextBoxDescription.Multiline = true;
+            i_TextBoxDescription.WordWrap = true;
+            i_TextBoxDescription.ReadOnly = true;
+            i_TextBoxDescription.TabIndex = 1;
         }
 
-        private void buildPictureControls(Label labelPost, Label labelPicture, TextBox textBoxDescription, PictureBox pictureBoxAttachedImage)
+        private void buildPictureControls(Label i_LabelPost, Label i_LabelPicture, TextBox i_TextBoxDescription, PictureBox i_PictureBoxAttachedImage)
         {
-            pictureBoxAttachedImage.Location = new Point(textBoxDescription.Right + 15, textBoxDescription.Location.Y);
-            pictureBoxAttachedImage.Margin = new Padding(5, 6, 5, 6);
-            pictureBoxAttachedImage.Name = string.Format("pictureBoxAttachedImage{0}", m_ListOfContests.Count);
-            pictureBoxAttachedImage.Size = new Size(200, textBoxDescription.Height);
-            pictureBoxAttachedImage.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBoxAttachedImage.BorderStyle = BorderStyle.FixedSingle;
-            pictureBoxAttachedImage.Image = Image.FromFile(m_ListOfContests[m_ListOfContests.Count - 1].m_ImagePath);
-            pictureBoxAttachedImage.TabIndex = 2;
-            pictureBoxAttachedImage.TabStop = false;
+            i_PictureBoxAttachedImage.Location = new Point(i_TextBoxDescription.Right + 15, i_TextBoxDescription.Location.Y);
+            i_PictureBoxAttachedImage.Margin = new Padding(5, 6, 5, 6);
+            i_PictureBoxAttachedImage.Name = string.Format("pictureBoxAttachedImage{0}", m_ListOfContests.Count);
+            i_PictureBoxAttachedImage.Size = new Size(200, i_TextBoxDescription.Height);
+            i_PictureBoxAttachedImage.SizeMode = PictureBoxSizeMode.StretchImage;
+            i_PictureBoxAttachedImage.BorderStyle = BorderStyle.FixedSingle;
+            i_PictureBoxAttachedImage.Image = Image.FromFile(m_ListOfContests[m_ListOfContests.Count - 1].m_ImagePath);
+            i_PictureBoxAttachedImage.TabIndex = 2;
+            i_PictureBoxAttachedImage.TabStop = false;
 
-            labelPicture.Location = new Point(pictureBoxAttachedImage.Location.X, labelPost.Location.Y);
-            labelPicture.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelPicture.Margin = new Padding(2, 2, 2, 2);
-            labelPicture.Name = string.Format("textBoxContestDescription{0}", m_ListOfContests.Count);
-            labelPicture.Text = "Image attached to the post:";
-            labelPicture.Size = new Size(195, 25);
+            i_LabelPicture.Location = new Point(i_PictureBoxAttachedImage.Location.X, i_LabelPost.Location.Y);
+            i_LabelPicture.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            i_LabelPicture.Margin = new Padding(2, 2, 2, 2);
+            i_LabelPicture.Name = string.Format("textBoxContestDescription{0}", m_ListOfContests.Count);
+            i_LabelPicture.Text = "Image attached to the post:";
+            i_LabelPicture.Size = new Size(195, 25);
         }
 
-        private void buildRequirementsControls(Label labelParticipants, Label labelContestrequirements, CheckBox checkBoxCommentCondition, CheckBox checkBoxLikeCondition, TextBox textBoxDescription, ListBox listBoxParticipants)
+        private void buildRequirementsControls(Label i_LabelParticipants, Label i_LabelContestRequirements, CheckBox i_CheckBoxCommentCondition, CheckBox i_CheckBoxLikeCondition, TextBox i_TextBoxDescription, ListBox i_ListBoxParticipants)
         {
-            labelContestrequirements.AutoSize = true;
-            labelContestrequirements.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelContestrequirements.Location = new Point(textBoxDescription.Location.X, textBoxDescription.Bottom + 15);
-            labelContestrequirements.Name = string.Format("labelContestrequirements{0}", m_ListOfContests.Count);
-            labelContestrequirements.Size = new Size(100, 25);
-            labelContestrequirements.Text = "List of requirements:";
-            labelContestrequirements.TabIndex = 5;
-            labelContestrequirements.TabStop = false;
+            i_LabelContestRequirements.AutoSize = true;
+            i_LabelContestRequirements.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            i_LabelContestRequirements.Location = new Point(i_TextBoxDescription.Location.X, i_TextBoxDescription.Bottom + 15);
+            i_LabelContestRequirements.Name = string.Format("labelContestrequirements{0}", m_ListOfContests.Count);
+            i_LabelContestRequirements.Size = new Size(100, 25);
+            i_LabelContestRequirements.Text = "List of requirements:";
+            i_LabelContestRequirements.TabIndex = 5;
+            i_LabelContestRequirements.TabStop = false;
 
-            checkBoxLikeCondition.AutoSize = true;
-            checkBoxLikeCondition.Location = new Point(labelContestrequirements.Location.X, labelContestrequirements.Bottom + 15);
-            checkBoxLikeCondition.Name = string.Format("checkBoxLikeCondition{0}", m_ListOfContests.Count);
-            checkBoxLikeCondition.Size = new Size(123, 24);
-            checkBoxLikeCondition.TabIndex = 6;
-            checkBoxLikeCondition.Text = "Require to like my post";
-            checkBoxLikeCondition.UseVisualStyleBackColor = true;
-            checkBoxLikeCondition.Checked = m_ListOfContests[m_TabIndex].m_LikeRequired;
-            checkBoxLikeCondition.Enabled = false;
+            i_CheckBoxLikeCondition.AutoSize = true;
+            i_CheckBoxLikeCondition.Location = new Point(i_LabelContestRequirements.Location.X, i_LabelContestRequirements.Bottom + 15);
+            i_CheckBoxLikeCondition.Name = string.Format("checkBoxLikeCondition{0}", m_ListOfContests.Count);
+            i_CheckBoxLikeCondition.Size = new Size(123, 24);
+            i_CheckBoxLikeCondition.TabIndex = 6;
+            i_CheckBoxLikeCondition.Text = "Require to like my post";
+            i_CheckBoxLikeCondition.UseVisualStyleBackColor = true;
+            i_CheckBoxLikeCondition.Checked = m_ListOfContests[m_TabIndex].m_LikeRequired;
+            i_CheckBoxLikeCondition.Enabled = false;
 
-            checkBoxCommentCondition.AutoSize = true;
-            checkBoxCommentCondition.Location = new Point(labelContestrequirements.Location.X, checkBoxLikeCondition.Location.Y + (listBoxParticipants.Height / 2));
-            checkBoxCommentCondition.Name = string.Format("checkBoxCommentCondition{0}", m_ListOfContests.Count);
-            checkBoxCommentCondition.Size = new Size(163, 24);
-            checkBoxCommentCondition.TabIndex = 7;
-            checkBoxCommentCondition.Text = "Require to comment my post";
-            checkBoxCommentCondition.UseVisualStyleBackColor = true;
-            checkBoxCommentCondition.Checked = m_ListOfContests[m_TabIndex].m_CommentRequired;
-            checkBoxCommentCondition.Enabled = false;
+            i_CheckBoxCommentCondition.AutoSize = true;
+            i_CheckBoxCommentCondition.Location = new Point(i_LabelContestRequirements.Location.X, i_CheckBoxLikeCondition.Location.Y + (i_ListBoxParticipants.Height / 2));
+            i_CheckBoxCommentCondition.Name = string.Format("checkBoxCommentCondition{0}", m_ListOfContests.Count);
+            i_CheckBoxCommentCondition.Size = new Size(163, 24);
+            i_CheckBoxCommentCondition.TabIndex = 7;
+            i_CheckBoxCommentCondition.Text = "Require to comment my post";
+            i_CheckBoxCommentCondition.UseVisualStyleBackColor = true;
+            i_CheckBoxCommentCondition.Checked = m_ListOfContests[m_TabIndex].m_CommentRequired;
+            i_CheckBoxCommentCondition.Enabled = false;
         }
 
-        private void buildParticipantsControls(Label labelParticipants, TextBox textBoxDescription, ListBox listBoxParticipants, Label labelContestrequirements, CheckBox checkBoxCommentCondition)
+        private void buildParticipantsControls(Label i_LabelParticipants, TextBox i_TextBoxDescription, ListBox i_ListBoxParticipants, Label i_LabelContestRequirements, CheckBox i_CheckBoxCommentCondition)
         {
-            labelParticipants.AutoSize = true;
-            labelParticipants.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelParticipants.Location = new Point(checkBoxCommentCondition.Right + labelParticipants.Width - 10, textBoxDescription.Bottom + 15);
-            labelParticipants.Name = string.Format("labelParticipants{0}", m_ListOfContests.Count);
-            labelParticipants.Size = new Size(100, 25);
-            labelParticipants.Text = "List of participants:";
-            labelParticipants.TabIndex = 3;
-            labelParticipants.TabStop = false;
+            i_LabelParticipants.AutoSize = true;
+            i_LabelParticipants.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            i_LabelParticipants.Location = new Point(i_CheckBoxCommentCondition.Right + i_LabelParticipants.Width - 10, i_TextBoxDescription.Bottom + 15);
+            i_LabelParticipants.Name = string.Format("labelParticipants{0}", m_ListOfContests.Count);
+            i_LabelParticipants.Size = new Size(100, 25);
+            i_LabelParticipants.Text = "List of participants:";
+            i_LabelParticipants.TabIndex = 3;
+            i_LabelParticipants.TabStop = false;
 
-            listBoxParticipants.FormattingEnabled = true;
-            listBoxParticipants.ItemHeight = 20;
-            listBoxParticipants.Location = new Point(labelParticipants.Location.X, labelParticipants.Bottom + 10);
-            listBoxParticipants.Margin = new Padding(3, 2, 3, 2);
-            listBoxParticipants.Name = string.Format("listBoxParticipants{0}", m_ListOfContests.Count);
-            listBoxParticipants.Size = new Size(170, 70);
-            listBoxParticipants.TabIndex = 4;
+            i_ListBoxParticipants.FormattingEnabled = true;
+            i_ListBoxParticipants.ItemHeight = 20;
+            i_ListBoxParticipants.Location = new Point(i_LabelParticipants.Location.X, i_LabelParticipants.Bottom + 10);
+            i_ListBoxParticipants.Margin = new Padding(3, 2, 3, 2);
+            i_ListBoxParticipants.Name = string.Format("listBoxParticipants{0}", m_ListOfContests.Count);
+            i_ListBoxParticipants.Size = new Size(170, 70);
+            i_ListBoxParticipants.TabIndex = 4;
         }
 
-        private void buildButtonsControls(ListBox listBoxParticipants, Button buttonUpdateParticipants, Button buttonChooseWinner, Button buttonDeleteConstest, Label labelParticipants)
+        private void buildButtonsControls(ListBox i_ListBoxParticipants, Button i_ButtonUpdateParticipants, Button i_ButtonChooseWinner, Button i_ButtonDeleteContest, Label i_LabelParticipants)
         {
-            buttonUpdateParticipants.Location = new Point(listBoxParticipants.Location.X + (listBoxParticipants.Width / 7) + 3, listBoxParticipants.Bottom + 10);
-            buttonUpdateParticipants.Margin = new Padding(5, 6, 5, 6);
-            buttonUpdateParticipants.Name = string.Format("buttonUpdateParticipants{0}", m_ListOfContests.Count);
-            buttonUpdateParticipants.Size = new Size(120, 35);
-            buttonUpdateParticipants.TabIndex = 8;
-            buttonUpdateParticipants.Text = "Update participants";
-            buttonUpdateParticipants.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonUpdateParticipants.Click += new EventHandler(this.buttonUpdateParticipants_Click);
+            i_ButtonUpdateParticipants.Location = new Point(i_ListBoxParticipants.Location.X + (i_ListBoxParticipants.Width / 7) + 3, i_ListBoxParticipants.Bottom + 10);
+            i_ButtonUpdateParticipants.Margin = new Padding(5, 6, 5, 6);
+            i_ButtonUpdateParticipants.Name = string.Format("buttonUpdateParticipants{0}", m_ListOfContests.Count);
+            i_ButtonUpdateParticipants.Size = new Size(120, 35);
+            i_ButtonUpdateParticipants.TabIndex = 8;
+            i_ButtonUpdateParticipants.Text = "Update participants";
+            i_ButtonUpdateParticipants.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            i_ButtonUpdateParticipants.Click += new EventHandler(this.buttonUpdateParticipants_Click);
 
-            buttonChooseWinner.Location = new Point(listBoxParticipants.Right + (buttonChooseWinner.Width / 2), labelParticipants.Bottom);
-            buttonChooseWinner.Margin = new Padding(5, 6, 5, 6);
-            buttonChooseWinner.Name = string.Format("buttonChooseWinner{0}", m_ListOfContests.Count);
-            buttonChooseWinner.Size = new Size(120, 35);
-            buttonChooseWinner.TabIndex = 9;
-            buttonChooseWinner.BackColor = Color.Green;
-            buttonChooseWinner.Text = m_ListOfContests[m_ListOfContests.Count - 1].m_NumberOfWinners < 2 ? "Choose winner" : "Choose winners";
-            buttonChooseWinner.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonChooseWinner.Click += new EventHandler(this.buttonChooseWinner_Click);
+            i_ButtonChooseWinner.Location = new Point(i_ListBoxParticipants.Right + (i_ButtonChooseWinner.Width / 2), i_LabelParticipants.Bottom);
+            i_ButtonChooseWinner.Margin = new Padding(5, 6, 5, 6);
+            i_ButtonChooseWinner.Name = string.Format("buttonChooseWinner{0}", m_ListOfContests.Count);
+            i_ButtonChooseWinner.Size = new Size(120, 35);
+            i_ButtonChooseWinner.TabIndex = 9;
+            i_ButtonChooseWinner.BackColor = Color.Green;
+            i_ButtonChooseWinner.Text = m_ListOfContests[m_ListOfContests.Count - 1].m_NumberOfWinners < 2 ? "Choose winner" : "Choose winners";
+            i_ButtonChooseWinner.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            i_ButtonChooseWinner.Click += new EventHandler(this.buttonChooseWinner_Click);
 
-            buttonDeleteConstest.Location = new Point(buttonChooseWinner.Location.X, buttonUpdateParticipants.Location.Y);
-            buttonDeleteConstest.Margin = new Padding(5, 6, 5, 6);
-            buttonDeleteConstest.Name = string.Format("buttonDeleteConstest{0}", m_ListOfContests.Count);
-            buttonDeleteConstest.Size = new Size(120, 35);
-            buttonDeleteConstest.TabIndex = 10;
-            buttonDeleteConstest.BackColor = Color.Red;
-            buttonDeleteConstest.Text = "Delete contest";
-            buttonDeleteConstest.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonDeleteConstest.Click += new EventHandler(this.buttonDeleteConstest_Click);
+            i_ButtonDeleteContest.Location = new Point(i_ButtonChooseWinner.Location.X, i_ButtonUpdateParticipants.Location.Y);
+            i_ButtonDeleteContest.Margin = new Padding(5, 6, 5, 6);
+            i_ButtonDeleteContest.Name = string.Format("buttonDeleteConstest{0}", m_ListOfContests.Count);
+            i_ButtonDeleteContest.Size = new Size(120, 35);
+            i_ButtonDeleteContest.TabIndex = 10;
+            i_ButtonDeleteContest.BackColor = Color.Red;
+            i_ButtonDeleteContest.Text = "Delete contest";
+            i_ButtonDeleteContest.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            i_ButtonDeleteContest.Click += new EventHandler(this.buttonDeleteConstest_Click);
         }
 
         private void buttonUpdateParticipants_Click(object sender, EventArgs e)
