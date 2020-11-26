@@ -195,7 +195,7 @@
             this.MaximizeBox = false;
             this.Name = "FormMemoriesFetch";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FormMemoriesFetch";
+            this.Text = "Memories";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -9,19 +9,20 @@ namespace DesktopFacebookInterface
 {
     public partial class FormMemoriesFetch : Form
     {
-        private readonly List<CheckBox> r_MemoriesOptions;
-        private readonly List<string> r_Memories;
-        private UserInformationWrapper m_User;
+        private readonly List<CheckBox> r_MemoriesTypes;
+        private readonly List<string> r_FetchedMemories;
+        private UserInformationWrapper m_UserInfo;
         private DateTime m_StartDate;
         private DateTime m_EndDate;
-        private string m_MissingDetails = string.Empty;
+        private StringBuilder m_MissingDetails;
 
         public FormMemoriesFetch(UserInformationWrapper i_UserInfo)
         {
             m_UserInfo = i_UserInfo;
             InitializeComponent();
-            r_MemoriesOptions = new List<CheckBox>();
-            r_Memories = new List<string>();
+            r_MemoriesTypes = new List<CheckBox>();
+            r_FetchedMemories = new List<string>();
+            m_MissingDetails = new StringBuilder();
             initMemoryOptionsList();
             monthCalendarStartDate.MinDate = new DateTime(2005, 1, 1);
             monthCalendarStartDate.MaxDate = DateTime.Today;
@@ -33,10 +34,10 @@ namespace DesktopFacebookInterface
 
         private void initMemoryOptionsList()
         {
-            r_MemoriesOptions.Add(checkBoxCheckAll);
-            r_MemoriesOptions.Add(checkBoxPosts);
-            r_MemoriesOptions.Add(checkBoxCheckIn);
-            r_MemoriesOptions.Add(checkBoxEvents);
+            r_MemoriesTypes.Add(checkBoxCheckAll);
+            r_MemoriesTypes.Add(checkBoxPosts);
+            r_MemoriesTypes.Add(checkBoxCheckIn);
+            r_MemoriesTypes.Add(checkBoxEvents);
         }
 
         private void monthCalendarStartDate_DateSelected(object sender, DateRangeEventArgs e)
@@ -55,8 +56,8 @@ namespace DesktopFacebookInterface
         private void buttonFetchData_Click(object sender, EventArgs e)
         {
             textBoxFetchResault.Text = string.Empty;
-            m_MissingDetails = string.Empty;
-            r_Memories.Clear();
+            m_MissingDetails.Clear();
+            r_FetchedMemories.Clear();
             StringBuilder fetchResults = new StringBuilder();
 
             if (checkBoxPosts.Checked)
@@ -74,7 +75,7 @@ namespace DesktopFacebookInterface
                 displayEvents();
             }
 
-            foreach (string option in r_Memories)
+            foreach (string option in r_FetchedMemories)
             {
                 fetchResults.Append(option + Environment.NewLine);
             }
@@ -85,7 +86,7 @@ namespace DesktopFacebookInterface
             }
             else
             {
-                MessageBox.Show(m_MissingDetails);
+                MessageBox.Show(m_MissingDetails.ToString());
             }
         }
 
@@ -93,32 +94,32 @@ namespace DesktopFacebookInterface
         {
             if (i_fetchResult.Length == 0)
             {
-                m_MissingDetails += string.Format("At least 1 checkbox of options should be checked.{0}", Environment.NewLine);
-
+                m_MissingDetails.Append(string.Format("At least 1 checkbox of options should be checked.{0}", Environment.NewLine));
             }
 
             if (m_StartDate < monthCalendarStartDate.MinDate)
             {
-                m_MissingDetails += string.Format("Need to select start day.{0}", Environment.NewLine);
+                m_MissingDetails.Append(string.Format("Need to select start day.{0}", Environment.NewLine));
             }
 
             if (m_EndDate < monthCalendarEndDate.MinDate)
             {
-                m_MissingDetails += string.Format("Need to select end day.{0}", Environment.NewLine);
+                m_MissingDetails.Append(string.Format("Need to select end day.{0}", Environment.NewLine));
             }
 
-            return string.IsNullOrEmpty(m_MissingDetails);
+            return string.IsNullOrEmpty(m_MissingDetails.ToString());
         }
+
         private void displayPosts()
         {
             string title = string.Format("{0}Posts:{0}", Environment.NewLine);
             List<string> posts = m_UserInfo.fetchPostsByDate(m_StartDate, m_EndDate);
 
-            r_Memories.Add(title);
+            r_FetchedMemories.Add(title);
 
             foreach(string post in posts)
             {
-                r_Memories.Add(post);
+                r_FetchedMemories.Add(post);
             }
         }
 
@@ -127,11 +128,11 @@ namespace DesktopFacebookInterface
             string title = string.Format("{0}Check in:{0}", Environment.NewLine);
             List<string> checkIn = m_UserInfo.fetchCheckInsByDate(m_StartDate, m_EndDate);
 
-            r_Memories.Add(title);
+            r_FetchedMemories.Add(title);
 
             foreach (string post in checkIn)
             {
-                r_Memories.Add(post);
+                r_FetchedMemories.Add(post);
             }
         }
 
@@ -140,11 +141,11 @@ namespace DesktopFacebookInterface
             string title = string.Format("{0}Events:{0}", Environment.NewLine);
             List<string> events = m_UserInfo.fetchEventsByDate(m_StartDate, m_EndDate);
 
-            r_Memories.Add(title);
+            r_FetchedMemories.Add(title);
 
             foreach (string post in events)
             {
-                r_Memories.Add(post);
+                r_FetchedMemories.Add(post);
             }
         }
 
@@ -154,14 +155,14 @@ namespace DesktopFacebookInterface
 
             if(checkAll.Checked)
             {
-                foreach(CheckBox currentOption in r_MemoriesOptions)
+                foreach(CheckBox currentOption in r_MemoriesTypes)
                 {
                     currentOption.Checked = true;
                 }
             }
             else
             {
-                foreach (CheckBox currentOption in r_MemoriesOptions)
+                foreach (CheckBox currentOption in r_MemoriesTypes)
                 {
                     currentOption.Checked = false;
                 }
