@@ -34,6 +34,7 @@
             this.PictureBoxCoverPhoto = new System.Windows.Forms.PictureBox();
             this.tabControlHomeScreen = new System.Windows.Forms.TabControl();
             this.tabPageAbout = new System.Windows.Forms.TabPage();
+            this.labelAbout = new System.Windows.Forms.Label();
             this.tabPageAlbums = new System.Windows.Forms.TabPage();
             this.listBoxAlbums = new System.Windows.Forms.ListBox();
             this.tabPageFriends = new System.Windows.Forms.TabPage();
@@ -54,6 +55,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxProfile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCoverPhoto)).BeginInit();
             this.tabControlHomeScreen.SuspendLayout();
+            this.tabPageAbout.SuspendLayout();
             this.tabPageAlbums.SuspendLayout();
             this.tabPageFriends.SuspendLayout();
             this.tabPagePages.SuspendLayout();
@@ -107,10 +109,10 @@
             this.tabControlHomeScreen.SelectedIndex = 0;
             this.tabControlHomeScreen.Size = new System.Drawing.Size(441, 231);
             this.tabControlHomeScreen.TabIndex = 5;
-            this.tabControlHomeScreen.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlHomeScreen_Selected);
             // 
             // tabPageAbout
             // 
+            this.tabPageAbout.Controls.Add(this.labelAbout);
             this.tabPageAbout.Location = new System.Drawing.Point(4, 29);
             this.tabPageAbout.Name = "tabPageAbout";
             this.tabPageAbout.Padding = new System.Windows.Forms.Padding(3);
@@ -118,6 +120,15 @@
             this.tabPageAbout.TabIndex = 0;
             this.tabPageAbout.Text = "About";
             this.tabPageAbout.UseVisualStyleBackColor = true;
+            // 
+            // labelAbout
+            // 
+            this.labelAbout.AutoSize = true;
+            this.labelAbout.Location = new System.Drawing.Point(0, 0);
+            this.labelAbout.Name = "labelAbout";
+            this.labelAbout.Size = new System.Drawing.Size(89, 20);
+            this.labelAbout.TabIndex = 0;
+            this.labelAbout.Text = "label About";
             // 
             // tabPageAlbums
             // 
@@ -325,6 +336,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxProfile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxCoverPhoto)).EndInit();
             this.tabControlHomeScreen.ResumeLayout(false);
+            this.tabPageAbout.ResumeLayout(false);
+            this.tabPageAbout.PerformLayout();
             this.tabPageAlbums.ResumeLayout(false);
             this.tabPageFriends.ResumeLayout(false);
             this.tabPagePages.ResumeLayout(false);
@@ -358,5 +371,6 @@
         private System.Windows.Forms.Button buttonCancelAttachment;
         private System.Windows.Forms.Button buttonContestMenu;
         private System.Windows.Forms.Button buttonMemories;
+        private System.Windows.Forms.Label labelAbout;
     }
 }
