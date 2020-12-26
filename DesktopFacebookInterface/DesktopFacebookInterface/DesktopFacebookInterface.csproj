@@ -60,6 +60,12 @@
     <Compile Include="FormAddContest.Designer.cs">
       <DependentUpon>FormAddContest.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDisplayPhotos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDisplayPhotos.Designer.cs">
+      <DependentUpon>FormDisplayPhotos.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormContest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     <EmbeddedResource Include="FormAddContest.resx">
       <DependentUpon>FormAddContest.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormDisplayPhotos.resx">
+      <DependentUpon>FormDisplayPhotos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormContest.resx">
       <DependentUpon>FormContest.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,6 +139,7 @@
     <EmbeddedResource Include="FormShowAlbum.resx">
       <DependentUpon>FormShowAlbum.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="FacebookWrapper.ObjectModel.Album.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
