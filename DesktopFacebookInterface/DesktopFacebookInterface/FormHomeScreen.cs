@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using Facebook;
 using FacebookWrapper;
@@ -18,6 +20,7 @@ namespace DesktopFacebookInterface
         private FormContest m_FormContest;
         private string m_AttachedImagePath = null;
         private bool m_IsFirstContestClick = true;
+        private Size tabPageSize;
 
         public FormHomeScreen(LoginResult i_LoginResult, AppSettings i_AppSettings)
         {
@@ -30,7 +33,8 @@ namespace DesktopFacebookInterface
             textBoxPostStatus.Text = k_TextBoxPostStatusMsg;
             PictureBoxProfile.LoadAsync(m_UserInfo.User.PictureNormalURL);
             PictureBoxCoverPhoto.LoadAsync(m_UserInfo.fetchCoverPhotoURL());
-            displayAbout();
+            //displayAbout();
+            tabPageSize = tabControlHomeScreen.TabPages[0].Size;
             displayTimeline();
         }
 
@@ -44,6 +48,23 @@ namespace DesktopFacebookInterface
             }
 
             base.OnShown(e);
+            loadInformation();
+        }
+
+        private void loadInformation()
+        {
+            try
+            {
+                new Thread(displayAbout).Start();
+                new Thread(displayAlbums).Start();
+                new Thread(displayFriends).Start();
+                new Thread(displayPages).Start();
+                new Thread(displayEvents).Start();
+            }
+            catch (FacebookOAuthException)
+            {
+                MessageBox.Show(string.Format("Unable to load: No Permissions to view {0}."));
+            }
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -74,82 +95,57 @@ namespace DesktopFacebookInterface
             }
         }
 
-        private void tabControlHomeScreen_Selected(object sender, TabControlEventArgs e)
-        {
-            eTabOptions tabClicked = (eTabOptions)tabControlHomeScreen.SelectedIndex;
-
-            try
-            {
-                switch (tabClicked)
-                {
-                    case eTabOptions.About:
-                        displayAbout();
-                        break;
-                    case eTabOptions.Albums:
-                        displayAlbums();
-                        break;
-                    case eTabOptions.Pages:
-                        displayPages();
-                        break;
-                    case eTabOptions.Events:
-                        displayEvents();
-                        break;
-                    case eTabOptions.Friends:
-                        displayFriends();
-                        break;
-                    default:
-                        break;
-                }
-            }
-            catch (FacebookOAuthException)
-            {
-                MessageBox.Show(string.Format("Unable to load: No Permissions to view {0}.", tabClicked));
-            }
-        }
-
         private void displayAbout()
         {
             List<string> listAbout = m_UserInfo.fetchAbout();
-
-            TabPage selectedTab = tabControlHomeScreen.SelectedTab;
-            Label prevLabel = new Label();
+            StringBuilder generateAbout = new StringBuilder();
 
             foreach (string info in listAbout)
             {
-                Label labelInfo = new Label();
-
-                if (listAbout[0].Equals(info))
+                if(info.Equals(listAbout[listAbout.Count - 1]))
                 {
-                    labelInfo.Text = info;
-                    labelInfo.Width += 100;
-                    selectedTab.Controls.Add(labelInfo);
+                    generateAbout.Append(string.Format("{0}", info));
                 }
                 else
                 {
-                    labelInfo.Text = info;
-                    labelInfo.Width += 100;
-                    labelInfo.Location = new Point(prevLabel.Location.X, prevLabel.Location.Y + 25);
-                    selectedTab.Controls.Add(labelInfo);
+                    generateAbout.Append(string.Format("{0}{1}{1}", info, Environment.NewLine));
                 }
-
-                prevLabel = labelInfo;
             }
+
+            labelAbout.Invoke(new Action(() => labelAbout.Text = generateAbout.ToString()));
+            labelAbout.Invoke(new Action(() =>
+            { 
+                if(labelAbout.Height > tabControlHomeScreen.TabPages[0].Height)
+                {
+                    tabControlHomeScreen.TabPages[0].AutoScroll = true;
+                }
+            }));
         }
 
         private void displayAlbums()
         {
             listBoxAlbums.Items.Clear();
-            listBoxAlbums.Size = tabControlHomeScreen.SelectedTab.Size;
+            listBoxAlbums.Size = tabPageSize;
             listBoxAlbums.DisplayMember = "Name";
 
-            foreach (Album album in m_UserInfo.User.Albums)
+            try
             {
-                listBoxAlbums.Items.Add(album);
-            }
+                foreach (Album album in m_UserInfo.User.Albums)
+                {
+                    listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add(album)));
+                }
 
-            if (m_UserInfo.User.Albums.Count == 0)
+                if (m_UserInfo.User.Albums.Count == 0)
+                {
+                    listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add("No Albums found")));
+                    listBoxAlbums.MouseDoubleClick -= new MouseEventHandler(listBoxAlbums_MouseDoubleClick);
+
+                }
+            }
+            catch (FacebookOAuthException)
             {
-                MessageBox.Show("No Albums found");
+                listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add("Unable to load: No Permissions to view Albums.")));
+                //MessageBox.Show(string.Format("Unable to load: No Permissions to view {0}."));
             }
         }
 
@@ -179,51 +175,79 @@ namespace DesktopFacebookInterface
         private void displayPages()
         {
             listBoxPages.Items.Clear();
-            listBoxPages.Size = tabControlHomeScreen.SelectedTab.Size;
+            listBoxPages.Size = tabPageSize;
             listBoxPages.DisplayMember = "Name";
 
-            foreach (Page page in m_UserInfo.User.LikedPages)
+            try
             {
-                listBoxPages.Items.Add(page);
-            }
+                foreach (Page page in m_UserInfo.User.LikedPages)
+                {
+                    listBoxPages.Invoke(new Action(() => listBoxPages.Items.Add(page)));
+                }
 
-            if (m_UserInfo.User.LikedPages.Count == 0)
+                if (m_UserInfo.User.LikedPages.Count == 0)
+                {
+                    listBoxPages.Invoke(new Action(() => listBoxPages.Items.Add("No pages found")));
+                    //MessageBox.Show("No pages found");
+                }
+            }
+            catch (FacebookOAuthException)
             {
-                MessageBox.Show("No pages found");
+                listBoxPages.Invoke(new Action(() => listBoxPages.Items.Add("Unable to load: No Permissions to view Pages.")));
+                //MessageBox.Show(string.Format("Unable to load: No Permissions to view {0}."));
             }
         }
 
         private void displayEvents()
         {
             listBoxEvents.Items.Clear();
-            listBoxEvents.Size = tabControlHomeScreen.SelectedTab.Size;
+            listBoxEvents.Size = tabPageSize;
             listBoxEvents.DisplayMember = "Name";
 
-            foreach (Event userEvent in m_UserInfo.User.Events)
+            try
             {
-                listBoxEvents.Items.Add(userEvent);
-            }
+                foreach (Event userEvent in m_UserInfo.User.Events)
+                {
+                    listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add(userEvent)));
+                }
 
-            if (m_UserInfo.User.Events.Count == 0)
+                if (m_UserInfo.User.Events.Count == 0)
+                {
+                    listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add("No events found")));
+                    //MessageBox.Show("No events found");
+                }
+            }
+            catch (FacebookOAuthException)
             {
-                MessageBox.Show("No events found");
+                listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add("Unable to load: No Permissions to view Events.")));
+                //MessageBox.Show(string.Format("Unable to load: No Permissions to view {0}."));
             }
         }
 
         private void displayFriends()
         {
             listBoxFriends.Items.Clear();
-            listBoxFriends.Size = tabControlHomeScreen.SelectedTab.Size;
+            listBoxFriends.Size = tabPageSize;
             listBoxFriends.DisplayMember = "Name";
 
-            foreach (User friend in m_UserInfo.User.Friends)
-            {
-                listBoxFriends.Items.Add(friend.Name);
-            }
 
-            if (m_UserInfo.User.Friends.Count == 0)
+            try
             {
-                MessageBox.Show("No friends found");
+                foreach (User friend in m_UserInfo.User.Friends)
+                {
+                    listBoxFriends.Invoke(new Action(() => listBoxFriends.Items.Add(friend.Name)));
+                }
+
+                if (m_UserInfo.User.Friends.Count == 0)
+                {
+                    listBoxFriends.Invoke(new Action(() => listBoxFriends.Items.Add("No friends found")));
+                    //MessageBox.Show("No friends found");
+                }
+            }
+            catch (FacebookOAuthException)
+            {
+                listBoxFriends.Invoke(new Action(() => listBoxFriends.Items.Add("Unable to load: No Permissions to view Friends.")));
+                //MessageBox.Show(string.Format("Unable to load: No Permissions to view {0}."));
             }
         }
 
