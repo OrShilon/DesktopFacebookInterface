@@ -170,8 +170,8 @@ namespace DesktopFacebookInterface
                 }
                 else
                 {
-                    FormShowAlbum album = new FormShowAlbum(selectedAlbum);
-                    album.ShowDialog();
+                    FormDisplayPhotos albumPhotos = new FormDisplayPhotos(selectedAlbum);
+                    albumPhotos.ShowDialog();
                 }
             }
         }
