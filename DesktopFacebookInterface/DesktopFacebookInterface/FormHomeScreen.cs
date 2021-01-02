@@ -33,7 +33,6 @@ namespace DesktopFacebookInterface
             textBoxPostStatus.Text = k_TextBoxPostStatusMsg;
             PictureBoxProfile.LoadAsync(m_UserInfo.User.PictureNormalURL);
             PictureBoxCoverPhoto.LoadAsync(m_UserInfo.fetchCoverPhotoURL());
-            //displayAbout();
             tabPageSize = tabControlHomeScreen.TabPages[0].Size;
             displayTimeline();
         }
@@ -48,23 +47,17 @@ namespace DesktopFacebookInterface
             }
 
             base.OnShown(e);
-            loadInformation();
+            fetchUserInfo();
+
         }
 
-        private void loadInformation()
+        private void fetchUserInfo()
         {
-            try
-            {
-                new Thread(displayAbout).Start();
-                new Thread(displayAlbums).Start();
-                new Thread(displayFriends).Start();
-                new Thread(displayPages).Start();
-                new Thread(displayEvents).Start();
-            }
-            catch (FacebookOAuthException)
-            {
-                MessageBox.Show(string.Format("Unable to load: No Permissions to view {0}."));
-            }
+            new Thread(displayAbout).Start();
+            new Thread(displayAlbums).Start();
+            new Thread(displayFriends).Start();
+            new Thread(displayPages).Start();
+            new Thread(displayEvents).Start();
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
