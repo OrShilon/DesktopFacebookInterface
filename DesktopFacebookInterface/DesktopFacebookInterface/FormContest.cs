@@ -9,14 +9,14 @@ namespace DesktopFacebookInterface
     internal partial class FormContest : Form
     {
         private const int k_MaxNumberOfContests = 15;
-        private readonly List<ContestLogic> m_ListOfContests;
+        private readonly List<Contest> m_ListOfContests;
         private UserInformationWrapper m_UserInfo;
         private int m_TabIndex = 0;
 
         public FormContest(UserInformationWrapper i_UserInfo)
         {
             m_UserInfo = i_UserInfo;
-            m_ListOfContests = new List<ContestLogic>();
+            m_ListOfContests = new List<Contest>();
 
             InitializeComponent();
         }
@@ -61,14 +61,14 @@ namespace DesktopFacebookInterface
 
                 if (newFormContest.DialogResult == DialogResult.OK)
                 {
-                    ContestLogic newContest = new ContestLogic(
+                    Contest newContest = ContestFactory.CreateConstest(
                         m_TabIndex + 1,
                         m_UserInfo,
                         newFormContest.Status,
                         newFormContest.ImagePath,
+                        newFormContest.NumberOfWinners,
                         newFormContest.LikeRequired,
-                        newFormContest.CommentRequired,
-                        newFormContest.NumberOfWinners);
+                        newFormContest.CommentRequired);
                     m_ListOfContests.Add(newContest);
 
                     try
@@ -127,6 +127,7 @@ namespace DesktopFacebookInterface
 
             buildParticipantsControls(labelParticipants, textBoxDescription, listBoxParticipants, labelContestrequirements, checkBoxCommentCondition);
             buildRequirementsControls(labelParticipants, labelContestrequirements, checkBoxCommentCondition, checkBoxLikeCondition, textBoxDescription, listBoxParticipants);
+            updateRequirementsCheckBoxes(m_ListOfContests[m_ListOfContests.Count - 1], checkBoxCommentCondition, checkBoxLikeCondition);
             buildButtonsControls(listBoxParticipants, buttonUpdateParticipants, buttonChooseWinner, buttonDeleteConstest, labelParticipants);
 
             i_CurrentTabPage.Controls.Add(labelPost);
@@ -204,7 +205,6 @@ namespace DesktopFacebookInterface
             i_CheckBoxLikeCondition.TabIndex = 6;
             i_CheckBoxLikeCondition.Text = "Require to like my post";
             i_CheckBoxLikeCondition.UseVisualStyleBackColor = true;
-            i_CheckBoxLikeCondition.Checked = m_ListOfContests[m_TabIndex].m_LikeRequired;
             i_CheckBoxLikeCondition.Enabled = false;
 
             i_CheckBoxCommentCondition.AutoSize = true;
@@ -214,7 +214,6 @@ namespace DesktopFacebookInterface
             i_CheckBoxCommentCondition.TabIndex = 7;
             i_CheckBoxCommentCondition.Text = "Require to comment my post";
             i_CheckBoxCommentCondition.UseVisualStyleBackColor = true;
-            i_CheckBoxCommentCondition.Checked = m_ListOfContests[m_TabIndex].m_CommentRequired;
             i_CheckBoxCommentCondition.Enabled = false;
         }
 
@@ -268,6 +267,27 @@ namespace DesktopFacebookInterface
             i_ButtonDeleteContest.Text = "Delete contest";
             i_ButtonDeleteContest.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             i_ButtonDeleteContest.Click += new EventHandler(this.buttonDeleteConstest_Click);
+        }
+
+        private void updateRequirementsCheckBoxes(Contest i_Contest, CheckBox i_CheckBoxCommentCondition, CheckBox i_CheckBoxLikeCondition)
+        {
+            if(i_Contest is ContestByLikes)
+            {
+                i_CheckBoxLikeCondition.Checked = true;
+                i_CheckBoxCommentCondition.Checked = false;
+            }
+
+            if(i_Contest is ContestByComments)
+            {
+                i_CheckBoxLikeCondition.Checked = false;
+                i_CheckBoxCommentCondition.Checked = true;
+            }
+
+            if(i_Contest is ContestByLikesAndComments)
+            {
+                i_CheckBoxLikeCondition.Checked = true;
+                i_CheckBoxCommentCondition.Checked = true;
+            }
         }
 
         private void buttonUpdateParticipants_Click(object sender, EventArgs e)
