@@ -108,7 +108,7 @@ namespace DesktopFacebookInterface
 
         private void SetUserInfoWrapper()
         {
-            (UserInformationWrapper.GetUserWrapper).SetUser(m_LoginResult.LoggedInUser);
+            (FacebookUserFacade.GetFacebookUserInstance).SetUser(m_LoginResult.LoggedInUser);
         }
 
         private void SetAppSetingsParams() 

@@ -107,13 +107,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="FormShowAlbum.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormShowAlbum.Designer.cs">
-      <DependentUpon>FormShowAlbum.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserInformationWrapper.cs" />
+    <Compile Include="FacebookUserFacade.cs" />
     <EmbeddedResource Include="FormAddContest.resx">
       <DependentUpon>FormAddContest.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,9 +133,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormShowAlbum.resx">
-      <DependentUpon>FormShowAlbum.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="FacebookWrapper.ObjectModel.Album.datasource" />
     <None Include="Properties\Settings.settings">

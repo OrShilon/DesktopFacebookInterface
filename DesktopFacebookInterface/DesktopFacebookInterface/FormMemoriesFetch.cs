@@ -11,14 +11,14 @@ namespace DesktopFacebookInterface
     {
         private readonly List<CheckBox> r_MemoriesTypes;
         private readonly List<string> r_FetchedMemories;
-        private UserInformationWrapper m_UserInfo;
+        private FacebookUserFacade m_UserInfo;
         private DateTime m_StartDate;
         private DateTime m_EndDate;
         private StringBuilder m_MissingDetails;
 
         public FormMemoriesFetch()
         {
-            m_UserInfo = UserInformationWrapper.GetUserWrapper;
+            m_UserInfo = FacebookUserFacade.GetFacebookUserInstance;
             InitializeComponent();
             r_MemoriesTypes = new List<CheckBox>();
             r_FetchedMemories = new List<string>();

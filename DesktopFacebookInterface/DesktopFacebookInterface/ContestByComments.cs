@@ -8,8 +8,8 @@ namespace DesktopFacebookInterface
 {
     class ContestByComments : Contest
     {
-        public ContestByComments(int i_ContestID, UserInformationWrapper i_UserInfo, string i_Status,
-            string i_ImagePath, int i_NumberOfWinners) : base(i_ContestID, i_UserInfo, i_Status, i_ImagePath, i_NumberOfWinners)
+        public ContestByComments(int i_ContestID, string i_Status,
+            string i_ImagePath, int i_NumberOfWinners) : base(i_ContestID, i_Status, i_ImagePath, i_NumberOfWinners)
         {
 
         }
