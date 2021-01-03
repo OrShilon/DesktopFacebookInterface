@@ -22,16 +22,18 @@ namespace DesktopFacebookInterface
         private bool m_IsFirstContestClick = true;
         private Size tabPageSize;
 
-        public FormHomeScreen(LoginResult i_LoginResult, AppSettings i_AppSettings)
+        public FormHomeScreen(LoginResult i_LoginResult)
         {
             m_LoginResult = i_LoginResult;
-            m_AppSettings = i_AppSettings;
-            m_UserInfo = new UserInformationWrapper(i_LoginResult.LoggedInUser);
+            m_AppSettings = AppSettings.LoadFile();
+            //m_UserInfo = new UserInformationWrapper(i_LoginResult.LoggedInUser);
+            m_UserInfo = UserInformationWrapper.GetUserWrapper;
+            m_UserInfo.SetUser(i_LoginResult.LoggedInUser);
 
             InitializeComponent();
-            this.Text = string.Format("Facebook - {0}", m_UserInfo.User.Name);
+            this.Text = string.Format("Facebook - {0}", m_UserInfo.Name);
             textBoxPostStatus.Text = k_TextBoxPostStatusMsg;
-            PictureBoxProfile.LoadAsync(m_UserInfo.User.PictureNormalURL);
+            PictureBoxProfile.LoadAsync(m_UserInfo.PictureNormalURL);
             PictureBoxCoverPhoto.LoadAsync(m_UserInfo.fetchCoverPhotoURL());
             tabPageSize = tabControlHomeScreen.TabPages[0].Size;
             displayTimeline();
@@ -47,11 +49,11 @@ namespace DesktopFacebookInterface
             }
 
             base.OnShown(e);
-            fetchUserInfo();
+            displayUserInfo();
 
         }
 
-        private void fetchUserInfo()
+        private void displayUserInfo()
         {
             new Thread(displayAbout).Start();
             new Thread(displayAlbums).Start();
@@ -69,7 +71,7 @@ namespace DesktopFacebookInterface
         {
             m_AppSettings.m_UserAccessToken = null;
             m_AppSettings.m_RememberUser = false;
-            m_AppSettings.SaveFile();
+            AppSettings.SaveFile();
             MessageBox.Show("You are now logged out!");
             this.Hide();
             this.Close();
@@ -120,15 +122,17 @@ namespace DesktopFacebookInterface
             listBoxAlbums.Items.Clear();
             listBoxAlbums.Size = tabPageSize;
             listBoxAlbums.DisplayMember = "Name";
+            FacebookObjectCollection<Album> albumList = null;
 
             try
             {
-                foreach (Album album in m_UserInfo.User.Albums)
+                albumList = m_UserInfo.FetchAlbums();
+                foreach (Album album in albumList)
                 {
                     listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add(album)));
                 }
 
-                if (m_UserInfo.User.Albums.Count == 0)
+                if (albumList.Count == 0)
                 {
                     listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add("No Albums found")));
                     listBoxAlbums.MouseDoubleClick -= new MouseEventHandler(listBoxAlbums_MouseDoubleClick);
@@ -138,7 +142,6 @@ namespace DesktopFacebookInterface
             catch (FacebookOAuthException)
             {
                 listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add("Unable to load: No Permissions to view Albums.")));
-                //MessageBox.Show(string.Format("Unable to load: No Permissions to view {0}."));
             }
         }
 
@@ -170,24 +173,24 @@ namespace DesktopFacebookInterface
             listBoxPages.Items.Clear();
             listBoxPages.Size = tabPageSize;
             listBoxPages.DisplayMember = "Name";
+            FacebookObjectCollection<Page> likedPages = null;
 
             try
             {
-                foreach (Page page in m_UserInfo.User.LikedPages)
+                likedPages = m_UserInfo.FetchLikedPages();
+                foreach (Page page in likedPages)
                 {
                     listBoxPages.Invoke(new Action(() => listBoxPages.Items.Add(page)));
                 }
 
-                if (m_UserInfo.User.LikedPages.Count == 0)
+                if (likedPages.Count == 0)
                 {
                     listBoxPages.Invoke(new Action(() => listBoxPages.Items.Add("No pages found")));
-                    //MessageBox.Show("No pages found");
                 }
             }
             catch (FacebookOAuthException)
             {
                 listBoxPages.Invoke(new Action(() => listBoxPages.Items.Add("Unable to load: No Permissions to view Pages.")));
-                //MessageBox.Show(string.Format("Unable to load: No Permissions to view {0}."));
             }
         }
 
@@ -196,24 +199,24 @@ namespace DesktopFacebookInterface
             listBoxEvents.Items.Clear();
             listBoxEvents.Size = tabPageSize;
             listBoxEvents.DisplayMember = "Name";
+            FacebookObjectCollection<Event> events = null;
 
             try
             {
-                foreach (Event userEvent in m_UserInfo.User.Events)
+                events = m_UserInfo.FetchEvents();
+                foreach (Event userEvent in events)
                 {
                     listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add(userEvent)));
                 }
 
-                if (m_UserInfo.User.Events.Count == 0)
+                if (events.Count == 0)
                 {
                     listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add("No events found")));
-                    //MessageBox.Show("No events found");
                 }
             }
             catch (FacebookOAuthException)
             {
                 listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add("Unable to load: No Permissions to view Events.")));
-                //MessageBox.Show(string.Format("Unable to load: No Permissions to view {0}."));
             }
         }
 
@@ -222,25 +225,25 @@ namespace DesktopFacebookInterface
             listBoxFriends.Items.Clear();
             listBoxFriends.Size = tabPageSize;
             listBoxFriends.DisplayMember = "Name";
+            FacebookObjectCollection<User> friends = null;
 
 
             try
             {
-                foreach (User friend in m_UserInfo.User.Friends)
+                friends = m_UserInfo.FetchFriends();
+                foreach (User friend in friends)
                 {
                     listBoxFriends.Invoke(new Action(() => listBoxFriends.Items.Add(friend.Name)));
                 }
 
-                if (m_UserInfo.User.Friends.Count == 0)
+                if (friends.Count == 0)
                 {
                     listBoxFriends.Invoke(new Action(() => listBoxFriends.Items.Add("No friends found")));
-                    //MessageBox.Show("No friends found");
                 }
             }
             catch (FacebookOAuthException)
             {
                 listBoxFriends.Invoke(new Action(() => listBoxFriends.Items.Add("Unable to load: No Permissions to view Friends.")));
-                //MessageBox.Show(string.Format("Unable to load: No Permissions to view {0}."));
             }
         }
 
@@ -258,7 +261,7 @@ namespace DesktopFacebookInterface
                 m_AppSettings.m_UserAccessToken = null;
             }
 
-            m_AppSettings.SaveFile();
+            AppSettings.SaveFile();
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)

@@ -5,13 +5,53 @@ using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
-    public class UserInformationWrapper
+    public sealed class UserInformationWrapper
     {
-        private User m_LoginUser;
+        private static UserInformationWrapper s_Instance = null;
+        private static readonly object sr_Lock = new object();
+        private User m_LoginUser = null;
 
-        public UserInformationWrapper(User i_LoginUser)
+        public void SetUser(User i_User)
         {
-            m_LoginUser = i_LoginUser;
+            m_LoginUser = i_User;
+        }
+
+        private UserInformationWrapper()
+        {
+        }
+
+        public static UserInformationWrapper GetUserWrapper
+        {
+            get
+            {
+                if(s_Instance == null)
+                {
+                    lock(sr_Lock)
+                    {
+                        if(s_Instance == null)
+                        {
+                            s_Instance = new UserInformationWrapper();
+                        }
+                    }
+                }
+                return s_Instance;
+            }
+        }
+
+        public string Name
+        { 
+            get
+            {
+                return m_LoginUser.Name;
+            } 
+        }
+
+        public string PictureNormalURL
+        {
+            get
+            {
+                return m_LoginUser.PictureNormalURL;
+            }
         }
 
         public User User
@@ -119,7 +159,27 @@ namespace DesktopFacebookInterface
             return listTimeLine;
         }
 
-        public List<string> fetchPostsByDate(DateTime i_StartDate, DateTime i_EndDate)
+        public FacebookObjectCollection<Album> FetchAlbums()
+        {
+            return m_LoginUser.Albums;
+        }
+        
+        public FacebookObjectCollection<Page> FetchLikedPages()
+        {
+            return m_LoginUser.LikedPages;
+        }
+        
+        public FacebookObjectCollection<Event> FetchEvents()
+        {
+            return m_LoginUser.Events;
+        }
+
+        public FacebookObjectCollection<User> FetchFriends()
+        {
+            return m_LoginUser.Friends;
+        }
+
+        public List<string> FetchPostsByDate(DateTime i_StartDate, DateTime i_EndDate)
         {
             List<string> filteredPosts = new List<string>();
 
