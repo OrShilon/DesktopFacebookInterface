@@ -296,7 +296,7 @@ namespace DesktopFacebookInterface
         {
             if (m_IsFirstContestClick)
             {
-                m_FormContest = new FormContest(m_UserInfo);
+                m_FormContest = new FormContest();
                 m_FormContest.ShowDialog();
                 m_IsFirstContestClick = false;
             }
@@ -324,7 +324,7 @@ namespace DesktopFacebookInterface
 
         private void buttonMemories_Click(object sender, EventArgs e)
         {
-            FormMemoriesFetch newForm = new FormMemoriesFetch(m_UserInfo);
+            FormMemoriesFetch newForm = new FormMemoriesFetch();
             newForm.ShowDialog();
         }
     }

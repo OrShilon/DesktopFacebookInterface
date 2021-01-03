@@ -14,9 +14,9 @@ namespace DesktopFacebookInterface
         private UserInformationWrapper m_UserInfo;
         private int m_TabIndex = 0;
 
-        public FormContest(UserInformationWrapper i_UserInfo)
+        public FormContest()
         {
-            m_UserInfo = i_UserInfo;
+            m_UserInfo = UserInformationWrapper.GetUserWrapper;
             m_ListOfContests = new List<Contest>();
 
             InitializeComponent();
