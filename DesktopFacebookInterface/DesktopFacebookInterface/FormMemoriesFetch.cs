@@ -113,7 +113,7 @@ namespace DesktopFacebookInterface
         private void displayPosts()
         {
             string title = string.Format("{0}Posts:{0}", Environment.NewLine);
-            List<string> posts = m_UserInfo.fetchPostsByDate(m_StartDate, m_EndDate);
+            List<string> posts = m_UserInfo.FetchPostsByDate(m_StartDate, m_EndDate);
 
             r_FetchedMemories.Add(title);
 

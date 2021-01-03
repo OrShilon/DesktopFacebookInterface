@@ -99,7 +99,7 @@ namespace DesktopFacebookInterface
         private void closeFormAndShowHome()
         {
             this.Hide();
-            FormHomeScreen homeScreen = new FormHomeScreen(m_LoginResult, m_AppSettings);
+            FormHomeScreen homeScreen = new FormHomeScreen(m_LoginResult);
             homeScreen.ShowDialog();
             this.Close();
         }

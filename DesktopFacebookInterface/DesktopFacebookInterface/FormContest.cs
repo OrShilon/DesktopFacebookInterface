@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Facebook;
+using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
@@ -142,6 +143,7 @@ namespace DesktopFacebookInterface
             i_CurrentTabPage.Controls.Add(buttonDeleteConstest);
 
             tabControlContest.SelectedTab = i_CurrentTabPage;
+           
         }
 
         private void buildPostControls(Label i_LabelPost, TextBox i_TextBoxDescription)

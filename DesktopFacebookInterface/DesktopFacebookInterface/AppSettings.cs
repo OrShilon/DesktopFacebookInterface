@@ -5,8 +5,10 @@ using System.Xml.Serialization;
 
 namespace DesktopFacebookInterface
 {
-    public class AppSettings
+    public sealed class AppSettings
     {
+        private static AppSettings m_AppSettings = null;
+        private static readonly object sr_Lock = new object();
         public Point m_WindowLocation;
         public Size m_WindowSize;
         public bool m_RememberUser;
@@ -24,34 +26,41 @@ namespace DesktopFacebookInterface
 
         public static AppSettings LoadFile()
         {
-            AppSettings appSettings;
-            string filePath = string.Format(@"{0}\\{1}", sr_DefaultFolder, k_DefaultFileName);
-
-            if (File.Exists(filePath))
+            if (m_AppSettings == null)
             {
-                using (Stream stream = new FileStream(filePath, FileMode.Open))
+                string filePath = string.Format(@"{0}\\{1}", sr_DefaultFolder, k_DefaultFileName);
+                lock (sr_Lock)
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(AppSettings));
-                    appSettings = serializer.Deserialize(stream) as AppSettings;
+                    if (File.Exists(filePath))
+                    {
+                        using (Stream stream = new FileStream(filePath, FileMode.Open))
+                        {
+                            XmlSerializer serializer = new XmlSerializer(typeof(AppSettings));
+                            m_AppSettings = serializer.Deserialize(stream) as AppSettings;
+                        }
+                    }
+                    else
+                    {
+                        m_AppSettings = new AppSettings();
+                        SaveFile();
+                    }
                 }
             }
-            else
-            {
-                appSettings = new AppSettings();
-            }
-
-            return appSettings;
+            return m_AppSettings;
         }
 
-        public void SaveFile()
+        public static void SaveFile()
         {
-            string filePath = string.Format(@"{0}\\{1}", sr_DefaultFolder, k_DefaultFileName);
-            FileMode fileMode = File.Exists(filePath) ? FileMode.Truncate : FileMode.Create;
-
-            using (Stream stream = new FileStream(filePath, fileMode))
+            if (m_AppSettings != null)
             {
-                XmlSerializer serializer = new XmlSerializer(this.GetType());
-                serializer.Serialize(stream, this);
+                string filePath = string.Format(@"{0}\\{1}", sr_DefaultFolder, k_DefaultFileName);
+                FileMode fileMode = File.Exists(filePath) ? FileMode.Truncate : FileMode.Create;
+
+                using (Stream stream = new FileStream(filePath, fileMode))
+                {
+                    XmlSerializer serializer = new XmlSerializer(m_AppSettings.GetType());
+                    serializer.Serialize(stream, m_AppSettings);
+                }
             }
         }
     }
