@@ -16,9 +16,9 @@ namespace DesktopFacebookInterface
         private DateTime m_EndDate;
         private StringBuilder m_MissingDetails;
 
-        public FormMemoriesFetch(UserInformationWrapper i_UserInfo)
+        public FormMemoriesFetch()
         {
-            m_UserInfo = i_UserInfo;
+            m_UserInfo = UserInformationWrapper.GetUserWrapper;
             InitializeComponent();
             r_MemoriesTypes = new List<CheckBox>();
             r_FetchedMemories = new List<string>();
