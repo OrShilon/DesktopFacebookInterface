@@ -99,9 +99,28 @@ namespace DesktopFacebookInterface
         private void closeFormAndShowHome()
         {
             this.Hide();
-            FormHomeScreen homeScreen = new FormHomeScreen(m_LoginResult);
+            SetUserInfoWrapper();
+            SetAppSetingsParams();
+            FormHomeScreen homeScreen = new FormHomeScreen();
             homeScreen.ShowDialog();
             this.Close();
+        }
+
+        private void SetUserInfoWrapper()
+        {
+            (UserInformationWrapper.GetUserWrapper).SetUser(m_LoginResult.LoggedInUser);
+        }
+
+        private void SetAppSetingsParams() 
+        {
+            if (m_AppSettings.m_RememberUser)
+            {
+                m_AppSettings.m_UserAccessToken = m_LoginResult.AccessToken;
+            }
+            else
+            {
+                m_AppSettings.m_UserAccessToken = null;
+            }
         }
 
         private void ButtonLogin_Click(object sender, EventArgs e)

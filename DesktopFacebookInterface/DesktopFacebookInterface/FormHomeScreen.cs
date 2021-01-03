@@ -14,7 +14,6 @@ namespace DesktopFacebookInterface
     {
         private const string k_TextBoxPostStatusMsg = "Post something!";
         private const string k_AttachedFileTypeFilter = "Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
-        private LoginResult m_LoginResult;
         private AppSettings m_AppSettings;
         private UserInformationWrapper m_UserInfo;
         private FormContest m_FormContest;
@@ -22,13 +21,10 @@ namespace DesktopFacebookInterface
         private bool m_IsFirstContestClick = true;
         private Size tabPageSize;
 
-        public FormHomeScreen(LoginResult i_LoginResult)
+        public FormHomeScreen()
         {
-            m_LoginResult = i_LoginResult;
             m_AppSettings = AppSettings.LoadFile();
-            //m_UserInfo = new UserInformationWrapper(i_LoginResult.LoggedInUser);
             m_UserInfo = UserInformationWrapper.GetUserWrapper;
-            m_UserInfo.SetUser(i_LoginResult.LoggedInUser);
 
             InitializeComponent();
             this.Text = string.Format("Facebook - {0}", m_UserInfo.Name);
@@ -251,15 +247,6 @@ namespace DesktopFacebookInterface
         {
             m_AppSettings.m_WindowLocation = this.Location;
             m_AppSettings.m_WindowSize = this.Size;
-
-            if (m_AppSettings.m_RememberUser)
-            {
-                m_AppSettings.m_UserAccessToken = m_LoginResult.AccessToken;
-            }
-            else
-            {
-                m_AppSettings.m_UserAccessToken = null;
-            }
 
             AppSettings.SaveFile();
         }

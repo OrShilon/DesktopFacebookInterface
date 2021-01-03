@@ -114,7 +114,7 @@
             // tabPageAbout
             // 
             this.tabPageAbout.Controls.Add(this.labelAbout);
-            this.tabPageAbout.Location = new System.Drawing.Point(4, 29);
+            this.tabPageAbout.Location = new System.Drawing.Point(8, 39);
             this.tabPageAbout.Name = "tabPageAbout";
             this.tabPageAbout.Padding = new System.Windows.Forms.Padding(4);
             this.tabPageAbout.Size = new System.Drawing.Size(572, 242);
@@ -127,7 +127,7 @@
             this.labelAbout.AutoSize = true;
             this.labelAbout.Location = new System.Drawing.Point(0, 0);
             this.labelAbout.Name = "labelAbout";
-            this.labelAbout.Size = new System.Drawing.Size(89, 20);
+            this.labelAbout.Size = new System.Drawing.Size(120, 25);
             this.labelAbout.TabIndex = 0;
             this.labelAbout.Text = "label About";
             // 
