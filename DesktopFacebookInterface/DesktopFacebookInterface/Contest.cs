@@ -8,7 +8,7 @@ namespace DesktopFacebookInterface
     {
         public readonly List<User> r_ContestWinners;
         public readonly List<User> r_ParticipantsList;
-        public UserInformationWrapper m_UserInfo;
+        public FacebookUserFacade m_UserInfo;
         public int m_ContestID;
         public int m_ParticipantsCount;
         public int m_NumberOfWinners;
@@ -16,10 +16,10 @@ namespace DesktopFacebookInterface
         public string m_ImagePath;
         public GeoPostedItem m_ContestPost;
 
-        public Contest(int i_ContestID, UserInformationWrapper i_UserInfo, string i_Status, string i_ImagePath, int i_NumberOfWinners)
+        public Contest(int i_ContestID, string i_Status, string i_ImagePath, int i_NumberOfWinners)
         {
             m_ContestID = i_ContestID;
-            m_UserInfo = i_UserInfo;
+            m_UserInfo = FacebookUserFacade.GetFacebookUserInstance;
             m_ParticipantsCount = 0;
             m_NumberOfWinners = i_NumberOfWinners;
             r_ParticipantsList = new List<User>();

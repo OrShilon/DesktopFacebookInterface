@@ -15,7 +15,7 @@ namespace DesktopFacebookInterface
         private const string k_TextBoxPostStatusMsg = "Post something!";
         private const string k_AttachedFileTypeFilter = "Image Files *.BMP*;*.JPG*;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
         private AppSettings m_AppSettings;
-        private UserInformationWrapper m_UserInfo;
+        private FacebookUserFacade m_UserInfo;
         private FormContest m_FormContest;
         private string m_AttachedImagePath = null;
         private bool m_IsFirstContestClick = true;
@@ -24,7 +24,7 @@ namespace DesktopFacebookInterface
         public FormHomeScreen()
         {
             m_AppSettings = AppSettings.LoadFile();
-            m_UserInfo = UserInformationWrapper.GetUserWrapper;
+            m_UserInfo = FacebookUserFacade.GetFacebookUserInstance;
 
             InitializeComponent();
             this.Text = string.Format("Facebook - {0}", m_UserInfo.Name);

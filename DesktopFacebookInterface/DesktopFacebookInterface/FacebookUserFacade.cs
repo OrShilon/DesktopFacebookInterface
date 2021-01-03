@@ -5,9 +5,9 @@ using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
-    public sealed class UserInformationWrapper
+    public sealed class FacebookUserFacade
     {
-        private static UserInformationWrapper s_Instance = null;
+        private static FacebookUserFacade s_Instance = null;
         private static readonly object sr_Lock = new object();
         private User m_LoginUser = null;
 
@@ -16,11 +16,11 @@ namespace DesktopFacebookInterface
             m_LoginUser = i_User;
         }
 
-        private UserInformationWrapper()
+        private FacebookUserFacade()
         {
         }
 
-        public static UserInformationWrapper GetUserWrapper
+        public static FacebookUserFacade GetFacebookUserInstance
         {
             get
             {
@@ -30,7 +30,7 @@ namespace DesktopFacebookInterface
                     {
                         if(s_Instance == null)
                         {
-                            s_Instance = new UserInformationWrapper();
+                            s_Instance = new FacebookUserFacade();
                         }
                     }
                 }

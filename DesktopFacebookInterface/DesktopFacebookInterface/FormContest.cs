@@ -11,12 +11,12 @@ namespace DesktopFacebookInterface
     {
         private const int k_MaxNumberOfContests = 15;
         private readonly List<Contest> m_ListOfContests;
-        private UserInformationWrapper m_UserInfo;
+        private FacebookUserFacade m_UserInfo;
         private int m_TabIndex = 0;
 
         public FormContest()
         {
-            m_UserInfo = UserInformationWrapper.GetUserWrapper;
+            m_UserInfo = FacebookUserFacade.GetFacebookUserInstance;
             m_ListOfContests = new List<Contest>();
 
             InitializeComponent();
@@ -64,7 +64,6 @@ namespace DesktopFacebookInterface
                 {
                     Contest newContest = ContestFactory.CreateConstest(
                         m_TabIndex + 1,
-                        m_UserInfo,
                         newFormContest.Status,
                         newFormContest.ImagePath,
                         newFormContest.NumberOfWinners,

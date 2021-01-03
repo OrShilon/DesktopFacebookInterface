@@ -22,13 +22,11 @@ namespace DesktopFacebookInterface
         private void buttonNext_Click(object sender, EventArgs e)
         {
             photosBindingSource.MoveNext();
-            //UpdateButtons();
         }
 
         private void buttonPrev_Click(object sender, EventArgs e)
         {
             photosBindingSource.MovePrevious();
-            //UpdateButtons();
         }
 
         private void UpdateButtons()
