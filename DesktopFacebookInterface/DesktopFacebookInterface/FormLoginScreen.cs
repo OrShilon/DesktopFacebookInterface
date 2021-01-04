@@ -4,8 +4,9 @@ using System.Threading;
 using System.Windows.Forms;
 using Facebook;
 using FacebookWrapper;
+using DesktopFacebookInterface.Logic;
 
-namespace DesktopFacebookInterface
+namespace DesktopFacebookInterface.UI
 {
     internal partial class FormLoginScreen : Form
     {

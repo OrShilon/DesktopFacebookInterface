@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using FacebookWrapper.ObjectModel;
-using static System.Windows.Forms.CheckedListBox;
+using DesktopFacebookInterface.Logic;
 
-namespace DesktopFacebookInterface
+namespace DesktopFacebookInterface.UI
 {
     public partial class FormMemoriesFetch : Form
     {

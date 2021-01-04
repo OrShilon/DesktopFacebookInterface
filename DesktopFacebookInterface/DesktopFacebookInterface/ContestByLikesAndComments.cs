@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FacebookWrapper.ObjectModel;
+﻿using FacebookWrapper.ObjectModel;
+using DesktopFacebookInterface.Logic;
 
-namespace DesktopFacebookInterface
+namespace DesktopFacebookInterface.ContestFactoryMethod
 {
-    class ContestByLikesAndComments : Contest
+    class ContestByLikesAndComments : IContest
     {
-        public ContestByLikesAndComments(int i_ContestID, string i_Status,
+        internal ContestByLikesAndComments(int i_ContestID, string i_Status,
             string i_ImagePath, int i_NumberOfWinners) : base(i_ContestID, i_Status, i_ImagePath, i_NumberOfWinners)
         {
 

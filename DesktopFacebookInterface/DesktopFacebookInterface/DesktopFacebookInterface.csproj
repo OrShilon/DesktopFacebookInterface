@@ -57,7 +57,7 @@
     <Compile Include="ContestByLikes.cs" />
     <Compile Include="ContestByLikesAndComments.cs" />
     <Compile Include="ContestFactory.cs" />
-    <Compile Include="Contest.cs" />
+    <Compile Include="IContest.cs" />
     <Compile Include="FormAddContest.cs">
       <SubType>Form</SubType>
     </Compile>

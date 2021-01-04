@@ -1,4 +1,4 @@
-﻿namespace DesktopFacebookInterface
+﻿namespace DesktopFacebookInterface.UI
 {
     internal partial class FormAddContest
     {
