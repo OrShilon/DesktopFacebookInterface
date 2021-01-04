@@ -7,8 +7,9 @@ using System.Windows.Forms;
 using Facebook;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
+using DesktopFacebookInterface.Logic;
 
-namespace DesktopFacebookInterface
+namespace DesktopFacebookInterface.UI
 {
     internal partial class FormHomeScreen : Form
     {
@@ -19,7 +20,7 @@ namespace DesktopFacebookInterface
         private FormContest m_FormContest;
         private string m_AttachedImagePath = null;
         private bool m_IsFirstContestClick = true;
-        private Size tabPageSize;
+        private Size m_tabPageSize;
 
         public FormHomeScreen()
         {
@@ -30,8 +31,8 @@ namespace DesktopFacebookInterface
             this.Text = string.Format("Facebook - {0}", m_UserInfo.Name);
             textBoxPostStatus.Text = k_TextBoxPostStatusMsg;
             PictureBoxProfile.LoadAsync(m_UserInfo.PictureNormalURL);
-            PictureBoxCoverPhoto.LoadAsync(m_UserInfo.fetchCoverPhotoURL());
-            tabPageSize = tabControlHomeScreen.TabPages[0].Size;
+            PictureBoxCoverPhoto.LoadAsync(m_UserInfo.FetchCoverPhotoURL());
+            m_tabPageSize = tabControlHomeScreen.TabPages[0].Size;
             displayTimeline();
         }
 
@@ -75,7 +76,7 @@ namespace DesktopFacebookInterface
 
         private void displayTimeline()
         {
-            List<string> listTimeLine = m_UserInfo.fetchTimeline();
+            List<string> listTimeLine = m_UserInfo.FetchTimeline();
 
             listBoxTimeline.Items.Clear();
             listBoxTimeline.DisplayMember = "Name";
@@ -88,7 +89,7 @@ namespace DesktopFacebookInterface
 
         private void displayAbout()
         {
-            List<string> listAbout = m_UserInfo.fetchAbout();
+            List<string> listAbout = m_UserInfo.FetchAbout();
             StringBuilder generateAbout = new StringBuilder();
 
             foreach (string info in listAbout)
@@ -116,13 +117,13 @@ namespace DesktopFacebookInterface
         private void displayAlbums()
         {
             listBoxAlbums.Items.Clear();
-            listBoxAlbums.Size = tabPageSize;
+            listBoxAlbums.Size = m_tabPageSize;
             listBoxAlbums.DisplayMember = "Name";
-            FacebookObjectCollection<Album> albumList = null;
 
             try
             {
-                albumList = m_UserInfo.FetchAlbums();
+                List<Album> albumList = m_UserInfo.FetchAlbums();
+
                 foreach (Album album in albumList)
                 {
                     listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add(album)));
@@ -132,7 +133,6 @@ namespace DesktopFacebookInterface
                 {
                     listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add("No Albums found")));
                     listBoxAlbums.MouseDoubleClick -= new MouseEventHandler(listBoxAlbums_MouseDoubleClick);
-
                 }
             }
             catch (FacebookOAuthException)
@@ -167,21 +167,14 @@ namespace DesktopFacebookInterface
         private void displayPages()
         {
             listBoxPages.Items.Clear();
-            listBoxPages.Size = tabPageSize;
+            listBoxPages.Size = m_tabPageSize;
             listBoxPages.DisplayMember = "Name";
-            FacebookObjectCollection<Page> likedPages = null;
 
             try
             {
-                likedPages = m_UserInfo.FetchLikedPages();
-                foreach (Page page in likedPages)
+                foreach (string pageName in m_UserInfo.FetchLikedPages())
                 {
-                    listBoxPages.Invoke(new Action(() => listBoxPages.Items.Add(page)));
-                }
-
-                if (likedPages.Count == 0)
-                {
-                    listBoxPages.Invoke(new Action(() => listBoxPages.Items.Add("No pages found")));
+                    listBoxPages.Invoke(new Action(() => listBoxPages.Items.Add(pageName)));
                 }
             }
             catch (FacebookOAuthException)
@@ -193,21 +186,14 @@ namespace DesktopFacebookInterface
         private void displayEvents()
         {
             listBoxEvents.Items.Clear();
-            listBoxEvents.Size = tabPageSize;
+            listBoxEvents.Size = m_tabPageSize;
             listBoxEvents.DisplayMember = "Name";
-            FacebookObjectCollection<Event> events = null;
 
             try
             {
-                events = m_UserInfo.FetchEvents();
-                foreach (Event userEvent in events)
+                foreach (string fbEvent in m_UserInfo.FetchEvents())
                 {
-                    listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add(userEvent)));
-                }
-
-                if (events.Count == 0)
-                {
-                    listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add("No events found")));
+                    listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add(fbEvent)));
                 }
             }
             catch (FacebookOAuthException)
@@ -219,22 +205,15 @@ namespace DesktopFacebookInterface
         private void displayFriends()
         {
             listBoxFriends.Items.Clear();
-            listBoxFriends.Size = tabPageSize;
+            listBoxFriends.Size = m_tabPageSize;
             listBoxFriends.DisplayMember = "Name";
-            FacebookObjectCollection<User> friends = null;
 
 
             try
             {
-                friends = m_UserInfo.FetchFriends();
-                foreach (User friend in friends)
+                foreach (string friend in m_UserInfo.FetchFriends())
                 {
-                    listBoxFriends.Invoke(new Action(() => listBoxFriends.Items.Add(friend.Name)));
-                }
-
-                if (friends.Count == 0)
-                {
-                    listBoxFriends.Invoke(new Action(() => listBoxFriends.Items.Add("No friends found")));
+                    listBoxFriends.Invoke(new Action(() => listBoxFriends.Items.Add(friend)));
                 }
             }
             catch (FacebookOAuthException)

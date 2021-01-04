@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Facebook;
-using FacebookWrapper.ObjectModel;
+using DesktopFacebookInterface.Logic;
+using DesktopFacebookInterface.ContestFactoryMethod;
 
-namespace DesktopFacebookInterface
+namespace DesktopFacebookInterface.UI
 {
     internal partial class FormContest : Form
     {
         private const int k_MaxNumberOfContests = 15;
-        private readonly List<Contest> m_ListOfContests;
+        private readonly List<IContest> m_ListOfContests;
         private FacebookUserFacade m_UserInfo;
         private int m_TabIndex = 0;
 
         public FormContest()
         {
             m_UserInfo = FacebookUserFacade.GetFacebookUserInstance;
-            m_ListOfContests = new List<Contest>();
+            m_ListOfContests = new List<IContest>();
 
             InitializeComponent();
         }
@@ -62,7 +63,7 @@ namespace DesktopFacebookInterface
 
                 if (newFormContest.DialogResult == DialogResult.OK)
                 {
-                    Contest newContest = ContestFactory.CreateConstest(
+                    IContest newContest = ContestFactory.CreateContest(
                         m_TabIndex + 1,
                         newFormContest.Status,
                         newFormContest.ImagePath,
@@ -270,7 +271,7 @@ namespace DesktopFacebookInterface
             i_ButtonDeleteContest.Click += new EventHandler(this.buttonDeleteConstest_Click);
         }
 
-        private void updateRequirementsCheckBoxes(Contest i_Contest, CheckBox i_CheckBoxCommentCondition, CheckBox i_CheckBoxLikeCondition)
+        private void updateRequirementsCheckBoxes(IContest i_Contest, CheckBox i_CheckBoxCommentCondition, CheckBox i_CheckBoxLikeCondition)
         {
             if(i_Contest is ContestByLikes)
             {

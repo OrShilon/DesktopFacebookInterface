@@ -1,4 +1,4 @@
-﻿namespace DesktopFacebookInterface
+﻿namespace DesktopFacebookInterface.UI
 {
     public partial class FormMemoriesFetch
     {

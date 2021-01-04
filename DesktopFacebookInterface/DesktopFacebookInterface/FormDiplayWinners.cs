@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
-namespace DesktopFacebookInterface
+namespace DesktopFacebookInterface.UI
 {
     internal partial class FormDiplayWinners : Form
     {

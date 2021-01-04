@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
+using DesktopFacebookInterface.Logic;
 
-namespace DesktopFacebookInterface
+namespace DesktopFacebookInterface.ContestFactoryMethod
 {
-    public abstract class Contest
+    public abstract class IContest
     {
         public readonly List<User> r_ContestWinners;
         public readonly List<User> r_ParticipantsList;
@@ -16,7 +17,7 @@ namespace DesktopFacebookInterface
         public string m_ImagePath;
         public GeoPostedItem m_ContestPost;
 
-        public Contest(int i_ContestID, string i_Status, string i_ImagePath, int i_NumberOfWinners)
+        public IContest(int i_ContestID, string i_Status, string i_ImagePath, int i_NumberOfWinners)
         {
             m_ContestID = i_ContestID;
             m_UserInfo = FacebookUserFacade.GetFacebookUserInstance;

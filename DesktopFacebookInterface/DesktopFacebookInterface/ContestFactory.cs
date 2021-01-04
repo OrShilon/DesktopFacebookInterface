@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace DesktopFacebookInterface
+﻿namespace DesktopFacebookInterface.ContestFactoryMethod
 {
     static class ContestFactory
     {
-        public static Contest CreateConstest(int i_ContestID, string i_Status,
+        public static IContest CreateContest(int i_ContestID, string i_Status,
             string i_ImagePath, int i_NumberOfWinners, bool i_LikeRequired, bool i_CommentRequired)
         {
-            Contest newContest;
+            IContest newContest;
 
             if(i_LikeRequired && i_CommentRequired)
             {

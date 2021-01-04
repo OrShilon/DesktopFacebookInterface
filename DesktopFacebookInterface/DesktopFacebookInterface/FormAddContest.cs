@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Text;
 using System.Windows.Forms;
+using DesktopFacebookInterface.Logic;
 
-namespace DesktopFacebookInterface
+namespace DesktopFacebookInterface.UI
 {
     internal partial class FormAddContest : Form
     {

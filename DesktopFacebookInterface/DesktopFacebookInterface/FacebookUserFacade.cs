@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using FacebookWrapper.ObjectModel;
 
-namespace DesktopFacebookInterface
+namespace DesktopFacebookInterface.Logic
 {
     public sealed class FacebookUserFacade
     {
         private static FacebookUserFacade s_Instance = null;
         private static readonly object sr_Lock = new object();
         private User m_LoginUser = null;
-
-        public void SetUser(User i_User)
-        {
-            m_LoginUser = i_User;
-        }
 
         private FacebookUserFacade()
         {
@@ -62,9 +56,16 @@ namespace DesktopFacebookInterface
             }
         }
 
+        public void SetUser(User i_User)
+        {
+            m_LoginUser = i_User;
+        }
+
+
         public GeoPostedItem PostStatus(string i_ImagePath, string i_Status)
         {
             GeoPostedItem newPostedItem = null;
+            
 
             if (i_ImagePath == null)
             {
@@ -78,7 +79,7 @@ namespace DesktopFacebookInterface
             return newPostedItem;
         }
 
-        public List<string> fetchAbout()
+        public List<string> FetchAbout()
         {
             List<string> listUserInfo = new List<string>();
 
@@ -118,7 +119,7 @@ namespace DesktopFacebookInterface
             return listUserInfo;
         }
 
-        public string fetchCoverPhotoURL()
+        public string FetchCoverPhotoURL()
         {
             string coverPhotoURL = string.Empty;
 
@@ -135,7 +136,7 @@ namespace DesktopFacebookInterface
             return coverPhotoURL;
         }
 
-        public List<string> fetchTimeline()
+        public List<string> FetchTimeline()
         {
             List<string> listTimeLine = new List<string>();
 
@@ -159,24 +160,67 @@ namespace DesktopFacebookInterface
             return listTimeLine;
         }
 
-        public FacebookObjectCollection<Album> FetchAlbums()
+        public List<Album> FetchAlbums()
         {
-            return m_LoginUser.Albums;
+            List<Album> listAlbums = new List<Album>();
+
+            foreach (Album album in m_LoginUser.Albums)
+            {
+                listAlbums.Add(album);
+            }
+
+            return listAlbums;
         }
         
-        public FacebookObjectCollection<Page> FetchLikedPages()
+        public List<string> FetchLikedPages()
         {
-            return m_LoginUser.LikedPages;
+            List<string> listLikedPages = new List<string>();
+
+            foreach (Page page in m_LoginUser.LikedPages)
+            {
+                listLikedPages.Add(page.Name);
+            }
+
+            if (listLikedPages.Count == 0)
+            {
+                listLikedPages.Add("No pages found");
+            }
+
+            return listLikedPages;
         }
         
-        public FacebookObjectCollection<Event> FetchEvents()
+        public List<String> FetchEvents()
         {
-            return m_LoginUser.Events;
+            List<string> listEvents = new List<string>();
+
+            foreach (Event fbEvent in m_LoginUser.Events)
+            {
+                listEvents.Add(fbEvent.Name);
+            }
+
+            if (listEvents.Count == 0)
+            {
+                listEvents.Add("No events found");
+            }
+
+            return listEvents;
         }
 
-        public FacebookObjectCollection<User> FetchFriends()
+        public List<string> FetchFriends()
         {
-            return m_LoginUser.Friends;
+            List<string> listFriends = new List<string>();
+
+            foreach (User friend in m_LoginUser.Friends)
+            {
+                listFriends.Add(friend.Name);
+            }
+
+            if (listFriends.Count == 0)
+            {
+                listFriends.Add("No friends found");
+            }
+
+            return listFriends;
         }
 
         public List<string> FetchPostsByDate(DateTime i_StartDate, DateTime i_EndDate)
