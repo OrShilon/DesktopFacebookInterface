@@ -143,7 +143,6 @@ namespace DesktopFacebookInterface.UI
             i_CurrentTabPage.Controls.Add(buttonDeleteConstest);
 
             tabControlContest.SelectedTab = i_CurrentTabPage;
-           
         }
 
         private void buildPostControls(Label i_LabelPost, TextBox i_TextBoxDescription)

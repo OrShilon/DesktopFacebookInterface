@@ -7,15 +7,15 @@ namespace DesktopFacebookInterface.Logic
 {
     public sealed class AppSettings
     {
-        private static AppSettings m_AppSettings = null;
+        private const string k_DefaultFileName = "appSettings.xml";
+        private static readonly string sr_DefaultFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         private static readonly object sr_Lock = new object();
+        private static AppSettings m_AppSettings = null;
         public Point m_WindowLocation;
         public Size m_WindowSize;
         public bool m_RememberUser;
         public string m_UserAccessToken;
-        private const string k_DefaultFileName = "appSettings.xml";
-        private static readonly string sr_DefaultFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
+        
         private AppSettings()
         {
             m_WindowLocation = new Point(0, 0);
@@ -46,6 +46,7 @@ namespace DesktopFacebookInterface.Logic
                     }
                 }
             }
+
             return m_AppSettings;
         }
 

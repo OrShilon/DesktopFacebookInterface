@@ -3,16 +3,13 @@ using DesktopFacebookInterface.Logic;
 
 namespace DesktopFacebookInterface.ContestFactoryMethod
 {
-    class ContestByComments : IContest
+    public class ContestByComments : IContest
     {
-        internal ContestByComments(int i_ContestID, string i_Status,
-            string i_ImagePath, int i_NumberOfWinners) : base(i_ContestID, i_Status, i_ImagePath, i_NumberOfWinners)
+        internal ContestByComments(int i_ContestID, string i_Status, string i_ImagePath, int i_NumberOfWinners) : base(i_ContestID, i_Status, i_ImagePath, i_NumberOfWinners)
         {
-
         }
 
-        override
-        public void UpdateParticipantsList()
+        public override void UpdateParticipantsList()
         {
             if (m_ContestPost != null)
             {
