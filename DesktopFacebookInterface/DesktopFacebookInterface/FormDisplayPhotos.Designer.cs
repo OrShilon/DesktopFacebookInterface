@@ -1,6 +1,6 @@
 ﻿namespace DesktopFacebookInterface.UI
 {
-    partial class FormDisplayPhotos
+    public partial class FormDisplayPhotos
     {
         /// <summary>
         /// Required designer variable.

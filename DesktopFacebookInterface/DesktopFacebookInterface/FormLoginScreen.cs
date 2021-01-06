@@ -109,7 +109,7 @@ namespace DesktopFacebookInterface.UI
 
         private void SetUserInfoWrapper()
         {
-            (FacebookUserFacade.GetFacebookUserInstance).SetUser(m_LoginResult.LoggedInUser);
+            FacebookUserFacade.GetFacebookUserInstance.SetUser(m_LoginResult.LoggedInUser);
         }
 
         private void SetAppSetingsParams() 

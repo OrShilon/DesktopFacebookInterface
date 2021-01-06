@@ -1,9 +1,8 @@
 ﻿namespace DesktopFacebookInterface.ContestFactoryMethod
 {
-    static class ContestFactory
+    public static class ContestFactory
     {
-        public static IContest CreateContest(int i_ContestID, string i_Status,
-            string i_ImagePath, int i_NumberOfWinners, bool i_LikeRequired, bool i_CommentRequired)
+        public static IContest CreateContest(int i_ContestID, string i_Status, string i_ImagePath, int i_NumberOfWinners, bool i_LikeRequired, bool i_CommentRequired)
         {
             IContest newContest;
 

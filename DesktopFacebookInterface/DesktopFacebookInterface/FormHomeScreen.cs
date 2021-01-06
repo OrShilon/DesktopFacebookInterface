@@ -47,7 +47,6 @@ namespace DesktopFacebookInterface.UI
 
             base.OnShown(e);
             displayUserInfo();
-
         }
 
         private void displayUserInfo()
@@ -207,7 +206,6 @@ namespace DesktopFacebookInterface.UI
             listBoxFriends.Items.Clear();
             listBoxFriends.Size = m_tabPageSize;
             listBoxFriends.DisplayMember = "Name";
-
 
             try
             {

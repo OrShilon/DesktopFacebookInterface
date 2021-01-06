@@ -6,8 +6,8 @@ namespace DesktopFacebookInterface.Logic
 {
     public sealed class FacebookUserFacade
     {
+        private static readonly object sr_Lock = new object(); 
         private static FacebookUserFacade s_Instance = null;
-        private static readonly object sr_Lock = new object();
         private User m_LoginUser = null;
 
         private FacebookUserFacade()
@@ -28,6 +28,7 @@ namespace DesktopFacebookInterface.Logic
                         }
                     }
                 }
+
                 return s_Instance;
             }
         }
@@ -61,12 +62,10 @@ namespace DesktopFacebookInterface.Logic
             m_LoginUser = i_User;
         }
 
-
         public GeoPostedItem PostStatus(string i_ImagePath, string i_Status)
         {
             GeoPostedItem newPostedItem = null;
             
-
             if (i_ImagePath == null)
             {
                 newPostedItem = User.PostStatus(i_Status);
@@ -189,7 +188,7 @@ namespace DesktopFacebookInterface.Logic
             return listLikedPages;
         }
         
-        public List<String> FetchEvents()
+        public List<string> FetchEvents()
         {
             List<string> listEvents = new List<string>();
 
