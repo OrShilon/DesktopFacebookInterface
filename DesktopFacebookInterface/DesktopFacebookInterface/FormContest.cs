@@ -344,7 +344,10 @@ namespace DesktopFacebookInterface.UI
             tabControlContest.TabPages.Remove(tabPageToDelete);
             m_ListOfContests.RemoveAt((buttonDelete.Name[buttonDelete.Name.Length - 1] - '0') - 1);
 
-            m_ReportDeletedContestDelegate.Invoke(int.Parse(tabPageToDelete.Text.Split(' ')[1]));
+            if (m_TabIndex != 0)
+            {
+                m_ReportDeletedContestDelegate.Invoke(int.Parse(tabPageToDelete.Text.Split(' ')[1]));
+            }
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
