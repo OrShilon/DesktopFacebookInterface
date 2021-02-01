@@ -53,6 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="TabPageObserver.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ContestByComments.cs" />
     <Compile Include="ContestByLikes.cs" />
     <Compile Include="ContestByLikesAndComments.cs" />

@@ -12,12 +12,12 @@ namespace DesktopFacebookInterface.UI
     {
         private const int k_MaxNumberOfContests = 15;
         private readonly List<IContest> m_ListOfContests;
-        private FacebookUserFacade m_UserInfo;
         private int m_TabIndex = 0;
+        private ReportDeletedContestDelegate m_ReportDeletedContestDelegate;
+
 
         public FormContest()
         {
-            m_UserInfo = FacebookUserFacade.GetFacebookUserInstance;
             m_ListOfContests = new List<IContest>();
 
             InitializeComponent();
@@ -51,7 +51,7 @@ namespace DesktopFacebookInterface.UI
         {
             if(m_TabIndex < k_MaxNumberOfContests)
             {
-                TabPage tabPageContest = new TabPage();
+                TabPageObserver tabPageContest = new TabPageObserver();
 
                 if (m_TabIndex == 0)
                 {
@@ -94,6 +94,8 @@ namespace DesktopFacebookInterface.UI
                     tabControlContest.Controls.Add(tabPageContest);
                     buildContest(tabPageContest);
                     m_TabIndex++;
+
+                    m_ReportDeletedContestDelegate += tabPageContest.m_ReportDeletedContestObserver;
                 }
             }
             else
@@ -102,7 +104,7 @@ namespace DesktopFacebookInterface.UI
             }
         }
 
-        private void buildContest(TabPage i_CurrentTabPage)
+        private void buildContest(TabPageObserver i_CurrentTabPage)
         {
             Label labelPost = new Label();
             Label labelParticipants = new Label();
@@ -335,51 +337,14 @@ namespace DesktopFacebookInterface.UI
         private void buttonDeleteConstest_Click(object sender, EventArgs e)
         {
             Button buttonDelete = (Button)sender;
-            TabPage tabPageToDelete = buttonDelete.Parent as TabPage;
+            TabPageObserver tabPageToDelete = buttonDelete.Parent as TabPageObserver;
 
+            m_ReportDeletedContestDelegate -= tabPageToDelete.m_ReportDeletedContestObserver;
+            m_TabIndex--;
             tabControlContest.TabPages.Remove(tabPageToDelete);
             m_ListOfContests.RemoveAt((buttonDelete.Name[buttonDelete.Name.Length - 1] - '0') - 1);
 
-            handleIndexesAfterDelete();
-        }
-
-        private void handleIndexesAfterDelete()
-        {
-            int index = 1;
-
-            foreach(TabPage tabPage in tabControlContest.TabPages)
-            {
-                if(tabPage.Name.Length > this.tabControlContest.TabPages[0].Name.Length) 
-                {
-                    tabPage.Name = tabPage.Name.Substring(0, tabPage.Name.Length - 2) + index;
-                    tabPage.Text = tabPage.Text.Substring(0, tabPage.Text.Length - 2) + index;
-                }
-                else
-                {
-                    tabPage.Name = tabPage.Name.Substring(0, tabPage.Name.Length - 1) + index;
-                    tabPage.Text = tabPage.Text.Substring(0, tabPage.Text.Length - 1) + index;
-                }
-
-                int controlIterator = 0;
-
-                foreach (Control control in tabPage.Controls)
-                {
-                    if (control.Name.Length > this.tabControlContest.TabPages[0].Controls[controlIterator].Name.Length)
-                    {
-                        control.Name = control.Name.Substring(0, control.Name.Length - 2) + index;
-                    }
-                    else
-                    {
-                        control.Name = control.Name.Substring(0, control.Name.Length - 1) + index;
-                    }
-
-                    controlIterator++;
-                }
-
-                index++;
-            }
-
-            m_TabIndex--;
+            m_ReportDeletedContestDelegate.Invoke(int.Parse(tabPageToDelete.Text.Split(' ')[1]));
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
