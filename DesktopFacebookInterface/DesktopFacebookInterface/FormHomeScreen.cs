@@ -304,5 +304,31 @@ namespace DesktopFacebookInterface.UI
             FormMemoriesFetch newForm = new FormMemoriesFetch();
             newForm.ShowDialog();
         }
+
+        private void listBoxTimeline_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            string selectedItem = listBoxTimeline.Items[e.Index].ToString();
+            SolidBrush solidBrush;
+
+            switch (e.Index % 3)
+            {
+                case 0:
+                default:
+                    solidBrush = new SolidBrush(Color.Red);
+                    break;
+                case 1:
+                    solidBrush = new SolidBrush(Color.Blue);
+                    break;
+                case 2:
+                    solidBrush = new SolidBrush(Color.Green);
+                    break;
+            }
+
+            // 4. Use Draw the background within the bounds
+            e.DrawBackground();
+
+            // 5. Colorize listbox items
+            e.Graphics.DrawString(selectedItem, e.Font, solidBrush, e.Bounds);
+        }
     }
 }

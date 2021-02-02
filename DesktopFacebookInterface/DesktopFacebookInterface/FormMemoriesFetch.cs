@@ -54,7 +54,7 @@ namespace DesktopFacebookInterface.UI
 
         private void buttonFetchData_Click(object sender, EventArgs e)
         {
-            textBoxFetchResault.Text = string.Empty;
+            textBoxFetchResult.Text = string.Empty;
             m_MissingDetails.Clear();
             r_FetchedMemories.Clear();
             StringBuilder fetchResults = new StringBuilder();
@@ -81,7 +81,7 @@ namespace DesktopFacebookInterface.UI
 
             if(isValidForm(fetchResults))
             {
-                textBoxFetchResault.Text = fetchResults.ToString();
+                textBoxFetchResult.Text = fetchResults.ToString();
             }
             else
             {
