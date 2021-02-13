@@ -128,8 +128,8 @@ namespace DesktopFacebookInterface.UI
                 i_CurrentTabPage.Controls.Add(pictureBoxAttachedImage);
             }
 
-            buildParticipantsControls(labelParticipants, textBoxDescription, listBoxParticipants, labelContestrequirements, checkBoxCommentCondition);
-            buildRequirementsControls(labelParticipants, labelContestrequirements, checkBoxCommentCondition, checkBoxLikeCondition, textBoxDescription, listBoxParticipants);
+            buildParticipantsControls(labelParticipants, textBoxDescription, listBoxParticipants, checkBoxCommentCondition);
+            buildRequirementsControls(labelContestrequirements, checkBoxCommentCondition, checkBoxLikeCondition, textBoxDescription, listBoxParticipants);
             updateRequirementsCheckBoxes(m_ListOfContests[m_ListOfContests.Count - 1], checkBoxCommentCondition, checkBoxLikeCondition);
             buildButtonsControls(listBoxParticipants, buttonUpdateParticipants, buttonChooseWinner, buttonDeleteConstest, labelParticipants);
 
@@ -190,7 +190,7 @@ namespace DesktopFacebookInterface.UI
             i_LabelPicture.Size = new Size(195, 25);
         }
 
-        private void buildRequirementsControls(Label i_LabelParticipants, Label i_LabelContestRequirements, CheckBox i_CheckBoxCommentCondition, CheckBox i_CheckBoxLikeCondition, TextBox i_TextBoxDescription, ListBox i_ListBoxParticipants)
+        private void buildRequirementsControls(Label i_LabelContestRequirements, CheckBox i_CheckBoxCommentCondition, CheckBox i_CheckBoxLikeCondition, TextBox i_TextBoxDescription, ListBox i_ListBoxParticipants)
         {
             i_LabelContestRequirements.AutoSize = true;
             i_LabelContestRequirements.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -220,7 +220,7 @@ namespace DesktopFacebookInterface.UI
             i_CheckBoxCommentCondition.Enabled = false;
         }
 
-        private void buildParticipantsControls(Label i_LabelParticipants, TextBox i_TextBoxDescription, ListBox i_ListBoxParticipants, Label i_LabelContestRequirements, CheckBox i_CheckBoxCommentCondition)
+        private void buildParticipantsControls(Label i_LabelParticipants, TextBox i_TextBoxDescription, ListBox i_ListBoxParticipants, CheckBox i_CheckBoxCommentCondition)
         {
             i_LabelParticipants.AutoSize = true;
             i_LabelParticipants.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
