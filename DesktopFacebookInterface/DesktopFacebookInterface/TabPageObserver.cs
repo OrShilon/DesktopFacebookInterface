@@ -4,7 +4,7 @@ namespace DesktopFacebookInterface
 {
     public delegate void ReportDeletedContestDelegate(int i_DeletedIndex);
 
-    class TabPageObserver : TabPage
+    public class TabPageObserver : TabPage
     {
         public ReportDeletedContestDelegate m_ReportDeletedContestObserver { get; }
 

@@ -15,7 +15,6 @@ namespace DesktopFacebookInterface.UI
         private int m_TabIndex = 0;
         private ReportDeletedContestDelegate m_ReportDeletedContestDelegate;
 
-
         public FormContest()
         {
             m_ListOfContests = new List<IContest>();

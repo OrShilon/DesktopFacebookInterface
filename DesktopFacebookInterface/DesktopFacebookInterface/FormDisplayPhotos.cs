@@ -15,11 +15,12 @@ namespace DesktopFacebookInterface.UI
             InitializeComponent();
             m_AlbumIterator = i_AlbumIterator as AlbumIterator;
             m_AlbumIterator.MoveNext();
+
             if (m_AlbumIterator.m_Count == 1)
             {
                 buttonNext.Enabled = !k_ButtonEnabled;
             }
-            buttonPrev.Enabled = !k_ButtonEnabled;
+
             m_Current = m_AlbumIterator.Current as Photo;
             imageNormalPictureBox.LoadAsync(m_Current.PictureNormalURL);
         }

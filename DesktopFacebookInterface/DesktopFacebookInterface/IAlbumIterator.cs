@@ -8,9 +8,11 @@ namespace DesktopFacebookInterface
     public interface IAlbumIterator
     {
         bool MoveNext();
-        bool MovePrev();
-        object Current { get; }
-        void Reset();
 
+        bool MovePrev();
+
+        object Current { get; }
+
+        void Reset();
     }
 }

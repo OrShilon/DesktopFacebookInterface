@@ -38,10 +38,10 @@
             // 
             this.imageNormalPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.imageNormalPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.imageNormalPictureBox.Location = new System.Drawing.Point(9, 10);
-            this.imageNormalPictureBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.imageNormalPictureBox.Location = new System.Drawing.Point(6, 6);
+            this.imageNormalPictureBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.imageNormalPictureBox.Name = "imageNormalPictureBox";
-            this.imageNormalPictureBox.Size = new System.Drawing.Size(844, 473);
+            this.imageNormalPictureBox.Size = new System.Drawing.Size(563, 307);
             this.imageNormalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imageNormalPictureBox.TabIndex = 1;
             this.imageNormalPictureBox.TabStop = false;
@@ -49,10 +49,10 @@
             // buttonNext
             // 
             this.buttonNext.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonNext.Location = new System.Drawing.Point(458, 514);
-            this.buttonNext.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonNext.Location = new System.Drawing.Point(305, 334);
+            this.buttonNext.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.buttonNext.Name = "buttonNext";
-            this.buttonNext.Size = new System.Drawing.Size(105, 36);
+            this.buttonNext.Size = new System.Drawing.Size(70, 23);
             this.buttonNext.TabIndex = 2;
             this.buttonNext.Text = "Next";
             this.buttonNext.UseVisualStyleBackColor = true;
@@ -61,10 +61,11 @@
             // buttonPrev
             // 
             this.buttonPrev.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonPrev.Location = new System.Drawing.Point(320, 514);
-            this.buttonPrev.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonPrev.Enabled = false;
+            this.buttonPrev.Location = new System.Drawing.Point(213, 334);
+            this.buttonPrev.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.buttonPrev.Name = "buttonPrev";
-            this.buttonPrev.Size = new System.Drawing.Size(105, 36);
+            this.buttonPrev.Size = new System.Drawing.Size(70, 23);
             this.buttonPrev.TabIndex = 2;
             this.buttonPrev.Text = "Previous";
             this.buttonPrev.UseVisualStyleBackColor = true;
@@ -72,20 +73,20 @@
             // 
             // FormDisplayPhotos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(862, 559);
+            this.ClientSize = new System.Drawing.Size(575, 363);
             this.Controls.Add(this.buttonPrev);
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.imageNormalPictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormDisplayPhotos";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FormAlbums";
+            this.Text = "Facebook Album";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).EndInit();
             this.ResumeLayout(false);

@@ -1,15 +1,14 @@
-﻿using FacebookWrapper.ObjectModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
+using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface
 {
-    class AlbumIterator : IAlbumIterator
+    public class AlbumIterator : IAlbumIterator
     {
         private Album m_Album;
+
         public int m_CurrentIndex { get; private set; }
+
         public int m_Count { get; }
 
         public AlbumIterator(Album i_Album)
