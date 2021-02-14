@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlbumIterator.cs" />
+    <Compile Include="IAlbumAggregate.cs" />
+    <Compile Include="IAlbumIterator.cs" />
     <Compile Include="AppSettings.cs" />
     <Compile Include="TabPageObserver.cs">
       <SubType>Component</SubType>
