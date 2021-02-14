@@ -6,32 +6,49 @@ namespace DesktopFacebookInterface.UI
 {
     public partial class FormDisplayPhotos : Form
     {
-        public FormDisplayPhotos(Album m_Album)
+        private AlbumIterator m_AlbumIterator;
+        private Photo m_Current;
+
+        public FormDisplayPhotos(IAlbumIterator i_AlbumIterator)
         {
             InitializeComponent();
-            this.photosBindingSource.DataSource = m_Album.Photos;
-            this.Text = m_Album.Name;
+            m_AlbumIterator = i_AlbumIterator as AlbumIterator;
+            m_AlbumIterator.MoveNext();
+            buttonPrev.Enabled = false;
+            m_Current = m_AlbumIterator.Current as Photo;
+            imageNormalPictureBox.LoadAsync(m_Current.PictureNormalURL);
         }
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
-            photosBindingSource.MoveNext();
+            bool next = m_AlbumIterator.MoveNext();
+            if (next)
+            {
+                m_Current = m_AlbumIterator.Current as Photo;
+                imageNormalPictureBox.LoadAsync(m_Current.PictureNormalURL);
+            }
+
+            buttonNext.Enabled = m_AlbumIterator.m_CurrentIndex != m_AlbumIterator.m_Count - 1;
+            buttonPrev.Enabled = true;
         }
 
         private void buttonPrev_Click(object sender, EventArgs e)
         {
-            photosBindingSource.MovePrevious();
+            bool prev = m_AlbumIterator.MovePrev();
+            if (prev)
+            {
+                m_Current = m_AlbumIterator.Current as Photo;
+                imageNormalPictureBox.LoadAsync(m_Current.PictureNormalURL);
+            }
+
+            buttonPrev.Enabled = m_AlbumIterator.m_CurrentIndex != 0;
+            buttonNext.Enabled = true;
         }
 
         private void UpdateButtons()
         {
-            buttonPrev.Enabled = (photosBindingSource.Position == 0) ? false : true;
-            buttonNext.Enabled = (photosBindingSource.Position == photosBindingSource.Count - 1) ? false : true;
-        }
-
-        private void photosBindingSource_CurrentItemChanged(object sender, EventArgs e)
-        {
-            UpdateButtons();
+            buttonPrev.Enabled = (m_AlbumIterator.m_CurrentIndex < 0) ? false : true;
+            buttonNext.Enabled = (m_AlbumIterator.m_CurrentIndex == m_AlbumIterator.m_Count) ? false : true;
         }
     }
 }

@@ -4,7 +4,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace DesktopFacebookInterface.Logic
 {
-    public sealed class FacebookUserFacade
+    public sealed class FacebookUserFacade : IAlbumAggregate
     {
         private static readonly object sr_Lock = new object(); 
         private static FacebookUserFacade s_Instance = null;
@@ -307,6 +307,11 @@ namespace DesktopFacebookInterface.Logic
             }
 
             return filteredEvents;
+        }
+
+        public IAlbumIterator CreateIterator(int i_AlbumIndex)
+        {
+            return new AlbumIterator(m_LoginUser.Albums[i_AlbumIndex]);
         }
     }
 }

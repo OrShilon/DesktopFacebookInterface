@@ -157,7 +157,7 @@ namespace DesktopFacebookInterface.UI
                 }
                 else
                 {
-                    FormDisplayPhotos albumPhotos = new FormDisplayPhotos(selectedAlbum);
+                    FormDisplayPhotos albumPhotos = new FormDisplayPhotos(m_UserInfo.CreateIterator(listBoxAlbums.SelectedIndex));
                     albumPhotos.ShowDialog();
                 }
             }
