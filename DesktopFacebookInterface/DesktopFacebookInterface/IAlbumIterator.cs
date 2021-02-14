@@ -10,7 +10,7 @@ namespace DesktopFacebookInterface
         bool MoveNext();
         bool MovePrev();
         object Current { get; }
-        void reset();
+        void Reset();
 
     }
 }

@@ -57,7 +57,7 @@ namespace DesktopFacebookInterface
             return --m_CurrentIndex >= 0;
         }
 
-        public void reset()
+        public void Reset()
         {
             m_CurrentIndex = -1;
         }
