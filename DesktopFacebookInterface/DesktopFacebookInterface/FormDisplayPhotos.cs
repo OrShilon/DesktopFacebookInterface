@@ -49,11 +49,5 @@ namespace DesktopFacebookInterface.UI
             buttonPrev.Enabled = m_AlbumIterator.m_CurrentIndex != 0;
             buttonNext.Enabled = k_ButtonEnabled;
         }
-
-        private void UpdateButtons()
-        {
-            buttonPrev.Enabled = (m_AlbumIterator.m_CurrentIndex < 0) ? false : true;
-            buttonNext.Enabled = (m_AlbumIterator.m_CurrentIndex == m_AlbumIterator.m_Count) ? false : true;
-        }
     }
 }
