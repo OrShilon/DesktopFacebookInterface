@@ -6,6 +6,7 @@ namespace DesktopFacebookInterface.UI
 {
     public partial class FormDisplayPhotos : Form
     {
+        private const bool k_ButtonEnabled = true;
         private AlbumIterator m_AlbumIterator;
         private Photo m_Current;
 
@@ -14,7 +15,11 @@ namespace DesktopFacebookInterface.UI
             InitializeComponent();
             m_AlbumIterator = i_AlbumIterator as AlbumIterator;
             m_AlbumIterator.MoveNext();
-            buttonPrev.Enabled = false;
+            if (m_AlbumIterator.m_Count == 1)
+            {
+                buttonNext.Enabled = !k_ButtonEnabled;
+            }
+            buttonPrev.Enabled = !k_ButtonEnabled;
             m_Current = m_AlbumIterator.Current as Photo;
             imageNormalPictureBox.LoadAsync(m_Current.PictureNormalURL);
         }
@@ -29,7 +34,7 @@ namespace DesktopFacebookInterface.UI
             }
 
             buttonNext.Enabled = m_AlbumIterator.m_CurrentIndex != m_AlbumIterator.m_Count - 1;
-            buttonPrev.Enabled = true;
+            buttonPrev.Enabled = k_ButtonEnabled;
         }
 
         private void buttonPrev_Click(object sender, EventArgs e)
@@ -42,7 +47,7 @@ namespace DesktopFacebookInterface.UI
             }
 
             buttonPrev.Enabled = m_AlbumIterator.m_CurrentIndex != 0;
-            buttonNext.Enabled = true;
+            buttonNext.Enabled = k_ButtonEnabled;
         }
 
         private void UpdateButtons()
